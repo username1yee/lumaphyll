@@ -182,9 +182,10 @@ header.fqm #fqdone{display:inline-flex}header.crm>*:not(#crdone):not(span){displ
 #fsbox{margin-top:14px}
 body.noph #side{display:none!important}
 #tabs,#chbar,#chips{overflow-y:hidden;overscroll-behavior:contain;touch-action:pan-x}
+.mi.mu,.mi.md{display:flex;align-items:center;justify-content:center}.mi .ar{display:block;width:9px;height:9px;border-right:2px solid #fff;border-bottom:2px solid #fff;transform:rotate(45deg);margin-top:-4px}.mi.nm .ar{border-color:#5a5a62}.mi .ar.up{transform:rotate(-135deg);margin-top:4px}
 </style></head><body class="noph">
 <header>
-<button id="cvrs" class="ib" aria-label="重設曲線">重設</button><div id="ldw" style="flex:none"><button id="load" class="ib" aria-label="開啟" aria-haspopup="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v1H7.5a2 2 0 0 0-1.9 1.4L3 18z"/><path d="M3 18l2.6-7.6A2 2 0 0 1 7.5 9H22l-2.6 8.2a2 2 0 0 1-1.9 1.4H3z"/></svg></button><div id="ldm" class="hid"><button data-ld="photo">新增照片</button><button data-ld="proj">開啟專案</button></div></div><input id="file" type="file" accept="image/*" hidden><input id="jf" type="file" accept=".zip,.json,application/zip,application/json" hidden>
+<button id="cvrs" class="ib" aria-label="重設曲線">重設</button><div id="ldw" style="flex:none"><button id="load" class="ib" aria-label="開啟" aria-haspopup="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v1H7.5a2 2 0 0 0-1.9 1.4L3 18z"/><path d="M3 18l2.6-7.6A2 2 0 0 1 7.5 9H22l-2.6 8.2a2 2 0 0 1-1.9 1.4H3z"/></svg></button><div id="ldm" class="hid"><button data-ld="photo">新增照片</button><button data-ld="proj">開啟專案</button><button data-ld="preset">匯入預設集</button></div></div><input id="file" type="file" accept="image/*" hidden><input id="jf" type="file" accept=".zip,.json,application/zip,application/json" hidden><input id="pf" type="file" accept=".zip,application/zip" hidden>
 <button id="undo" class="ib" aria-label="復原" disabled><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></svg></button><button id="redo" class="ib" aria-label="重做" disabled><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 15-6.7L21 13"/></svg></button>
 <span style="flex:1"></span>
 <button id="rst" class="ib" aria-label="全部重設" title="全部重設"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 2.7-6.4L3 8"/><path d="M3 3v5h5"/></svg></button><button id="pxb" class="ib hid" aria-label="開關 Proxy 預覽" title="Proxy 預覽（開／關）"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><rect x="7" y="9" width="7" height="7" rx="1"/><path d="M17 8h1"/></svg></button><button id="cmp" class="ib" aria-label="按住看原圖" title="按住看原圖"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/><path d="M6.5 9h2M6.5 12h2" opacity=".6"/></svg></button><div id="dlw"><button id="dlb" class="ib" aria-label="下載"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg></button></div>
@@ -334,7 +335,7 @@ float Y2=Y<=.7?Y:.7+.3*tanh(min((Y-.7)/.3,12.));
 vec3 d=c-Y,lm=mix((1.-Y2)/max(d,vec3(1e-6)),Y2/max(-d,vec3(1e-6)),step(0.,-d));float rho=1./max(min(lm.x,min(lm.y,lm.z)),1e-6),kn=.85,r2=rho<kn?rho:kn+(1.-kn)*tanh(min((rho-kn)/(1.-kn),12.));
 return clamp(Y2+d*(r2/rho),0.,1.);}
 void main(){vec3 c=texture(t,uv).rgb;vec2 p=vec2(uv.x,1.-uv.y);
-if(ty==1){float d=dot(texture(dm,p).rgb,vec3(.299,.587,.114));if(a.z>.5)d=1.-d;d=clamp((d-.5)*a.y+.5,0.,1.);c=mix(c,clamp(bl(clamp(c,0.,1.),col,float(hm)),0.,1.),clamp((1.-d)*a.x/100.,0.,1.));}
+if(ty==1){float d=dot(texture(dm,p).rgb,vec3(.299,.587,.114));if(a.z>.5)d=1.-d;d=clamp((d-.5)*a.y+.5,0.,1.);float ds_=clamp(a.w/100.,0.,.95),fz=clamp(((1.-d)-ds_)/(1.-ds_),0.,1.);c=mix(c,clamp(bl(clamp(c,0.,1.),col,float(hm)),0.,1.),clamp(fz*a.x/100.,0.,1.));}
 else{float z=dot(texture(dm,p).rgb,vec3(.3333)),fr=clamp(((a.z>.5?z:1.-z)-.5)*a.y+.5,0.,1.),w=clamp(a.x/100.*fr,0.,1.);
 c=clamp(c,0.,1.);
 c=c*(1.-9.*w/100.)+(-27.*w)/100.*.3*(1.-c);
@@ -488,11 +489,11 @@ let sr=RA,ds=RB;offs.forEach(d=>{pass(2,sr.tx,ds.fb,[d/R,0],[Math.pow(as,d)],R,R
 gl.bindTexture(gl.TEXTURE_2D,sr.tx);gl.bindFramebuffer(gl.FRAMEBUFFER,G.C.fb);gl.viewport(0,0,w,h);
 gl.enable(gl.BLEND);gl.blendEquation(gl.MAX);gl.blendFunc(gl.ONE,gl.ONE);gl.uniform1i(lG.md,9);gl.uniform4f(lG.a,R,1,cs,sn);gl.uniform3f(lG.b,vw,vh,0);gl.drawArrays(gl.TRIANGLES,0,3);
 gl.disable(gl.BLEND);gl.blendEquation(gl.FUNC_ADD)}
-{const sgB=Math.min(8,Math.max(2,Lp*.012)),SC=[[sgB,.3],[sgB*2.2,.14]],lv=sg=>Math.min(5,Math.max(0,Math.ceil(Math.log2(sg/4)))),nbM=lv(SC[1][0]);
+{const bl=m.bloom==null?20:m.bloom;if(bl>0){const sgB=1.5+bl/100*.01*mx,SC=[[sgB,.3],[sgB*2.2,.14]],lv=sg=>Math.min(5,Math.max(0,Math.ceil(Math.log2(sg/4)))),nbM=lv(SC[1][0]);
 for(let k=1;k<=nbM;k++){const S0=G.P[k-1],D0=G.P[k];pass(4,S0.s.tx,D0.s.fb,[1/S0.W,1/S0.H],[0],D0.W,D0.H)}
 for(const[sg,wt]of SC){const Lv=G.P[lv(sg)],st=3.5*sg/16;pass(1,Lv.s.tx,Lv.t.fb,[st/vw,0],[0],Lv.W,Lv.H);pass(1,Lv.t.tx,Lv.u.fb,[0,st/vh],[0],Lv.W,Lv.H);
 pass(10,Lv.u.tx,Lv.t.fb,[0,0],[Math.min(30,.4*sg*sg)],Lv.W,Lv.H);
-gl.enable(gl.BLEND);gl.blendEquation(gl.FUNC_ADD);gl.blendFunc(gl.ONE,gl.ONE);pass(6,Lv.t.tx,G.C.fb,[0,0],[wt],w,h);gl.disable(gl.BLEND)}}
+gl.enable(gl.BLEND);gl.blendEquation(gl.FUNC_ADD);gl.blendFunc(gl.ONE,gl.ONE);pass(6,Lv.t.tx,G.C.fb,[0,0],[wt],w,h);gl.disable(gl.BLEND)}}}
 gTx=G.C.tx}
 // 3) 光效圖層用混合模式疊回照片
 const sgF=1.5+m.size/100*.07*mx,col=hsl2rgbH(m.hh,1,.5),gain=m.amount/100*(streak?2:4+.08*sgF);
@@ -538,7 +539,7 @@ gl.activeTexture(gl.TEXTURE4);gl.bindTexture(gl.TEXTURE_2D,C.tx);gl.activeTextur
 const last=nxt();mip(X.tx);vp(last);gl.uniform1i(l2.md,1);gl.bindFramebuffer(gl.FRAMEBUFFER,last?null:Y.fb);gl.drawArrays(gl.TRIANGLES,0,3);
 gl.bindTexture(gl.TEXTURE_2D,X.tx);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);
 gl.activeTexture(gl.TEXTURE4);gl.bindTexture(gl.TEXTURE_2D,null);gl.activeTexture(gl.TEXTURE0);src=1-src}
-else{const last=nxt(),dst=1-src,col=m.type=='haze'?hsl2rgbH(m.hh,m.hs/100,m.hl/100):m.A;gl.useProgram(prog3);gl.uniform1i(l3.ty,m.type=='haze'?1:2);gl.uniform1i(l3.hm,m.mode||0);gl.uniform4f(l3.a,m.amount,con,m.inv,m.aoff||0);gl.uniform3f(l3.col,col[0],col[1],col[2]);
+else{const last=nxt(),dst=1-src,col=m.type=='haze'?hsl2rgbH(m.hh,m.hs/100,m.hl/100):m.A;gl.useProgram(prog3);gl.uniform1i(l3.ty,m.type=='haze'?1:2);gl.uniform1i(l3.hm,m.mode||0);gl.uniform4f(l3.a,m.amount,con,m.inv,m.type=='haze'?(m.dist||0):(m.aoff||0));gl.uniform3f(l3.col,col[0],col[1],col[2]);
 gl.bindTexture(gl.TEXTURE_2D,fbs.t[src].tx);vp(last);gl.bindFramebuffer(gl.FRAMEBUFFER,last?null:fbs.t[dst].fb);gl.drawArrays(gl.TRIANGLES,0,3);src=dst}}}
 fxRun(fxPost);
 if(geo){nxt();gl.useProgram(prog4);gl.uniform4f(l4.gc,crop.cx,crop.cy,crop.hw*2,crop.hh*2);gl.uniform2f(l4.sz,iw,ih);gl.uniform2f(l4.ra,Math.cos(crop.a),Math.sin(crop.a));gl.uniform2f(l4.fl,crop.fx,crop.fy);
@@ -825,7 +826,7 @@ chips();syncAll();rebuildBrush();modRender();drawOv();render();if(cvOn)cvDraw()}
 function btns(){$('#undo').disabled=hi<=0;$('#redo').disabled=hi>=hist.length}
 function go(d){if(d<0){if(hi<=0)return;applyOps(baseS,hist[hi-1].b);hi--}else{if(hi>=hist.length)return;applyOps(baseS,hist[hi].f);hi++}applyState(baseS);btns()}
 $('#undo').onclick=()=>go(-1);$('#redo').onclick=()=>go(1);
-$('#rst').onclick=()=>{uiConfirm('清除全部調整與遮罩？',{title:'全部重設',ok:'清除'}).then(y=>{if(y){L=[mk('全圖')];cur=0;commit();chips();syncAll();rebuildBrush()}})};
+$('#rst').onclick=()=>{uiConfirm('清除全部調整與遮罩？',{title:'全部重設',ok:'清除'}).then(y=>{if(y){L=[mk('全圖')];cur=0;band=0;pend=null;clearMods();modRender();commit();chips();syncAll();rebuildBrush();drawOv();render()}})};
 // 按鈕
 document.querySelectorAll('#tabs button').forEach(b=>b.onclick=()=>{const pv=tab;tab=b.dataset.t;$('#side').classList.toggle('nochip',tab=='ef'||tab=='fn');if(pv=='crop'&&tab!='crop')cropLeave();focusPick=null;fqCA=null;$('#side').classList.remove('col');if(tab=='crop'){zm.z=1;zm.x=zm.y=0}zApply();document.querySelectorAll('#tabs button').forEach(x=>x.classList.toggle('on',x==b));
 fadeSwap(()=>{wfClose();['light','mask','ef','fn','crop'].forEach(t=>$('#p-'+t).classList.toggle('hid',t!=tab));panelsApply();$('#panel').scrollTop=0},pv==tab&&!$('#side').classList.contains('wf'));render()});
@@ -932,7 +933,7 @@ if(sc<1){const w=Math.round(b.width*sc),h=Math.round(b.height*sc);b.close();b=aw
 const tx=NT.get(m.id)||gl.createTexture();gl.activeTexture(gl.TEXTURE4);gl.bindTexture(gl.TEXTURE_2D,tx);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,b);
 [gl.TEXTURE_MIN_FILTER,gl.TEXTURE_MAG_FILTER].forEach(k=>gl.texParameteri(gl.TEXTURE_2D,k,gl.LINEAR));[gl.TEXTURE_WRAP_S,gl.TEXTURE_WRAP_T].forEach(k=>gl.texParameteri(gl.TEXTURE_2D,k,gl.CLAMP_TO_EDGE));gl.activeTexture(gl.TEXTURE0);b.close();
 NT.set(m.id,tx);NF.set(m.id,f);if(nv)m.nv=nv;else{m.nv=++nvc;NEPF.set(m.nv,f)}NMV.set(m.id,m.nv)}
-const newLight=()=>({vis:1,lx:.5,ly:.4,lz:.5,li:1,amb:.15,spec:.3,wr:.25,hh:40,hs:100,hl:80});const MD={relight:()=>({lights:[newLight()],ds:.15,thr:.1,fe:30,bm:1,amount:65,fy:0,lm:1,solo:0,sm:0}),glare:()=>({kind:0,th:80,sm:30,amount:50,hh:40,hs:0,size:50,ssize:50,mode:1,cnt:2,ang:0,fade:50}),haze:()=>({amount:50,con:0,hh:210,hs:22,hl:82,mode:0}),dof:()=>({amount:50,focus:50,range:20,bk:30}),dehaze:()=>({amount:50,con:0,aoff:0,A:[.82,.86,.9]}),vig:()=>({amount:50,feather:50,radius:60,hh:0,hs:0,hl:0}),lim:()=>({lo:0,lor:10,hi:0,hir:10}),ca:()=>({amount:1,k:.03,blur:0,red:1.015,green:1,blue:.985,fit:1,cx:.5,cy:.5})};
+const newLight=()=>({vis:1,lx:.5,ly:.4,lz:.5,li:1,amb:.15,spec:.3,wr:.25,hh:40,hs:100,hl:80});const MD={relight:()=>({lights:[newLight()],ds:.15,thr:.1,fe:30,bm:1,amount:65,fy:0,lm:1,solo:0,sm:0}),glare:()=>({kind:0,bloom:20,th:80,sm:30,amount:50,hh:40,hs:0,size:50,ssize:50,mode:1,cnt:2,ang:0,fade:50}),haze:()=>({amount:50,dist:0,con:0,hh:210,hs:22,hl:82,mode:0}),dof:()=>({amount:50,focus:50,range:20,bk:30}),dehaze:()=>({amount:50,con:0,aoff:0,A:[.82,.86,.9]}),vig:()=>({amount:50,feather:50,radius:60,hh:0,hs:0,hl:0}),lim:()=>({lo:0,lor:10,hi:0,hir:10}),ca:()=>({amount:1,k:.03,blur:0,red:1.015,green:1,blue:.985,fit:1,cx:.5,cy:.5})};
 const newMod=t=>({id:mid++,type:t,open:1,on:1,inv:0,pre:0,...MD[t]()}),hasD=m=>DM.has(m.id);
 function delDepth(m){DF.delete(m.id);DMV.delete(m.id);const d=DM.get(m.id);if(d){gl.deleteTexture(d.tx);DM.delete(m.id)}}
 function clearMods(){mods.forEach(m=>{delDepth(m);delNormal(m)});mods.length=0}
@@ -956,7 +957,7 @@ const ks=kd.querySelector('select');ks.value=m.kind?1:0;ks.onchange=e=>{m.kind=+
 R('th','門檻',0,100,80,'th');R('sm','平滑度',0,100,30,'sm');R('a','強度',0,100,50,'amount');
 let sat;const tint=()=>sat&&sat.i.style.setProperty('--hc',`hsl(${m.hh} 100% 50%)`);R('h','色相',0,360,40,'hh',tint,'rb');sat=R('s','飽和度',0,100,0,'hs',null,'sg');tint();
 m.kind?R('z','大小',0,100,50,'ssize'):R('z','大小',0,100,50,'size');
-if(m.kind){R('n','星芒數量',1,8,2,'cnt');R('g','星芒角度',0,180,0,'ang');R('f','淡出',0,100,50,'fade')}
+if(m.kind){R('bl','光暈大小',0,100,20,'bloom');R('n','星芒數量',1,8,2,'cnt');R('g','星芒角度',0,180,0,'ang');R('f','淡出',0,100,50,'fade')}
 const md=document.createElement('div');md.className='sw';md.innerHTML='<span>混合模式</span><select><option value="0">一般</option><option value="1">濾色</option><option value="2">線性加亮</option><option value="3">柔光</option><option value="4">覆蓋</option><option value="5">正片疊底</option></select>';
 const se=md.querySelector('select');se.value=m.mode;se.onchange=e=>{m.mode=+e.target.value;render();commit()};b.appendChild(md)}
 function caList(){return []}
@@ -971,8 +972,7 @@ const fw=document.createElement('label');fw.className='sw';fw.innerHTML='<span>�
 const cb=document.createElement('div');cb.className='bar';cb.innerHTML='<button style="flex:1 1 100%">快速設定鏡頭中心</button>';cb.querySelector('button').onclick=()=>fqStart(m,true);b.appendChild(cb);
 R('ca1','色差強度',0,5,1,'amount',.1);R('ca2','畸變曲率',0,.1,.03,'k',.001);R('ca3','邊緣色相光滑度',0,5,0,'blur',1);
 const n2=document.createElement('p');n2.className='note';n2.innerHTML='<b>通道分離比例</b>';b.appendChild(n2);
-R('ca4','紅色通道倍率',.95,1.08,1.015,'red',.001);R('ca5','綠色通道倍率',.95,1.08,1,'green',.001);R('ca6','藍色通道倍率',.95,1.08,.985,'blue',.001);
-const rb=document.createElement('div');rb.className='bar';rb.innerHTML='<button style="flex:1 1 100%">重置色差參數</button>';rb.querySelector('button').onclick=()=>{Object.assign(m,MD.ca());caBody(m,b);drawOv();render();commit()};b.appendChild(rb)}
+R('ca4','紅色通道倍率',.95,1.08,1.015,'red',.001);R('ca5','綠色通道倍率',.95,1.08,1,'green',.001);R('ca6','藍色通道倍率',.95,1.08,.985,'blue',.001);}
 let limMode=0;const lwx=document.createElement('canvas').getContext('2d',{willReadFrequently:true}),lwb=document.createElement('canvas');lwb.width=960;lwb.height=480;
 function limWf(){if(!bmp||tab!='ef')return;const cvs=[...document.querySelectorAll('canvas.limwf')].filter(c=>c.isConnected);if(!cvs.length)return;
 const par=limMode==1,SW=par?320:960,gc=$('#gl'),SH=Math.max(16,Math.min(180,Math.round(SW*gc.height/gc.width)));
@@ -1066,7 +1066,7 @@ b.querySelector('input').onchange=async e=>{const f=e.target.files[0];e.target.v
 const rm=b.querySelector('.rmd');if(rm)rm.onclick=()=>{delDepth(m);m.dv=0;modRender();render();commit()};if(!has)return;
 const reg=[],R=(id,l,mi,ma,def,key,extra,cls)=>slider(b,id,l,mi,ma,def,()=>m[key],v=>{m[key]=v;extra&&extra()},null,cls||'',1,reg);
 const sw=document.createElement('label');sw.className='sw';sw.innerHTML='<span>反轉深度</span><input type="checkbox">';const ci=sw.querySelector('input');ci.checked=!!m.inv;ci.onchange=e=>{m.inv=+e.target.checked;if(m.type=='dehaze')dhRefresh(m);render();commit()};b.appendChild(sw);
-if(m.type=='haze'){R('a','霧的濃度',0,100,50,'amount');R('c','深度圖對比',-100,100,0,'con');
+if(m.type=='haze'){R('a','濃度',0,100,50,'amount');R('d','距離',0,100,0,'dist');R('c','深度圖對比',-100,100,0,'con');
 const md=document.createElement('div');md.className='sw';md.innerHTML='<span>混合模式</span><select><option value="0">一般</option><option value="1">濾色</option><option value="2">線性加亮</option><option value="3">柔光</option><option value="4">覆蓋</option><option value="5">正片疊底</option></select>';const se=md.querySelector('select');se.value=m.mode;se.onchange=e=>{m.mode=+e.target.value;render();commit()};b.appendChild(md);
 const pt_=document.createElement('p');pt_.className='note';pt_.innerHTML='<b>霧的顏色</b>';b.appendChild(pt_);
 let sat;const tint=()=>sat&&sat.i.style.setProperty('--hc',`hsl(${m.hh} 100% 50%)`);R('h','色相',0,360,210,'hh',tint,'rb');sat=R('s','飽和度',0,100,22,'hs',null,'sg');R('l','亮度',0,100,82,'hl');tint()}
@@ -1085,11 +1085,14 @@ else if(b){b.style.overflow='hidden';b.style.transition='none';b.style.height=b.
 function rmMod(card){const box=$('#mods');box.style.pointerEvents='none';const h=card.offsetHeight;card.style.height=h+'px';card.style.overflow='hidden';void card.offsetHeight;
 card.style.transition=`height ${MD_T}ms ease,margin ${MD_T}ms ease,opacity ${MD_T}ms ease,border-width ${MD_T}ms ease`;card.style.height='0px';card.style.marginBottom='0px';card.style.opacity='0';card.style.borderWidth='0px';
 setTimeout(()=>{box.style.pointerEvents='';modRender()},MD_T)}
+function flipMods(fn){const box=$('#mods'),f=new Map();[...box.children].forEach(c=>f.set(c.dataset.id,c.getBoundingClientRect().top));fn();
+[...box.children].forEach(c=>{const o=f.get(c.dataset.id);if(o==null||!c.animate)return;const d=o-c.getBoundingClientRect().top;if(!d)return;c.style.position='relative';c.style.zIndex=Math.abs(d)>0?2:'';
+const a=c.animate([{transform:`translateY(${d}px)`},{transform:'translateY(0)'}],{duration:300,easing:'cubic-bezier(.2,.8,.3,1)'});a.onfinish=a.oncancel=()=>{c.style.position=c.style.zIndex=''}})}
 function modRender(){const box=$('#mods');box.innerHTML='';const cnt={};
-mods.forEach((m,idx)=>{cnt[m.type]=(cnt[m.type]||0)+1;const card=document.createElement('div');card.className='mod';
-card.innerHTML=`<div class="mh"><button class="mi mc" aria-label="展開或收合"><b class="cv${m.open?' op':''}"></b></button><span class="mn">${MT[m.type]} ${cnt[m.type]}</span><button class="mi mv" aria-label="開關">${m.on?ICO.eye:ICO.eyeoff}</button><button class="mi mu" aria-label="上移">↑</button><button class="mi md" aria-label="下移">↓</button><button class="mi mx" aria-label="刪除">✕</button></div>`;
+mods.forEach((m,idx)=>{cnt[m.type]=(cnt[m.type]||0)+1;const card=document.createElement('div');card.className='mod';card.dataset.id=m.id;
+card.innerHTML=`<div class="mh"><button class="mi mc" aria-label="展開或收合"><b class="cv${m.open?' op':''}"></b></button><span class="mn">${MT[m.type]} ${cnt[m.type]}</span><button class="mi mv" aria-label="開關">${m.on?ICO.eye:ICO.eyeoff}</button><button class="mi mu${idx>0?'':' nm'}" aria-label="上移"><b class="ar up"></b></button><button class="mi md${idx<mods.length-1?'':' nm'}" aria-label="下移"><b class="ar"></b></button><button class="mi mx" aria-label="刪除">✕</button></div>`;
 const q=x=>card.querySelector(x);q('.mc').onclick=q('.mn').onclick=()=>toggleMod(m,card);q('.mv').onclick=()=>{m.on^=1;modRender();render();commit()};
-q('.mu').onclick=()=>{if(idx>0){[mods[idx-1],mods[idx]]=[mods[idx],mods[idx-1]];modRender();render();commit()}};q('.md').onclick=()=>{if(idx<mods.length-1){[mods[idx+1],mods[idx]]=[mods[idx],mods[idx+1]];modRender();render();commit()}};
+q('.mu').onclick=()=>{if(idx>0){flipMods(()=>{[mods[idx-1],mods[idx]]=[mods[idx],mods[idx-1]];modRender()});render();commit()}};q('.md').onclick=()=>{if(idx<mods.length-1){flipMods(()=>{[mods[idx+1],mods[idx]]=[mods[idx],mods[idx+1]];modRender()});render();commit()}};
 q('.mx').onclick=()=>{delDepth(m);delNormal(m);mods.splice(idx,1);commit();render();rmMod(card)};
 if(m.open){const b=document.createElement('div');b.className='mb';card.appendChild(b);modBody(m,b)}box.appendChild(card)})}
 const EFL=[['glare','眩光','擷取畫面亮部，獨立算成一個光效圖層（霧光或星芒），再用混合模式疊回照片。'],['haze','濛霧','依深度圖在遠處加入霧氣，營造空氣感。'],['dof','景深模糊','依深度圖模糊焦點以外的區域，突顯主體。'],['dehaze','去朦朧','依深度圖去除遠處的霧氣，讓畫面更通透。'],['vig','暈影','在照片四周加入漸層，可變暗、變亮或染色，引導視線。'],['ca','色差','模擬鏡頭邊緣的折射色散：紅、綠、藍三色依不同倍率縮放，可拖移畸變中心。'],['lim','波形限制','限制波形的最小／最大值：把暗部往上提、亮部往下壓，影響範圍內的拉動量由強漸弱。'],['relight','重新打光','用深度圖與法線圖重新打光，可新增多盞燈並在預覽圖上拖曳燈泡。每張照片最多只能有一個。']];let efSel=null;
@@ -1202,16 +1205,16 @@ while(sw>tw){const nw=Math.max(tw,Math.ceil(sw/2)),nh=nw==tw?th:Math.max(th,Math
 cv.toBlob(bl=>{o.style.display='none';if(px)useBmp(BP,1);draw(false);if(!bl){uiAlert('輸出失敗，可能是圖片太大，請試著降低解析度。');return}{const fn=(dlName||'New_Project')+(t=='png'?'.png':'.jpg');saveBlob(bl,fn,'image/'+t).then(ok=>{if(ok){savedSig=sig();uiAlert('「'+fn+'」已儲存。','儲存成功')}})}},'image/'+t,.92)},50)};
 
 // 下載對話框
-{const d=document.createElement('div');d.id='dlg';d.innerHTML='<div id="dlgc" role="dialog" aria-modal="true" aria-label="下載"><div id="dlgh"><b>下載</b><button id="dlgx" aria-label="關閉">✕</button></div><div id="dlgl"><div class="dlr"><span>檔名（不含副檔名）</span><input id="dlname" type="text" value="New_Project" maxlength="80" autocomplete="off" spellcheck="false"></div><div class="dlr"><span>檔案格式</span><select id="dlfmt"><option value="png">PNG</option><option value="jpeg">JPEG</option><option value="project">專案（ZIP，含照片與設定）</option></select></div><div class="dlr" id="dlsr"><span>解析度</span><select id="dlres"><option value="1">1.0x</option><option value="0.75">0.75x</option><option value="0.5">0.5x</option><option value="0.25">0.25x</option></select><p class="note" id="dlsz" style="margin:2px 0 0"></p></div></div><div id="dlgf"><button id="dlgo" class="pri">下載</button></div></div>';document.body.appendChild(d);
+{const d=document.createElement('div');d.id='dlg';d.innerHTML='<div id="dlgc" role="dialog" aria-modal="true" aria-label="下載"><div id="dlgh"><b>下載</b><button id="dlgx" aria-label="關閉">✕</button></div><div id="dlgl"><div class="dlr"><span>檔名（不含副檔名）</span><input id="dlname" type="text" value="New_Project" maxlength="80" autocomplete="off" spellcheck="false"></div><div class="dlr"><span>檔案格式</span><select id="dlfmt"><option value="png">PNG</option><option value="jpeg">JPEG</option><option value="project">專案（ZIP，含照片與設定）</option><option value="preset">預設集（_preset.zip，只含調整參數）</option></select></div><div class="dlr" id="dlsr"><span>解析度</span><select id="dlres"><option value="1">1.0x</option><option value="0.75">0.75x</option><option value="0.5">0.5x</option><option value="0.25">0.25x</option></select><p class="note" id="dlsz" style="margin:2px 0 0"></p></div></div><div id="dlgf"><button id="dlgo" class="pri">下載</button></div></div>';document.body.appendChild(d);
 const dims=()=>{const sc=+$('#dlres').value,geo=bmp&&!cropIdent(),pk=bmp?FW/iw:1,pl=bmp?FH/ih:1,W=bmp?(geo?Math.max(2,Math.round(crop.hw*2*pk)):Math.round(iw*pk)):0,H=bmp?(geo?Math.max(2,Math.round(crop.hh*2*pl)):Math.round(ih*pl)):0;return bmp?`輸出尺寸：${Math.max(1,Math.round(W*sc))} × ${Math.max(1,Math.round(H*sc))} px`:'開啟照片後才能輸出圖片'};
-const sync=()=>{const p=$('#dlfmt').value=='project';$('#dlsr').classList.toggle('hid',p);$('#dlsz').textContent=dims()};
+const sync=()=>{const p=['project','preset'].includes($('#dlfmt').value);$('#dlsr').classList.toggle('hid',p);$('#dlsz').textContent=dims()};
 $('#dlb').onclick=()=>{sync();$('#dlg').classList.add('on')};
 $('#dlgx').onclick=()=>$('#dlg').classList.remove('on');
 $('#dlfmt').addEventListener('change',sync);$('#dlres').addEventListener('change',sync);
 $('#dlgo').onclick=()=>{const t=$('#dlfmt').value;let n=$('#dlname').value.replace(/[\\\/:*?"<>|\u0000-\u001f]/g,'').trim().replace(/[. ]+$/,'');if(!n)n='New_Project';$('#dlname').value=n;
-if(t!='project'&&!bmp){uiAlert('請先開啟照片');return}
+if((t=='png'||t=='jpeg')&&!bmp){uiAlert('請先開啟照片');return}
 $('#dlg').classList.remove('on');dlName=n;
-if(t=='project')$('#dl').click();else{dlScale=+$('#dlres').value||1;$('#fmt').value=t;$('#exp').click()}}}
+if(t=='project')$('#dl').click();else if(t=='preset')dlPreset();else{dlScale=+$('#dlres').value||1;$('#fmt').value=t;$('#exp').click()}}}
 // 空白畫面按鈕與拖放
 $('#dzp').onclick=()=>$('#file').click();$('#dzz').onclick=()=>$('#jf').click();
 {const w=$('#wrap'),hasF=e=>e.dataTransfer&&[...(e.dataTransfer.types||[])].includes('Files');let dc=0;
@@ -1221,7 +1224,7 @@ w.addEventListener('dragleave',e=>{if(!hasF(e))return;if(--dc<=0){dc=0;w.classLi
 w.addEventListener('drop',async e=>{if(!hasF(e))return;e.preventDefault();dc=0;w.classList.remove('dragover');const f=e.dataTransfer.files[0];if(!f)return;
 const n=(f.name||'').toLowerCase(),isP=/\.(zip|json)$/.test(n)||/zip|json/.test(f.type),isI=(f.type||'').startsWith('image/');
 if(!isP&&!isI){uiAlert('請拖入照片，或 .zip 專案檔');return}
-guard(()=>isP?openProjectFile(f):openPhoto(f))});
+if(/_preset\.zip$/i.test(n)){importPreset(f);return}guard(()=>isP?openProjectFile(f):openPhoto(f))});
 ['dragover','drop'].forEach(t=>addEventListener(t,e=>{if(hasF(e))e.preventDefault()}))}
 // ---- 自製提示／確認視窗（取代瀏覽器內建 alert / confirm）----
 {const d=document.createElement('div');d.id='uid';d.innerHTML='<div id="uidc" role="alertdialog" aria-modal="true" aria-labelledby="uidt"><div id="uidh"><b id="uidt"></b><button id="uidx" aria-label="關閉">✕</button></div><div id="uidl"><div id="uidic" class="hid"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></svg></div><p id="uidm"></p></div><div id="uidf"><button id="uidno">取消</button><button id="uidok" class="pri">確定</button></div></div>';document.body.appendChild(d);
@@ -1242,7 +1245,7 @@ const cl_=()=>{$('#wrn').classList.remove('on');wrnGo=null};$('#wrnx').onclick=$
 $('#wrnok').onclick=()=>{const g=wrnGo;$('#wrn').classList.remove('on');wrnGo=null;g&&g()}}
 $('#load').onclick=e=>{e.stopPropagation();$('#ldm').classList.toggle('hid')};
 document.addEventListener('click',e=>{if(!e.target.closest('#ldw'))$('#ldm').classList.add('hid')});
-document.querySelectorAll('#ldm button').forEach(b=>b.onclick=()=>{$('#ldm').classList.add('hid');const t=b.dataset.ld;guard(()=>$(t=='photo'?'#file':'#jf').click())});
+document.querySelectorAll('#ldm button').forEach(b=>b.onclick=()=>{$('#ldm').classList.add('hid');const t=b.dataset.ld;if(t=='preset'){$('#pf').click();return}guard(()=>$(t=='photo'?'#file':'#jf').click())});
 function panelExpand(){const sd=$('#side');if(matchMedia('(min-width:800px)').matches){sd.classList.remove('dcol','col')}else if(sd.classList.contains('col')){slideSet([$('#chbar'),$('#tabs'),$('#panel'),$('#wfwin')],false,()=>sd.classList.remove('col'))}else sd.classList.remove('dcol')}
 // 專案
 
@@ -1294,7 +1297,10 @@ if(Array.isArray(d.mods)){clearMods();d.mods.slice(0,40).forEach(x=>{if(!x||!MD[
 m.mode=m.mode===undefined?undefined:Math.round(cl(m.mode,0,5));if(m.mode===undefined)delete m.mode;m.inv=x.inv?1:0;m.on=x.on===0?0:1;m.pre=x.pre?1:0;mods.push(m);if(typeof x.df=='string'&&dfiles[x.df])pendD.push([m,dfiles[x.df]]);if(typeof x.nf=='string'&&dfiles[x.nf])pendD.push([m,dfiles[x.nf],1])});for(const[m,fl,isN]of pendD){try{await(isN?loadNormal(fl,m):loadDepth(fl,m))}catch(_){}}modRender();if(mods.some(m=>m.type!='vig'&&m.type!='glare'&&m.type!='ca'&&m.type!='lim'&&!hasD(m))){hint('效果需要重新上傳深度圖');setTimeout(()=>hint(''),3000)}}
 if(d.crop&&bmp){const c=d.crop;crop.cx=num(c.cx,.5,0,1)*iw;crop.cy=num(c.cy,.5,0,1)*ih;crop.hw=Math.max(8,num(c.hw,.5,0,1)*iw);crop.hh=Math.max(8,num(c.hh,.5,0,1)*ih);crop.a=num(c.a,0,-7,7);crop.fx=c.fx==-1?-1:1;crop.fy=c.fy==-1?-1:1;crop.ratio=num(c.ratio,0,0,20);crop.rk=Math.round(num(c.rk,0,-1,8));fitCrop();cropUI()}
 if(d.fx){fx.hist=d.fx.hist===0?0:1;syncFx()}L=d.layers.slice(0,200).map(clean);cur=0;band=0;wbOff();commit();chips();syncAll();rebuildBrush();savedSig=sig()}catch(err){uiAlert('無法載入專案：'+err.message)}}
-$('#jf').onchange=async e=>{const f=e.target.files[0];e.target.value='';await openProjectFile(f)};
+async function fileKind(f){try{const b=new Uint8Array(await f.arrayBuffer());if(b[0]==0x50&&b[1]==0x4b){const z=await zipRead(b);if(z['preset.json']&&!z['project.json'])return'preset';if(z['project.json'])return'project'}}catch(e){}return /_preset\.zip$/i.test(f.name||'')?'preset':'other'}
+$('#jf').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
+if(await fileKind(f)=='preset'){if(await uiConfirm('所選檔案「'+f.name+'」為預設集，不是專案檔案。\n是否改為匯入此預設集？匯入預設集不會取代目前編輯中的照片。',{title:'檔案類型不符',ok:'匯入預設集'}))await importPreset(f);return}
+await openProjectFile(f)};
 // ---- 曲線 ----
 function defCv(){return{w:[[0,0],[1,1]],r:[[0,0],[1,1]],g:[[0,0],[1,1]],b:[[0,0],[1,1]]}}
 function cvIdP(p){return!p||(p.length==2&&p[0][1]==0&&p[1][1]==1)}
@@ -1392,6 +1398,31 @@ if(q)return;fitCrop();rebuildBrush();cropUI();fit();drawOv();render()}
 function pxUI(){const b=$('#pxb');b.classList.toggle('hid',!BP);b.classList.toggle('on',!!(BP&&proxyOn));b.setAttribute('aria-pressed',!!(BP&&proxyOn))}
 $('#pxb').onclick=()=>{if(!BP)return;proxyOn=!proxyOn;useBmp(proxyOn?BP:BF);pxUI();hint(proxyOn?'Proxy 預覽：開（'+iw+'×'+ih+'）':'Proxy 預覽：關（原圖 '+iw+'×'+ih+'）');setTimeout(()=>hint(''),1800)};
 // 啟動
+// ---- 預設集（Preset）：只存滑桿／選項調整，不含照片、遮罩、需深度圖的效果 ----
+const PRE_T=['glare','vig','ca'];
+async function dlPreset(){try{const g=cp(L[0]);
+const glob={p:g.p,hsl:g.hsl,hx:g.hx,cgb:g.cgb,cgr:g.cgr,cg:g.cg,cv:g.cv};
+const pm=mods.filter(m=>PRE_T.includes(m.type)).map(m=>{const o=cp(m);delete o.id;delete o.open;return o});
+const proj={app:'lr5',kind:'preset',version:1,global:glob,mods:pm};
+const files=[{name:'preset.json',data:new TextEncoder().encode(JSON.stringify(proj,null,1))}];
+const fn=(dlName||'New_Project')+'_preset.zip';
+if(await saveBlob(zipMake(files),fn,'application/zip'))uiAlert('「'+fn+'」已儲存。','儲存成功')}catch(err){uiAlert('無法建立預設集：'+err.message)}}
+async function importPreset(f){if(!f)return;
+if(!/_preset\.zip$/i.test(f.name||'')){uiAlert('請選擇檔名以 _preset.zip 結尾的預設集檔案');return}
+if(!bmp){uiAlert('請先開啟照片，再匯入預設集');return}
+try{const z=await zipRead(new Uint8Array(await f.arrayBuffer()));if(!z['preset.json'])throw new Error('找不到 preset.json');
+const d=JSON.parse(new TextDecoder().decode(z['preset.json']));
+if(!d||d.app!='lr5'||d.kind!='preset'||!d.global)throw new Error('不是有效的預設集檔案');
+const g=clean(d.global,0);g.name=L[0].name;L[0]=g;
+for(let i=mods.length-1;i>=0;i--)if(PRE_T.includes(mods[i].type)){delDepth(mods[i]);mods.splice(i,1)}
+(Array.isArray(d.mods)?d.mods:[]).slice(0,12).forEach(x=>{if(!x||!PRE_T.includes(x.type))return;const m=newMod(x.type),df=MD[x.type]();
+Object.keys(df).forEach(k=>{if(k!='A'&&k!='lights')m[k]=num(x[k],df[k],-100,360)});
+if(m.mode!==undefined)m.mode=Math.round(cl(m.mode,0,5));if(m.kind!==undefined)m.kind=m.kind?1:0;
+m.inv=x.inv?1:0;m.on=x.on===0?0:1;m.pre=x.pre?1:0;mods.push(m)});
+modRender();syncAll();drawOv();render();commit();uiAlert('已套用預設集「'+f.name+'」。','已套用')}catch(err){uiAlert('無法匯入預設集：'+err.message)}}
+$('#pf').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
+if(await fileKind(f)=='project'){uiAlert('所選檔案「'+f.name+'」為專案檔案，不是預設集。\n請選擇檔名以 _preset.zip 結尾的預設集檔案。若要開啟專案，請使用「開啟專案」。','檔案類型不符');return}
+await importPreset(f)};
 try{localStorage.removeItem(KEY)}catch(e){}
 resetHist();chips();syncAll();btns();syncFx();
 $('#side').classList.add(matchMedia('(min-width:800px)').matches?'dcol':'col');
