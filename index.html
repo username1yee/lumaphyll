@@ -31,7 +31,7 @@ header button,header label{flex:none}
 #mdlc{width:min(420px,100%);max-height:calc(100% - 0px);max-height:min(100%,calc(100dvh - 128px));display:flex;flex-direction:column;background:var(--pn);border:1px solid var(--ln);border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.5);overflow:hidden}
 #mdlh{display:flex;align-items:center;justify-content:space-between;padding:8px 8px 8px 16px;border-bottom:1px solid var(--ln)}#mdlh b{font-size:16px}
 #mdlx{width:40px;height:40px;min-height:0;padding:0;border:0;border-radius:50%;background:none;font-size:20px;line-height:1}
-#mdll{padding:12px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;flex:1 1 auto;min-height:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}#mdll .mdi{flex:none}#mdlh,#mdlf{flex:none}
+#mdll{padding:12px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;flex:1 1 auto;min-height:0;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;touch-action:pan-y}#mdll .mdi{flex:none}#mdlh,#mdlf{flex:none}.mcat{flex:none}.mch{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:44px;padding:6px 6px 6px 4px;border:0;border-radius:8px;background:none;font-weight:600;font-size:15px;text-align:left}.mcv{flex:none;width:9px;height:9px;border-right:2px solid var(--mu);border-bottom:2px solid var(--mu);transform:rotate(-135deg);margin-top:4px;transition:transform .3s ease,margin-top .3s ease}.mcat.cl .mcv{transform:rotate(45deg);margin-top:-4px}.mcb{display:grid;grid-template-rows:1fr;transition:grid-template-rows .3s ease}.mcat.cl .mcb{grid-template-rows:0fr}.mci{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:8px;padding-top:2px}.mcat.cl .mci{visibility:hidden;transition:visibility 0s .3s}
 .mdi{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;padding:12px 14px;border-radius:10px;border:2px solid var(--ln);background:none}.mdi b{font-size:15px}.mdi span{font-size:13px;color:var(--mu)}.mdi.on{border-color:var(--ac)}
 #mdlf{display:flex;justify-content:flex-end;padding:10px 12px;border-top:1px solid var(--ln)}#mdlf button{min-width:96px}
 #mcomp.bar{flex-direction:column;flex-wrap:nowrap;gap:6px}.crow{display:flex;align-items:center;border:1px solid var(--ln);border-radius:10px;background:var(--pn)}.crow.on{border-color:var(--ac);color:var(--ac)}.crow.off .cn{opacity:.45}
@@ -121,6 +121,8 @@ header.fqm #fqdone{display:inline-flex}header.crm>*:not(#crdone):not(span){displ
 .ddm.on{opacity:1;transform:none}
 .ddm .ddi{flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;padding:0 12px;border:0;border-radius:8px;background:none;text-align:left;white-space:nowrap}
 .ddm .ddi:active{background:var(--ln)}.ddm .ddi.sel{color:var(--ac);font-weight:600}.ddm .ddi.sel::after{content:'✓'}
+.chip{position:relative;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;transition:border-color .25s ease,box-shadow .25s ease,transform .2s ease}
+.chip.drag{z-index:3;border-color:#fff;box-shadow:0 0 0 1.5px #fff,0 2px 10px rgba(0,0,0,.5);transition:border-color .25s ease,box-shadow .25s ease}
 
 @media(min-width:800px){
 #side{position:relative;margin-right:0;transition:margin-right .3s ease}
@@ -176,7 +178,7 @@ header.fqm #fqdone{display:inline-flex}header.crm>*:not(#crdone):not(span){displ
 .ftile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:92px;padding:12px 6px;border-radius:12px;border:1px solid var(--ln);background:var(--bg);color:var(--tx);transition:border-color .2s,color .2s,background .2s}
 .ftile svg{flex:none}.ftile span{font-size:13px;line-height:1.2;text-align:center}
 .ftile.on{border-color:var(--ac);color:var(--ac);background:rgba(108,184,255,.08)}
-#fpbar,#fhbar{display:flex;align-items:center;gap:8px;margin:0 -16px 12px;padding:4px 8px;border-bottom:1px solid var(--ln);position:sticky;top:0;background:var(--pn);z-index:3}#fpbar b,#fhbar b{font-size:15px}
+#fpbar,#fhbar,#fxbar{display:flex;align-items:center;gap:8px;margin:0 -16px 12px;padding:4px 8px;border-bottom:1px solid var(--ln);position:sticky;top:0;background:var(--pn);z-index:3}#fpbar b,#fhbar b,#fxbar b{font-size:15px}
 #side.palm #tabs{display:none}body.palp #panel{padding-top:0}
 @media(max-width:799px){body.palx #panel{height:var(--ph)}body.palw #wrap{min-height:0}}
 #fsbox{margin-top:14px}
@@ -207,7 +209,7 @@ body.noph #side{display:none!important}
 <div class="row"><div class="t"><span>傾斜</span><span class="v" id="ctv">0°</span></div><input type="range" id="ctilt" min="-450" max="450" value="0"></div>
 <div class="bar"><button id="cswap">橫直互換</button><button id="crst">重設裁切</button></div></div>
 <div id="p-fn" class="hid">
-<div id="fnhome"><div class="ftiles"><button class="ftile" id="fth" aria-label="分布圖"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><rect x="4.5" y="12" width="3" height="8" rx=".8"/><rect x="10.5" y="5" width="3" height="15" rx=".8"/><rect x="16.5" y="9" width="3" height="11" rx=".8"/></svg><span>分布圖</span></button><button class="ftile" id="ftp" aria-label="調色盤"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-.9 2-1.8 0-1.2-1-1.5-1-2.7 0-1 .8-1.7 1.8-1.7H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.1" fill="currentColor"/><circle cx="10" cy="7.3" r="1.1" fill="currentColor"/><circle cx="14.5" cy="7.3" r="1.1" fill="currentColor"/></svg><span>調色盤</span></button><button class="ftile" id="ftc" aria-label="裁切"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M2 6h14a2 2 0 0 1 2 2v14"/></svg><span>裁切</span></button></div>
+<div id="fnhome"><div class="ftiles"><button class="ftile" id="fth" aria-label="分布圖"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 20h18"/><rect x="4.5" y="12" width="3" height="8" rx=".8"/><rect x="10.5" y="5" width="3" height="15" rx=".8"/><rect x="16.5" y="9" width="3" height="11" rx=".8"/></svg><span>分布圖</span></button><button class="ftile" id="ftp" aria-label="調色盤"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 0 18c1.4 0 2-.9 2-1.8 0-1.2-1-1.5-1-2.7 0-1 .8-1.7 1.8-1.7H17a4 4 0 0 0 4-4C21 6.6 17 3 12 3z"/><circle cx="7.5" cy="11" r="1.1" fill="currentColor"/><circle cx="10" cy="7.3" r="1.1" fill="currentColor"/><circle cx="14.5" cy="7.3" r="1.1" fill="currentColor"/></svg><span>調色盤</span></button><button class="ftile" id="ftc" aria-label="裁切"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2v14a2 2 0 0 0 2 2h14"/><path d="M2 6h14a2 2 0 0 1 2 2v14"/></svg><span>裁切</span></button><button class="ftile" id="ftx" aria-label="Proxy"><svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><rect x="7" y="9" width="7" height="7" rx="1"/><path d="M17 8h1"/></svg><span>Proxy</span></button></div>
 <div class="hid" id="fsbox"><label class="sw"><span>全螢幕模式</span><input type="checkbox" id="fsw"></label><p class="note" id="fsn" style="margin-top:-4px"></p></div></div>
 <div class="hid" id="fnpal"><div id="fpbar"><button class="ib" id="fpback" aria-label="返回功能"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><b>調色盤</b></div>
 <select id="phm" style="width:100%"><option value="analogous">類似色 Analogous</option><option value="complementary">互補色 Complementary</option><option value="triad">三等分 Triad</option><option value="split">分裂互補 Split complementary</option><option value="tetrad">四角 Tetradic</option><option value="mono">單色 Monochromatic</option></select>
@@ -215,7 +217,12 @@ body.noph #side{display:none!important}
 <div class="pgrid" id="pgen"></div>
 <div class="bar"><button id="padd" class="pri">全部加入調色盤</button></div>
 <p class="note" style="margin-top:14px"><b>我的調色盤</b></p><div class="pgrid" id="pcus"></div><p class="note" id="pcn"></p>
-<div class="bar"><button id="pbase">設為基準色</button><button id="pdel">刪除</button><button id="pclr">清空</button></div></div><div class="hid" id="fnhist"><div id="fhbar"><button class="ib" id="fhback" aria-label="返回功能"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><b>分布圖</b></div>
+<div class="bar"><button id="pbase">設為基準色</button><button id="pdel">刪除</button><button id="pclr">清空</button></div></div><div class="hid" id="fnpx"><div id="fxbar"><button class="ib" id="fxback" aria-label="返回功能"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><b>Proxy</b></div>
+<label class="sw"><span>啟用 Proxy</span><input type="checkbox" id="pxsw"></label>
+<p class="note sh"><b>Proxy 倍率</b></p>
+<div class="bar" id="pxsc"><button data-s="0.75">0.75x</button><button data-s="0.5">0.5x</button><button data-s="0.25">0.25x</button></div>
+<p class="note" id="pxsz"></p>
+</div><div class="hid" id="fnhist"><div id="fhbar"><button class="ib" id="fhback" aria-label="返回功能"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button><b>分布圖</b></div>
 <label class="sw"><span>顯示分布圖</span><input type="checkbox" id="hshow"></label>
 <p class="note sh" style="margin:16px 0 10px"><b>波形圖</b></p>
 <canvas id="hwc" width="480" height="240" style="width:100%;height:auto;aspect-ratio:2/1;display:block;border-radius:8px;background:#000"></canvas>
@@ -795,11 +802,31 @@ if(m){$('#minv').textContent=ac().inv?'取消翻轉':'翻轉區域'}}
 const SV=d=>`<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
 const ICO={eye:SV('<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/>'),eyeoff:SV('<path d="M17.94 17.94A10.94 10.94 0 0 1 12 19C5 19 1 12 1 12a18.5 18.5 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19M14.12 14.12a3 3 0 1 1-4.24-4.24"/><path d="M1 1l22 22"/>'),trash:SV('<path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6M10 11v6M14 11v6"/>')};
 function delLayer(i){L.splice(i,1);cur=i==cur?0:(i<cur?cur-1:cur);chips();syncAll();rebuildBrush();drawOv();render();commit()}
-function chips(){const c=$('#chips');c.innerHTML='';L.forEach((m,i)=>{const w=document.createElement('div');w.className='chip'+(i==cur?' on':'')+(m.vis?'':' off');
+function chips(){const c=$('#chips');c.innerHTML='';L.forEach((m,i)=>{const w=document.createElement('div');w.className='chip'+(i==cur?' on':'')+(m.vis?'':' off');w.dataset.i=i;
 if(i){const e=document.createElement('button');e.innerHTML=m.vis?ICO.eye:ICO.eyeoff;e.setAttribute('aria-label',m.vis?'隱藏圖層':'顯示圖層');e.onclick=ev=>{ev.stopPropagation();m.vis^=1;chips();render();commit()};w.appendChild(e)}
 const b=document.createElement('button');b.className='cn';b.textContent=m.name;b.onclick=()=>{cur=i;chips();syncAll();render()};w.appendChild(b);
 if(i){const d=document.createElement('button');d.innerHTML=ICO.trash;d.setAttribute('aria-label','刪除圖層');d.onclick=ev=>{ev.stopPropagation();delLayer(i)};w.appendChild(d)}
 c.appendChild(w)});$('#chlab').textContent='圖層：'+(L[cur]?L[cur].name:'')}
+// 長按遮罩圖層左右拖動以調整順序
+{const box=$('#chips');let lp=null,dg=null,sup=0;
+const start=()=>{const o=lp;lp=null;if(!o||!o.w.isConnected||L.length<3)return;try{o.w.setPointerCapture(o.id)}catch(_){}
+const kids=[...box.children],r=kids.map(k=>k.getBoundingClientRect());dg={w:o.w,kids,r,mid:r.map(q=>q.left+q.width/2),from:o.i,to:o.i,x0:o.x,sl0:box.scrollLeft,id:o.id};
+o.w.classList.add('drag');navigator.vibrate&&navigator.vibrate(12)};
+box.addEventListener('pointerdown',e=>{if(dg||lp||e.button>0||!bmp)return;const w=e.target.closest('.chip'),i=w?+w.dataset.i:0;if(!i)return;
+lp={w,i,x:e.clientX,y:e.clientY,id:e.pointerId,t:setTimeout(start,380)}});
+box.addEventListener('pointermove',e=>{if(lp&&e.pointerId==lp.id){if(Math.hypot(e.clientX-lp.x,e.clientY-lp.y)>8){clearTimeout(lp.t);lp=null}return}
+if(!dg||dg.fin||e.pointerId!=dg.id)return;const b=box.getBoundingClientRect();if(e.clientX>b.right-36)box.scrollLeft+=10;else if(e.clientX<b.left+36)box.scrollLeft-=10;
+const sd=box.scrollLeft-dg.sl0,mv=e.clientX-dg.x0,c=dg.mid[dg.from]+mv;let n=1;dg.kids.forEach((k,j)=>{if(j>=1&&j!=dg.from&&dg.mid[j]-sd<c)n++});dg.to=n;
+const f=dg.from,t=n,sh=dg.r[f].width+6;dg.w.style.transform=`translateX(${mv+sd}px)`;
+dg.kids.forEach((k,j)=>{if(j<1||j==f)return;k.style.transform=(f<t&&j>f&&j<=t)?`translateX(${-sh}px)`:(f>t&&j>=t&&j<f)?`translateX(${sh}px)`:''})});
+const end=e=>{if(lp&&e.pointerId==lp.id){clearTimeout(lp.t);lp=null}if(!dg||dg.fin||e.pointerId!=dg.id)return;dg.fin=1;sup=1;setTimeout(()=>sup=0,80);
+const d=dg,f=d.from,t=d.to;let x=0;if(t>f)for(let k=f+1;k<=t;k++)x+=d.r[k].width+6;else for(let k=t;k<f;k++)x-=d.r[k].width+6;
+d.w.classList.remove('drag');d.w.style.transform=`translateX(${x}px)`;
+setTimeout(()=>{dg=null;if(t!=f){const co=L[cur],m=L.splice(f,1)[0];L.splice(t,0,m);cur=L.indexOf(co);chips();syncAll();rebuildBrush();drawOv();render();commit()}else chips()},220)};
+box.addEventListener('pointerup',end);box.addEventListener('pointercancel',end);
+box.addEventListener('touchmove',e=>{if(dg)e.preventDefault()},{passive:false});
+box.addEventListener('contextmenu',e=>e.preventDefault());
+box.addEventListener('click',e=>{if(sup||dg){e.stopPropagation();e.preventDefault()}},true)}
 // 復原／重做／保存
 function snap(){return JSON.stringify(L)}
 const DMV=new Map(),DEPF=new Map();let dvc=0,baseS=null,cdT=0;
@@ -906,12 +933,23 @@ $('#addL').onclick=()=>prep('linear');$('#addR').onclick=()=>prep('radial');$('#
 $('#mbr').onclick=()=>{brush.erase=0;syncAll()};$('#mer').onclick=()=>{brush.erase=1;syncAll()};
 function syncFx(){hc.style.display=fx.hist?'':'none';$('#fth').classList.toggle('on',!!fx.hist);$('#hshow').checked=!!fx.hist}
 $('#fth').onclick=()=>palGo(true,'hist');$('#fhback').onclick=()=>palGo(false);
+let pxBusy=false;
+$('#ftx').onclick=()=>palGo(true,'px');$('#fxback').onclick=()=>palGo(false);
+function pxPage(){const has=!!BP,sc=has&&FW?BP.width/FW:0;$('#pxsw').checked=has;$('#pxsw').disabled=!bmp||pxBusy;
+document.querySelectorAll('#pxsc button').forEach(b=>{b.disabled=!has||pxBusy;b.classList.toggle('on',has&&Math.abs(+b.dataset.s-sc)<.01)});
+$('#pxsz').textContent=!bmp?'':has?'預覽尺寸：'+BP.width+' × '+BP.height+' px（原圖 '+FW+' × '+FH+' px）':'原圖尺寸：'+FW+' × '+FH+' px'}
+async function pxSet(s){if(!bmp||!BF||pxBusy)return;pxBusy=true;pxPage();
+try{const nb=await createImageBitmap(BF,{resizeWidth:Math.max(1,Math.round(FW*s)),resizeHeight:Math.max(1,Math.round(FH*s)),resizeQuality:'high'}),old=BP,on=proxyOn||!old;BP=nb;proxyOn=on;if(on)useBmp(nb);if(old&&old!==bmp)try{old.close()}catch(_){}}
+catch(err){uiAlert('無法建立 Proxy：'+err.message)}pxBusy=false;pxUI()}
+function pxOff(){const old=BP;if(bmp!==BF&&BF)useBmp(BF);BP=null;proxyOn=false;if(old)try{old.close()}catch(_){}pxUI()}
+$('#pxsw').onchange=e=>{if(e.target.checked)pxSet(.5);else pxOff()};
+document.querySelectorAll('#pxsc button').forEach(b=>b.onclick=()=>pxSet(+b.dataset.s));
 $('#hshow').onchange=e=>{fx.hist=e.target.checked?1:0;syncFx();render()};
 let palPage=false,palT=0,palWhich='pal';
 function palPh(){document.body.style.setProperty('--ph',Math.max(120,document.body.clientHeight-document.querySelector('header').offsetHeight-$('#grip').offsetHeight-2)+'px')}
 addEventListener('resize',()=>{if(palPage)palPh()});
 function palGo(on,w){w=w||palWhich;if(slB||palPage==on)return;palPage=on;palWhich=w;const sd=$('#side');if(on)palPh();
-fadeSwap(()=>{document.body.classList.toggle('palp',on);$('#fnhome').classList.toggle('hid',on);$('#fnpal').classList.toggle('hid',!(on&&w=='pal'));$('#fnhist').classList.toggle('hid',!(on&&w=='hist'));$('#panel').scrollTop=0;if(on&&w=='pal')palRender();if(on&&w=='hist')render()});
+fadeSwap(()=>{document.body.classList.toggle('palp',on);$('#fnhome').classList.toggle('hid',on);$('#fnpal').classList.toggle('hid',!(on&&w=='pal'));$('#fnhist').classList.toggle('hid',!(on&&w=='hist'));$('#fnpx').classList.toggle('hid',!(on&&w=='px'));$('#panel').scrollTop=0;if(on&&w=='pal')palRender();if(on&&w=='hist')render();if(on&&w=='px')pxPage()});
 clearTimeout(palT);if(on)document.body.classList.add('palw');else palT=setTimeout(()=>document.body.classList.remove('palw'),340);document.body.classList.toggle('palx',on);
 slideSet([$('#tabs')],on,()=>sd.classList.toggle('palm',on))}
 function cropEnter(){if(!bmp){uiAlert('請先開啟照片');return}if(slB)return;const sd=$('#side');tab='crop';focusPick=null;fqCA=null;sd.classList.remove('col');zm.z=1;zm.x=zm.y=0;
@@ -1097,9 +1135,14 @@ q('.mx').onclick=()=>{delDepth(m);delNormal(m);mods.splice(idx,1);commit();rende
 if(m.open){const b=document.createElement('div');b.className='mb';card.appendChild(b);modBody(m,b)}box.appendChild(card)})}
 const EFL=[['glare','眩光','擷取畫面亮部，獨立算成一個光效圖層（霧光或星芒），再用混合模式疊回照片。'],['haze','濛霧','依深度圖在遠處加入霧氣，營造空氣感。'],['dof','景深模糊','依深度圖模糊焦點以外的區域，突顯主體。'],['dehaze','去朦朧','依深度圖去除遠處的霧氣，讓畫面更通透。'],['vig','暈影','在照片四周加入漸層，可變暗、變亮或染色，引導視線。'],['ca','色差','模擬鏡頭邊緣的折射色散：紅、綠、藍三色依不同倍率縮放，可拖移畸變中心。'],['lim','波形限制','限制波形的最小／最大值：把暗部往上提、亮部往下壓，影響範圍內的拉動量由強漸弱。'],['relight','重新打光','用深度圖與法線圖重新打光，可新增多盞燈並在預覽圖上拖曳燈泡。每張照片最多只能有一個。']];let efSel=null;
 {const d=document.createElement('div');d.id='mdl';d.innerHTML='<div id="mdlc" role="dialog" aria-modal="true" aria-label="新增效果"><div id="mdlh"><b>新增效果</b><button id="mdlx" aria-label="關閉">✕</button></div><div id="mdll"></div><div id="mdlf"><button id="mdlok" class="pri" disabled>確定</button></div></div>';document.body.appendChild(d);
-const L_=$('#mdll');EFL.forEach(([t,n,ds])=>{const b=document.createElement('button');b.className='mdi';b.dataset.mt=t;b.innerHTML='<b>'+n+'</b><span>'+ds+'</span>';b.onclick=()=>{efSel=t;[...L_.children].forEach(x=>x.classList.toggle('on',x==b));$('#mdlok').disabled=false};L_.appendChild(b)})}
+const L_=$('#mdll'),CATS=[['光線與氛圍',['glare','relight','vig']],['深度',['haze','dehaze','dof']],['鏡頭模擬',['ca']],['工具',['lim']]],EM=Object.fromEntries(EFL.map(q=>[q[0],q]));
+CATS.forEach(([cn,ts],ci)=>{const g=document.createElement('div');g.className='mcat';const h=document.createElement('button');h.type='button';h.className='mch';h.setAttribute('aria-expanded','true');h.innerHTML='<span>'+['一','二','三','四'][ci]+'、'+cn+'</span><b class="mcv"></b>';
+const bd=document.createElement('div'),inn=document.createElement('div');bd.className='mcb';inn.className='mci';bd.appendChild(inn);
+h.onclick=()=>{const c=g.classList.toggle('cl');h.setAttribute('aria-expanded',String(!c))};
+ts.forEach(t=>{const[,n,ds]=EM[t],b=document.createElement('button');b.className='mdi';b.dataset.mt=t;b.innerHTML='<b>'+n+'</b><span>'+ds+'</span>';b.onclick=()=>{efSel=t;L_.querySelectorAll('.mdi').forEach(x=>x.classList.toggle('on',x==b));$('#mdlok').disabled=false};inn.appendChild(b)});
+g.append(h,bd);L_.appendChild(g)})}
 const efClose=()=>$('#mdl').classList.remove('on');
-$('#addmod').onclick=()=>{efSel=null;$('#mdlok').disabled=true;[...$('#mdll').children].forEach(x=>x.classList.remove('on'));const hasR=mods.some(q=>q.type=='relight'),rb=$('#mdll [data-mt=relight]');rb.disabled=hasR;rb.querySelector('span').textContent=hasR?'已新增，最多只能有一個重新打光效果。':EFL.find(q=>q[0]=='relight')[2];$('#mdl').classList.add('on')};
+$('#addmod').onclick=()=>{efSel=null;$('#mdlok').disabled=true;$('#mdll').querySelectorAll('.mdi').forEach(x=>x.classList.remove('on'));const hasR=mods.some(q=>q.type=='relight'),rb=$('#mdll [data-mt=relight]');rb.disabled=hasR;rb.querySelector('span').textContent=hasR?'已新增，最多只能有一個重新打光效果。':EFL.find(q=>q[0]=='relight')[2];$('#mdl').classList.add('on')};
 $('#mdlx').onclick=efClose;
 $('#mdlok').onclick=()=>{if(!efSel)return;if(efSel=='relight'&&mods.some(q=>q.type=='relight'))return;mods.push(newMod(efSel));efClose();modRender();render();commit()};
 function pickFocus(q){const m=focusPick;focusPick=null;hint('');if(!m||!hasD(m))return;const z=depthAt(m,q.x,q.y);m.focus=Math.round((m.inv?z:1-z)*100);modRender();render()}
@@ -1395,7 +1438,7 @@ hist.forEach(h=>[h.f,h.b].forEach(a=>a.forEach(o=>{if(o.p[0]!='crop')return;if(o
 function useBmp(nb,q){if(!nb||nb===bmp)return;const kx=nb.width/iw,ky=nb.height/ih;crop.cx*=kx;crop.hw*=kx;crop.cy*=ky;crop.hh*=ky;rsHist(kx,ky);
 bmp=nb;iw=nb.width;ih=nb.height;const c=$('#gl');c.width=iw;c.height=ih;gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,tex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,bmp);vw=0;vh=0;
 if(q)return;fitCrop();rebuildBrush();cropUI();fit();drawOv();render()}
-function pxUI(){const b=$('#pxb');b.classList.toggle('hid',!BP);b.classList.toggle('on',!!(BP&&proxyOn));b.setAttribute('aria-pressed',!!(BP&&proxyOn))}
+function pxUI(){const b=$('#pxb');b.classList.toggle('hid',!BP);b.classList.toggle('on',!!(BP&&proxyOn));b.setAttribute('aria-pressed',!!(BP&&proxyOn));if(palPage&&palWhich=='px')pxPage()}
 $('#pxb').onclick=()=>{if(!BP)return;proxyOn=!proxyOn;useBmp(proxyOn?BP:BF);pxUI();hint(proxyOn?'Proxy 預覽：開（'+iw+'×'+ih+'）':'Proxy 預覽：關（原圖 '+iw+'×'+ih+'）');setTimeout(()=>hint(''),1800)};
 // 啟動
 // ---- 預設集（Preset）：只存滑桿／選項調整，不含照片、遮罩、需深度圖的效果 ----
