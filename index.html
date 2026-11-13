@@ -23,8 +23,8 @@ header button,header label{flex:none}
 #cgm{display:flex;align-items:center;justify-content:center;gap:16px;width:100%;padding:34px 0 40px;box-sizing:border-box}#cgm #cgw{flex:1 1 0;min-width:0;width:auto;max-width:190px;margin:0}
 #cgv{flex:0 0 auto}#cgv .row{position:relative;width:34px;height:170px;margin:0}#cgv .row .t{display:none}
 #cgv input{position:absolute;left:50%;top:50%;width:170px;height:34px;transform:translate(-50%,-50%) rotate(-90deg);touch-action:none}
-#cgv input::-webkit-slider-runnable-track{height:10px;border-radius:5px;background:linear-gradient(90deg,#000,#fff)}#cgv input::-webkit-slider-thumb{margin-top:-9px}
-#cgv input::-moz-range-track{height:10px;border-radius:5px;background:linear-gradient(90deg,#000,#fff)}
+#cgv input::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(90deg,#000,#fff)}#cgv input::-webkit-slider-thumb{margin-top:-12.5px}
+#cgv input::-moz-range-track{height:3px;border-radius:2px;background:linear-gradient(90deg,#000,#fff)}
 #cgt .rg{stroke:#bdbdbd;stroke-width:3.5;r:17px;transition:stroke .3s ease,stroke-width .3s ease,r .3s ease}#cgt .on .rg{stroke:#fff;stroke-width:6;r:16.5px}
 #wb{gap:4px}#wb button{flex:none;min-width:0;width:44px;height:44px;min-height:0;padding:0;border:0;border-radius:50%;background:none;display:flex;align-items:center;justify-content:center}#wb button.pri{background:none;color:var(--ac)}
 #mdl{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;padding:16px;background:rgba(0,0,0,.55);opacity:0;visibility:hidden;transition:opacity .2s,visibility .2s}#mdl.on{opacity:1;visibility:visible}
@@ -75,11 +75,11 @@ input[type=range]::-moz-range-thumb{box-sizing:border-box;width:28px;height:28px
 #grip b,#chtg b{transition:transform .3s ease,margin-top .3s ease}#grip b{width:9px;height:9px;border-right:2px solid var(--mu);border-bottom:2px solid var(--mu);transform:rotate(45deg);margin-top:-4px}
 #side.col #grip b{transform:rotate(-135deg);margin-top:4px}#side.col #panel,#side.col #chbar,#side.col #wfwin,#side.col #tabs{display:none}#zc{display:none!important}
 .sw{display:flex;justify-content:space-between;align-items:center;min-height:46px;border-bottom:1px solid var(--ln);margin-bottom:8px}.sw input{width:22px;height:22px;accent-color:var(--ac)}
-input.rb::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,hsl(0 100% 50%),hsl(60 100% 50%),hsl(120 100% 50%),hsl(180 100% 50%),hsl(240 100% 50%),hsl(300 100% 50%),hsl(360 100% 50%))}
-input.sg::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#777,var(--hc,#f00))}
-input.rb::-moz-range-track{height:8px;border-radius:4px;background:linear-gradient(90deg,hsl(0 100% 50%),hsl(60 100% 50%),hsl(120 100% 50%),hsl(180 100% 50%),hsl(240 100% 50%),hsl(300 100% 50%),hsl(360 100% 50%))}
-input.sg::-moz-range-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#777,var(--hc,#f00))}
-input.rb::-webkit-slider-thumb,input.sg::-webkit-slider-thumb{margin-top:-10px;box-shadow:0 0 0 1.5px rgba(0,0,0,.6)}
+input.rb::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(90deg,hsl(0 100% 50%),hsl(60 100% 50%),hsl(120 100% 50%),hsl(180 100% 50%),hsl(240 100% 50%),hsl(300 100% 50%),hsl(360 100% 50%))}
+input.sg::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(90deg,#777,var(--hc,#f00))}
+input.rb::-moz-range-track{height:3px;border-radius:2px;background:linear-gradient(90deg,hsl(0 100% 50%),hsl(60 100% 50%),hsl(120 100% 50%),hsl(180 100% 50%),hsl(240 100% 50%),hsl(300 100% 50%),hsl(360 100% 50%))}
+input.sg::-moz-range-track{height:3px;border-radius:2px;background:linear-gradient(90deg,#777,var(--hc,#f00))}
+input.rb::-webkit-slider-thumb,input.sg::-webkit-slider-thumb{margin-top:-12.5px;box-shadow:0 0 0 1.5px rgba(0,0,0,.6)}
 input.rb::-moz-range-thumb,input.sg::-moz-range-thumb{box-shadow:0 0 0 1.5px rgba(0,0,0,.6)}
 .bar button.on{border-color:var(--ac);color:var(--ac)}
 #p-mask .bar>button[id^=add],#p-mask .btnl{gap:7px}#p-mask .bar>button[id^=add]{display:inline-flex;align-items:center;justify-content:center}#p-mask .bar svg{flex:none}
@@ -1756,9 +1756,11 @@ b.onclick=()=>{maskView=(maskView+1)%3;up();render()}}
 
 // ================= 專案深度圖（Depth Anything V2 / Transformers.js）=================
 const TF_URL='https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1',DG_MODEL='onnx-community/depth-anything-v2-small';
-const DL={a:[0,0],b:[0,0],n:0,pm:0};
-function dlProg(k,l,t,bg){DL[k]=[l,t];const A=DL.a[0]+DL.b[0],T=DL.a[1]+DL.b[1],p=Math.max(DL.pm,T?A/T:0);DL.pm=p;dgShow('下載必要資源中','只需下載一次，請稍候。',p,(A/1048576).toFixed(1)+' / '+(T/1048576).toFixed(1)+' MB',bg)}
-function dlEnd(){if(--DL.n<=0){DL.n=0;DL.a=[0,0];DL.b=[0,0];DL.pm=0;if($('#dgpt').textContent=='下載必要資源中')dgHide()}}
+const DL={a:[0,0],b:[0,0],bd:0,n:0,t:0,shown:0,bg:true};
+function dlPct(){const pa=DL.a[1]?DL.a[0]/DL.a[1]:0,pb=DL.bd?1:(DL.b[1]?DL.b[0]/DL.b[1]:0);return pa*.8+pb*.2}
+function dlDraw(){const A=DL.a[0]+DL.b[0],T=DL.a[1]+DL.b[1];dgShow('下載必要資源中','只需下載一次，請稍候。',dlPct(),(A/1048576).toFixed(1)+' / '+(T/1048576).toFixed(1)+' MB',DL.bg)}
+function dlProg(k,l,t,bg){DL[k]=[l,t];DL.bg=bg;if(DL.shown){dlDraw();return}if(!DL.t)DL.t=setTimeout(()=>{DL.t=0;if(DL.n>0&&dlPct()<.999){DL.shown=1;dlDraw()}},350)}
+function dlEnd(){if(--DL.n<=0){DL.n=0;clearTimeout(DL.t);DL.t=0;DL.shown=0;DL.a=[0,0];DL.b=[0,0];DL.bd=0;if($('#dgpt').textContent=='下載必要資源中')dgHide()}}
 const DG={mgp:null,nfile:null,ngp:null,nsrc:'',nsess:null,nu:null,mgBad:0,mgNoGpu:0,ort:null,file:null,gp:null,pipe:null,pp:null,tf:null,user:0,tok:0,dev:'',noGpu:0};
 function needsN(m){return m.type=='relight'||(m.type=='ramp'&&m.src>=3)}
 function needsD(m){return m.type=='haze'||m.type=='dof'||m.type=='dehaze'||m.type=='relight'||(m.type=='ramp'&&m.src==2)}
@@ -1767,7 +1769,7 @@ function dgShow(t,m,p,n,bg){if(DG.user&&bg)return;$('#dgpt').textContent=t;$('#d
 function dgHide(){$('#dgp').classList.remove('on')}
 async function dgLoad(){if(DG.pipe)return DG.pipe;if(DG.pp)return DG.pp;
 DG.pp=(async()=>{DL.n++;try{const tf=DG.tf||(DG.tf=await import(TF_URL)),fl={};
-const cb=e=>{if(e.status=='progress'&&e.total){fl[e.file]={l:e.loaded,t:e.total};let l=0,t=0;for(const q in fl){l+=fl[q].l;t+=fl[q].t}dlProg('a',l,t,true)}};
+const cb=e=>{if(e.status=='progress'&&e.total>1e6){fl[e.file]={l:e.loaded,t:e.total};let l=0,t=0;for(const q in fl){l+=fl[q].l;t+=fl[q].t}dlProg('a',l,t,true)}};
 const tr=[];if(navigator.gpu&&!DG.noGpu)tr.push(['webgpu','fp16']);tr.push(['wasm','q8']);let err;
 for(const[device,dtype]of tr){try{const p=await tf.pipeline('depth-estimation',DG_MODEL,{device,dtype,progress_callback:cb});DG.dev=device;DG.pipe=p;return p}catch(e){err=e;console.warn(device,e)}}
 throw err}finally{dlEnd()}})();DG.pp.catch(()=>{DG.pp=null});return DG.pp}
@@ -1808,7 +1810,7 @@ setTimeout(()=>{Promise.all([dgLoad().catch(e=>console.warn('深度模型預載�
 // ================= 專案法線圖（MoGe-2 AI；失敗時由深度圖推算）=================
 const MG_URLS=['https://huggingface.co/shiertier/deepbump/resolve/main/deepbump256.onnx'],ORT_B='https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
 function mgBuf(bg){return DG.mgp||(DG.mgp=mgBuf0(bg).catch(e=>{DG.mgp=null;throw e}))}
-async function mgBuf0(bg){let c=null;try{c=await caches.open('deepbump-cache');for(const u of MG_URLS){const h=await c.match(u);if(h)return new Uint8Array(await h.arrayBuffer())}}catch(_){}
+async function mgBuf0(bg){let c=null;try{c=await caches.open('deepbump-cache');for(const u of MG_URLS){const h=await c.match(u);if(h){DL.bd=1;return new Uint8Array(await h.arrayBuffer())}}}catch(_){}
 DL.n++;try{let err;for(const u of MG_URLS){try{const r=await fetch(u);if(!r.ok)throw new Error('HTTP '+r.status);const tot=+r.headers.get('content-length')||9e6,rd=r.body.getReader(),ch=[];let l=0;
 for(;;){const{done,value}=await rd.read();if(done)break;ch.push(value);l+=value.length;dlProg('b',l,tot,!!bg)}
 const bl=new Blob(ch);try{c&&await c.put(u,new Response(bl))}catch(_){}return new Uint8Array(await bl.arrayBuffer())}catch(e){err=e;console.warn(u,e)}}throw err}finally{dlEnd()}}
