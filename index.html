@@ -198,7 +198,7 @@ body.noph #side{display:none!important}
 #dgpc{width:min(380px,100%);background:var(--pn);border:1px solid var(--ln);border-radius:14px;padding:16px}#dgpc b{font-size:16px}
 #dgpb{height:8px;border-radius:4px;background:#2f2f33;overflow:hidden}#dgpf{display:block;height:100%;width:0;background:var(--ac);transition:width .15s}
 #dgps{display:none;width:56px;height:56px;margin:0 auto 18px;flex:none;border:5px solid #2f2f33;border-top-color:var(--ac);border-radius:50%;animation:dgr .9s linear infinite}
-#dgpc.spin{width:min(170px,56vw);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center}#dgpc.spin #dgps{display:block}#dgpc.spin #dgpt,#dgpc.spin #dgpb,#dgpc.spin #dgpn,#dgpc.spin #dgpx{display:none}#dgpc.spin #dgpm{margin:0!important;font-size:14px;color:var(--tx)}@keyframes dgr{to{transform:rotate(360deg)}}
+#dgpc.spin{width:min(170px,56vw);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center}#dgpc.spin #dgps{display:block}#dgpc.spin #dgpt,#dgpc.spin #dgpb,#dgpc.spin #dgpn,#dgpc.spin #dgpx{display:none}#dgpc.spin #dgpm{margin:0!important;font-size:14px;line-height:1.6;color:var(--tx);white-space:pre-line;text-align:center}@keyframes dgr{to{transform:rotate(360deg)}}
 #dgpb.ind #dgpf{width:35%!important;animation:dgi 1.1s ease-in-out infinite alternate}@keyframes dgi{from{margin-left:0}to{margin-left:65%}}
 </style></head><body class="noph">
 <header>
@@ -1768,24 +1768,35 @@ function needsD(m){return m.type=='haze'||m.type=='dof'||m.type=='dehaze'||m.typ
 function dgShow(t,m,p,n,bg){if(DG.user&&bg)return;$('#dgpt').textContent=t;$('#dgpm').textContent=m;$('#dgpc').classList.toggle('spin',p<0);$('#dgpf').style.width=p<0?'':Math.round(p*100)+'%';$('#dgpn').textContent=n||'';$('#dgpx').style.display=bg?'':'none';$('#dgp').classList.add('on')}
 function dgHide(){$('#dgp').classList.remove('on')}
 async function dgLoad(){if(DG.pipe)return DG.pipe;if(DG.pp)return DG.pp;
-DG.pp=(async()=>{DL.n++;try{const tf=DG.tf||(DG.tf=await import(TF_URL)),fl={};
+DG.pp=(async()=>{DL.n++;try{const tf=DG.tf||(DG.tf=await import(TF_URL)),fl={};try{tf.env.backends.onnx.wasm.numThreads=Math.min(4,navigator.hardwareConcurrency||1)}catch(_){}
 const cb=e=>{if(e.status=='progress'&&e.total>1e6){fl[e.file]={l:e.loaded,t:e.total};let l=0,t=0;for(const q in fl){l+=fl[q].l;t+=fl[q].t}dlProg('a',l,t,true)}};
 const tr=[];if(navigator.gpu&&!DG.noGpu)tr.push(['webgpu','fp16']);tr.push(['wasm','q8']);let err;
 for(const[device,dtype]of tr){try{const p=await tf.pipeline('depth-estimation',DG_MODEL,{device,dtype,progress_callback:cb});DG.dev=device;DG.pipe=p;return p}catch(e){err=e;console.warn(device,e)}}
 throw err}finally{dlEnd()}})();DG.pp.catch(()=>{DG.pp=null});return DG.pp}
-async function depthGenerate(){if(!bmp)throw new Error('請先開啟照片');DG.user=0;let pipe=await dgLoad();
-const busy=()=>dgShow('','正在分析場景',-1,'',false);const t0=performance.now();busy();await new Promise(r=>setTimeout(r,60));
-const src=BF||bmp,k=Math.min(1,1024/Math.max(src.width,src.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(src.width*k));c.height=Math.max(1,Math.round(src.height*k));c.getContext('2d').drawImage(src,0,0,c.width,c.height);
-const bl=await new Promise(r=>c.toBlob(r,'image/jpeg',.95)),url=URL.createObjectURL(bl);let out;const tl=setTimeout(()=>dgShow('','正在計算圖片景深',-1,'',false),Math.max(0,2000-(performance.now()-t0)));if(DG.dev!='webgpu'){const w=2000-(performance.now()-t0);if(w>0)await new Promise(r=>setTimeout(r,w));await new Promise(r=>setTimeout(r,60))}
-try{try{out=await pipe(url)}catch(e){if(DG.dev!='webgpu')throw e;console.warn(e);DG.noGpu=1;DG.pipe=null;DG.pp=null;pipe=await dgLoad();busy();out=await pipe(url)}}finally{clearTimeout(tl);URL.revokeObjectURL(url);if(!out)dgHide()}
-dgShow('','快完成了',-1,'',false);
+const DSA=new Set();let dsT=0;
+function dsRender(){if(!DSA.size)return;const L=[];DSA.forEach(q=>L.push(...q.lines()));dgShow('',L.join('\n'),-1,'',false)}
+function dgStages(tag){const done=[];let name='',t=0;const f=()=>((performance.now()-t)/1000).toFixed(1)+'s',s={tag,sum:'',
+lines(){return name?[name]:[]},
+go(n){if(name)done.push('✓ '+name+' '+f());name=n;t=performance.now();DSA.add(s);if(!dsT)dsT=setInterval(dsRender,150);dsRender()},
+set(n){name=n;dsRender()},
+stop(){if(name){done.push('✓ '+name+' '+f());name=''}DSA.delete(s);if(!DSA.size){clearInterval(dsT);dsT=0}s.sum=done.map(x=>x.slice(2)).join('、');console.log('['+tag+'] '+s.sum);return s.sum},
+end(){s.stop();if(!DSA.size)dgHide()}};return s}
+async function depthGenerate(){if(!bmp)throw new Error('請先開啟照片');DG.user=0;const st=dgStages('深度圖');
+try{st.go('載入模型');let pipe=await dgLoad();
+st.go('準備圖片');await new Promise(r=>setTimeout(r,30));
+const src=BF||bmp,k=Math.min(1,518/Math.max(src.width,src.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(src.width*k));c.height=Math.max(1,Math.round(src.height*k));c.getContext('2d').drawImage(src,0,0,c.width,c.height);
+const bl=await new Promise(r=>c.toBlob(r,'image/jpeg',.95)),url=URL.createObjectURL(bl);let out;
+st.go('正在計算場景景深');await new Promise(r=>setTimeout(r,30));
+try{try{out=await pipe(url)}catch(e){if(DG.dev!='webgpu')throw e;console.warn(e);DG.noGpu=1;DG.pipe=null;DG.pp=null;st.go('改用 CPU 載入');pipe=await dgLoad();st.go('正在計算場景景深');await new Promise(r=>setTimeout(r,30));out=await pipe(url)}}finally{URL.revokeObjectURL(url)}
+st.go('轉換深度圖');await new Promise(r=>setTimeout(r,0));
 const d=out.depth,w=d.width,h=d.height,ch=d.channels||1,id=new ImageData(w,h);
 for(let i=0;i<w*h;i++){const v=d.data[i*ch];id.data[i*4]=id.data[i*4+1]=id.data[i*4+2]=v;id.data[i*4+3]=255}
 const o=document.createElement('canvas');o.width=w;o.height=h;o.getContext('2d').putImageData(id,0,0);
-const pb=await new Promise(r=>o.toBlob(r,'image/png'));await new Promise(r=>setTimeout(r,500));dgHide();return new File([pb],'depth.png',{type:'image/png'})}
+const pb=await new Promise(r=>o.toBlob(r,'image/png'));st.end();DG.tDepth=st.sum;return new File([pb],'depth.png',{type:'image/png'})}
+catch(e){st.end();throw e}}
 function getProjDepth(){if(DG.file)return Promise.resolve(DG.file);
 if(!DG.gp){const t=DG.tok;DG.gp=depthGenerate().then(f=>{if(t!==DG.tok)throw new Error('照片已更換');DG.file=f;imgPage();return f}).finally(()=>{DG.gp=null})}return DG.gp}
-async function autoDepth(m){if(!bmp)return;try{let f=null,nf=null;if(needsD(m))f=await getProjDepth();if(needsN(m))nf=await getProjNormal();if(!mods.includes(m))return;if(f)await loadDepth(f,m);if(nf)await loadNormal(nf,m);modRender();render();commit()}catch(err){uiAlert('無法生成圖片：'+err.message)}}
+async function autoDepth(m){if(!bmp)return;try{let f=null,nf=null;[f,nf]=await Promise.all([needsD(m)?getProjDepth():null,needsN(m)?getProjNormal():null]);if(!mods.includes(m))return;if(f)await loadDepth(f,m);if(nf)await loadNormal(nf,m);modRender();render();commit()}catch(err){uiAlert('無法生成圖片：'+err.message)}}
 async function depthURL(f){const b=await createImageBitmap(f),k=Math.min(1,512/Math.max(b.width,b.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(b.width*k));c.height=Math.max(1,Math.round(b.height*k));
 const x=c.getContext('2d');x.fillStyle='#000';x.fillRect(0,0,c.width,c.height);x.drawImage(b,0,0,c.width,c.height);b.close();const u=c.toDataURL('image/jpeg',.92);
 await new Promise(r=>{const im=new Image();IMG.set(u,im);im.onload=im.onerror=r;im.src=u});return u}
@@ -1794,10 +1805,10 @@ const u=await depthURL(f);L.forEach(l=>[l,...l.extra].forEach(c=>{if(c.type=='de
 let fiU=null;
 function imgPage(){const im=$('#fiimg'),em=$('#fiemp');if(fiU){URL.revokeObjectURL(fiU);fiU=null}
 if(DG.file){fiU=URL.createObjectURL(DG.file);im.src=fiU;im.style.display='block';em.style.display='none'}else{im.style.display='none';em.style.display=''}
-$('#fiinfo').textContent=DG.file?'白色＝近、黑色＝遠。目前有 '+mods.filter(needsD).length+' 個效果使用這張深度圖。':'';
+$('#fiinfo').textContent=DG.file?'白色＝近、黑色＝遠。目前有 '+mods.filter(needsD).length+' 個效果使用這張深度圖。'+(DG.tDepth?' 生成耗時：'+DG.tDepth+'。':''):'';
 {const im2=$('#fnimg2'),em2=$('#fnemp');if(DG.nu){URL.revokeObjectURL(DG.nu);DG.nu=null}
 if(DG.nfile){DG.nu=URL.createObjectURL(DG.nfile);im2.src=DG.nu;im2.style.display='block';em2.style.display='none'}else{im2.style.display='none';em2.style.display=''}
-$('#fninfo').textContent=DG.nfile?(DG.nsrc=='ai'?'由 DeepBump AI 模型生成（依照片明暗推算表面細節）。':DG.nsrc=='depth'?'由專案深度圖推算（AI 法線模型無法使用時的備案）。':'自行上傳的法線圖。')+' 目前有 '+mods.filter(needsN).length+' 個效果使用。':''}}
+$('#fninfo').textContent=DG.nfile?(DG.nsrc=='ai'?'由 DeepBump AI 模型生成（依照片明暗推算表面細節）。':DG.nsrc=='depth'?'由專案深度圖推算（AI 法線模型無法使用時的備案）。':'自行上傳的法線圖。')+' 目前有 '+mods.filter(needsN).length+' 個效果使用。'+(DG.tNormal&&DG.nsrc=='ai'?' 生成耗時：'+DG.tNormal+'。':''):''}}
 $('#fti').onclick=()=>palGo(true,'img');$('#fiback').onclick=()=>palGo(false);
 $('#fif').onclick=e=>{if(!bmp){e.preventDefault();uiAlert('請先開啟照片')}};
 $('#fif').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f||!bmp)return;try{await depthReplace(f)}catch(err){uiAlert('無法開啟深度圖：'+err.message)}};
@@ -1814,24 +1825,24 @@ async function mgBuf0(bg){let c=null;try{c=await caches.open('deepbump-cache');f
 DL.n++;try{let err;for(const u of MG_URLS){try{const r=await fetch(u);if(!r.ok)throw new Error('HTTP '+r.status);const tot=+r.headers.get('content-length')||9e6,rd=r.body.getReader(),ch=[];let l=0;
 for(;;){const{done,value}=await rd.read();if(done)break;ch.push(value);l+=value.length;dlProg('b',l,tot,!!bg)}
 const bl=new Blob(ch);try{c&&await c.put(u,new Response(bl))}catch(_){}return new Uint8Array(await bl.arrayBuffer())}catch(e){err=e;console.warn(u,e)}}throw err}finally{dlEnd()}}
-async function mgGen(){if(DG.mgBad)throw new Error('skip');DG.user=0;
+async function mgGen(){if(DG.mgBad)throw new Error('skip');DG.user=0;const st=dgStages('法線圖');
 try{const ort=DG.ort||(DG.ort=await import(ORT_B+'ort.webgpu.min.mjs'));ort.env.wasm.wasmPaths=ORT_B;
-const src=BF||bmp,k=Math.min(1,768/Math.max(src.width,src.height)),w0=Math.max(1,Math.round(src.width*k)),h0=Math.max(1,Math.round(src.height*k)),c=document.createElement('canvas');c.width=w0;c.height=h0;const cx=c.getContext('2d',{willReadFrequently:true});cx.drawImage(src,0,0,w0,h0);
+st.go('準備圖片');await new Promise(r=>setTimeout(r,0));const src=BF||bmp,k=Math.min(1,768/Math.max(src.width,src.height)),w0=Math.max(1,Math.round(src.width*k)),h0=Math.max(1,Math.round(src.height*k)),c=document.createElement('canvas');c.width=w0;c.height=h0;const cx=c.getContext('2d',{willReadFrequently:true});cx.drawImage(src,0,0,w0,h0);
 const d=cx.getImageData(0,0,w0,h0).data,g0=new Float32Array(w0*h0);for(let i=0;i<w0*h0;i++)g0[i]=(d[i*4]+d[i*4+1]+d[i*4+2])/765;
 const W=Math.max(256,w0),H=Math.max(256,h0),G=(x,y)=>g0[Math.min(h0-1,y)*w0+Math.min(w0-1,x)],T=256,OV=28,pos=S=>{const a=[];if(S<=T)return[0];for(let p=0;p+T<S;p+=T-OV*2)a.push(p);a.push(S-T);return a},xs=pos(W),ys=pos(H);
 const acc=new Float32Array(W*H*3),wt=new Float32Array(W*H);let buf=null,s=null,lastE;const eps=navigator.gpu&&!DG.mgNoGpu?[['webgpu'],['wasm']]:[['wasm']];
-for(const ep of eps){try{if(!DG.nsess){if(!buf)buf=await mgBuf(false);dgShow('','正在分析場景',-1,'',false);await new Promise(r=>setTimeout(r,40));DG.nsess=await ort.InferenceSession.create(buf,{executionProviders:ep})}
-s=DG.nsess;acc.fill(0);wt.fill(0);let n=0;const tot=xs.length*ys.length;
-for(const y0 of ys)for(const x0 of xs){dgShow('',n/tot<.5?'正在分析場景':n/tot<.85?'正在細看表面細節':'快完成了',-1,'',false);await new Promise(r=>setTimeout(r,20));
+for(const ep of eps){try{if(!DG.nsess){if(!buf)buf=await mgBuf(false);st.go('建立法線模型');await new Promise(r=>setTimeout(r,40));DG.nsess=await ort.InferenceSession.create(buf,{executionProviders:ep})}
+s=DG.nsess;acc.fill(0);wt.fill(0);let n=0;const tot=xs.length*ys.length;st.go('正在計算場景法線');
+for(const y0 of ys)for(const x0 of xs){await new Promise(r=>setTimeout(r,0));
 const tl=new Float32Array(T*T);for(let y=0;y<T;y++)for(let x=0;x<T;x++)tl[y*T+x]=G(x0+x,y0+y);
 const out=await s.run({[s.inputNames[0]]:new ort.Tensor('float32',tl,[1,1,T,T])}),q=out[s.outputNames[0]],o=q.data;if(!q.dims||q.dims.length!=4||q.dims[1]!=3||q.dims[2]!=T)throw new Error('輸出格式不符');
 let mn=1e9;for(let i=0;i<o.length;i+=97)mn=Math.min(mn,o[i]);const sc=mn<-.01?1:2,of=mn<-.01?0:-1;
 for(let y=0;y<T;y++){const wy=Math.min(1,(Math.min(y,T-1-y)+1)/OV);for(let x=0;x<T;x++){const wv=wy*Math.min(1,(Math.min(x,T-1-x)+1)/OV),i=y*T+x,p=(y0+y)*W+x0+x;
 acc[p*3]+=(o[i]*sc+of)*wv;acc[p*3+1]+=(o[T*T+i]*sc+of)*wv;acc[p*3+2]+=(o[2*T*T+i]*sc+of)*wv;wt[p]+=wv}}n++}
-dgShow('','快完成了',-1,'',false);await new Promise(r=>setTimeout(r,400));const id=new ImageData(w0,h0);for(let y=0;y<h0;y++)for(let x=0;x<w0;x++){const p=y*W+x,j=(y*w0+x)*4;let a=acc[p*3],b=acc[p*3+1],e=acc[p*3+2];const L=Math.hypot(a,b,e)||1;a/=L;b/=L;e/=L;id.data[j]=(a*.5+.5)*255;id.data[j+1]=(b*.5+.5)*255;id.data[j+2]=(e*.5+.5)*255;id.data[j+3]=255}
-const oc2=document.createElement('canvas');oc2.width=w0;oc2.height=h0;oc2.getContext('2d').putImageData(id,0,0);const pb=await new Promise(r=>oc2.toBlob(r,'image/png'));dgHide();return new File([pb],'normal.png',{type:'image/png'})}
+st.go('合成法線圖');await new Promise(r=>setTimeout(r,0));const id=new ImageData(w0,h0);for(let y=0;y<h0;y++)for(let x=0;x<w0;x++){const p=y*W+x,j=(y*w0+x)*4;let a=acc[p*3],b=acc[p*3+1],e=acc[p*3+2];const L=Math.hypot(a,b,e)||1;a/=L;b/=L;e/=L;id.data[j]=(a*.5+.5)*255;id.data[j+1]=(b*.5+.5)*255;id.data[j+2]=(e*.5+.5)*255;id.data[j+3]=255}
+const oc2=document.createElement('canvas');oc2.width=w0;oc2.height=h0;oc2.getContext('2d').putImageData(id,0,0);const pb=await new Promise(r=>oc2.toBlob(r,'image/png'));st.end();DG.tNormal=st.sum;return new File([pb],'normal.png',{type:'image/png'})}
 catch(e){lastE=e;console.warn('DeepBump',ep,e);DG.nsess=null;if(ep[0]=='webgpu')DG.mgNoGpu=1}}
-throw lastE}catch(e){DG.mgBad=1;dgHide();throw e}}
+throw lastE}catch(e){DG.mgBad=1;st.end();throw e}}
 async function normalFromDepth(){const df=await getProjDepth(),b=await createImageBitmap(df),k=Math.min(1,1024/Math.max(b.width,b.height)),w=Math.max(2,Math.round(b.width*k)),h=Math.max(2,Math.round(b.height*k)),c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(b,0,0,w,h);b.close();
 const d=x.getImageData(0,0,w,h).data,z=new Float32Array(w*h),t=new Float32Array(w*h);for(let i=0;i<w*h;i++)z[i]=d[i*4]/255;
 for(let y=0;y<h;y++)for(let X=0;X<w;X++){let a=0;for(let j=-1;j<=1;j++)for(let i=-1;i<=1;i++)a+=z[Math.min(h-1,Math.max(0,y+j))*w+Math.min(w-1,Math.max(0,X+i))];t[y*w+X]=a/9}
@@ -1839,7 +1850,7 @@ const id=new ImageData(w,h),sc=w*.15,Z=(X,y)=>t[Math.min(h-1,Math.max(0,y))*w+Ma
 for(let y=0;y<h;y++)for(let X=0;X<w;X++){const gx=(Z(X+1,y)-Z(X-1,y))/2,gy=(Z(X,y+1)-Z(X,y-1))/2;let nx=-gx*sc,ny=gy*sc,nz=1;const L=Math.hypot(nx,ny,nz);nx/=L;ny/=L;nz/=L;const i=(y*w+X)*4;id.data[i]=(nx*.5+.5)*255;id.data[i+1]=(ny*.5+.5)*255;id.data[i+2]=(nz*.5+.5)*255;id.data[i+3]=255}
 x.putImageData(id,0,0);const pb=await new Promise(r=>c.toBlob(r,'image/png'));return new File([pb],'normal.png',{type:'image/png'})}
 async function normalGenerate(){if(!bmp)throw new Error('請先開啟照片');
-try{return{f:await mgGen(),src:'ai'}}catch(e){console.warn('AI 法線失敗，改用深度推算',e);dgShow('','正在分析場景',-1,'',false);try{return{f:await normalFromDepth(),src:'depth'}}finally{dgHide()}}}
+try{return{f:await mgGen(),src:'ai'}}catch(e){console.warn('AI 法線失敗，改用深度推算',e);const s2=dgStages('法線圖');s2.go('改用深度圖推算');try{return{f:await normalFromDepth(),src:'depth'}}finally{s2.end()}}}
 function getProjNormal(){if(DG.nfile)return Promise.resolve(DG.nfile);
 if(!DG.ngp){const t=DG.tok;DG.ngp=normalGenerate().then(r=>{if(t!==DG.tok)throw new Error('照片已更換');DG.nfile=r.f;DG.nsrc=r.src;imgPage();return r.f}).finally(()=>{DG.ngp=null})}return DG.ngp}
 async function normalReplace(f,src){DG.nfile=f;DG.nsrc=src;for(const m of mods)if(needsN(m)){try{await loadNormal(f,m)}catch(e){console.warn(e)}}modRender();render();imgPage();commit()}
