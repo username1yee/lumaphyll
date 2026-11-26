@@ -206,7 +206,100 @@ body.noph #side{display:none!important}
 #dsqh{padding:14px 16px;border-bottom:1px solid var(--ln)}#dsqh b{font-size:16px}
 #dsql{padding:14px 16px 6px;display:flex;flex-direction:column;gap:12px}
 #dsqf{display:flex;justify-content:flex-end;gap:8px;padding:10px 12px;border-top:1px solid var(--ln)}#dsqf button{min-width:96px}
-</style></head><body class="noph">
+</style><style>
+body.noph #chbar,body:has(#side.cropm) #chbar,body:has(#side.nochip) #chbar,body:has(#side.col) #chbar{display:none}
+#chbar{position:absolute;right:6px;top:58px;bottom:auto;max-height:calc(100% - 66px);width:152px;z-index:5;flex-direction:column;border:0;border-radius:14px;background:rgba(20,20,22,.74);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+#chips{flex-direction:column;overflow-x:hidden;overflow-y:auto;touch-action:pan-y;padding:6px}
+#chlab,#chtg{display:none!important}
+#chbar .chip .cn{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left}
+#tabs{padding:4px 6px 2px;gap:2px;border-bottom:0;border-top:1px solid var(--ln)}
+#tabs button{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:58px;padding:6px 2px;border-radius:12px;border-bottom:0;font-size:12px;color:var(--mu);transition:background .25s,color .25s}
+#tabs button.on{color:var(--tx);background:rgba(255,255,255,.1);border-bottom:0}
+@media(max-width:799px){
+#grip{display:none!important}
+#panel,#wfwin{order:1;transition:height .3s ease,padding .3s ease}
+#tabs{order:2}
+#side.pc #panel,#side.pc #wfwin{height:0!important;padding-top:0;padding-bottom:0;overflow:hidden}
+#side.pc #tabs button.on{background:none;color:var(--mu)}
+}
+</style><style>
+#chbar{right:auto;left:6px;top:8px;width:120px;max-height:calc(100% - 114px);transition:transform .3s ease}
+body.chcl #chbar{transform:translateX(calc(-100% - 12px))}
+#chh{position:absolute;left:132px;top:8px;z-index:6;width:24px;height:52px;min-height:0;padding:0;border:0;border-radius:0 12px 12px 0;background:rgba(20,20,22,.74);display:flex;align-items:center;justify-content:center;transition:left .3s ease}
+#chh b{width:8px;height:8px;border-left:2px solid #ddd;border-bottom:2px solid #ddd;transform:rotate(45deg);margin-left:3px;transition:transform .3s ease,margin .3s ease}
+body.chcl #chh{left:0}body.chcl #chh b{transform:rotate(-135deg);margin-left:-3px}
+body.noph #chh,body:has(#side.cropm) #chh,body:has(#side.nochip) #chh,body:has(#side.col) #chh{display:none}
+#chips{gap:8px;padding:6px}
+.chip.tile{flex-direction:column;align-items:stretch;padding:0;min-height:0;border-radius:12px;overflow:hidden;border-width:2px;background:var(--bg)}
+.tile .th{position:relative;width:100%;aspect-ratio:4/3;background:#000;display:flex;align-items:center;justify-content:center}
+.tile .th canvas{width:100%;height:100%;object-fit:contain;display:block}
+.tile .th.all{background:#fff}.tile .th.fxi{background:linear-gradient(135deg,#3a2a12,#6b4a1c);color:#ffb454}
+.chip.off .th canvas{opacity:.35}
+.chip.tile .ey,.chip.tile .lkb{position:absolute;top:3px;width:28px;height:28px;min-height:0;padding:0;border-radius:50%;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;color:#fff}
+.chip.tile .ey{right:3px}.chip.tile .lkb{left:3px}
+.tile .tb{display:flex;align-items:center;min-width:0}
+.chip.tile .cn{flex:1;min-width:0;padding:0 2px 0 8px;min-height:34px;font-size:12px}
+.chip.tile .mm{min-height:34px;padding:0 6px}
+</style><style>
+body{position:relative}
+#chbar{width:92px;z-index:1;max-height:calc(100% - 175px)}
+#chh{left:98px;z-index:1}
+#chips{padding:4px;gap:6px}
+.chip.tile{border-radius:10px}
+.tile .th{aspect-ratio:1}
+.chip.tile .ey,.chip.tile .lkb{top:2px;width:24px;height:24px}
+.chip.tile .ey{right:2px}.chip.tile .lkb{left:2px}
+.chip.tile .ey svg,.chip.tile .lkb svg{width:15px;height:15px}
+.chip.tile .cn{min-height:28px;padding:0 0 0 6px;font-size:11px}
+.chip.tile .mm{min-height:28px;padding:0 4px}
+.chip.tile .mm svg{width:15px;height:15px}
+</style><style>.tile .th.bsi{background:#26262a;color:#6cb8ff}</style><style>
+#cst{display:none!important}
+#csbar{display:flex;align-items:center;gap:8px;margin:-10px -16px 12px;padding:4px 8px;border-bottom:1px solid var(--ln);position:sticky;top:0;background:var(--pn);z-index:3}#csbar b{font-size:15px}
+#wb{flex-wrap:nowrap;align-items:center}
+#wb button.tx{flex:none;width:auto;min-width:0;height:44px;padding:0 10px;border:1px solid var(--ln);border-radius:10px;background:var(--bg);gap:6px;font-size:14px}
+#wb button.tx.r{margin-left:auto}
+</style><style>body.csp #panel{padding-top:0}body.csp #csbar{margin-top:0}</style><style>#csbar{transition:transform .25s ease}#csbar.csh{transform:translateY(-100%)}</style><style>#cvb{background:var(--bg)}</style><style>
+#csbar{position:static}#csbar.csh{transform:none}
+#tabs button span{display:block;max-height:18px;overflow:hidden;transition:max-height .3s ease,opacity .25s ease}
+@media(max-width:799px){
+#tabs button{transition:background .25s,color .25s,min-height .3s ease,gap .3s ease}
+#side:not(.pc) #tabs button{min-height:44px;gap:0}
+#side:not(.pc) #tabs button span{max-height:0;opacity:0}
+}
+</style><style>
+#dots .dot,#cdots .dot{position:relative;border-color:transparent;overflow:hidden}
+#dots .dot::after,#cdots .dot::after{content:'';position:absolute;inset:1px;border-radius:50%;background:var(--pn);transition:inset .25s ease,width .25s ease,height .25s ease,background .25s ease}
+#dots .dot.on,#cdots .dot.on{transform:none;border-color:transparent}
+#dots .dot.on::after,#cdots .dot.on::after{inset:50% auto auto 50%;width:9px;height:9px;transform:translate(-50%,-50%);background:#fff}
+input.hsc::-webkit-slider-runnable-track{height:3px;border-radius:2px;background:linear-gradient(90deg,transparent 0,transparent var(--p0),#fff var(--p0),#fff var(--p1),transparent var(--p1),transparent 100%),var(--tg)}
+input.hsc::-moz-range-track{height:3px;border-radius:2px;background:linear-gradient(90deg,transparent 0,transparent var(--p0),#fff var(--p0),#fff var(--p1),transparent var(--p1),transparent 100%),var(--tg)}
+</style><style>#chbar{border-top-right-radius:0}#chh{left:98px;border-radius:0 12px 12px 0;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}body.chcl #chh{left:0}</style><style>body.chcl #chbar{transform:translateX(-98px)}#chh{left:98px;transition:transform .3s ease}body.chcl #chh{left:98px;transform:translateX(-98px)}</style><style>
+#chbar{overflow:visible}
+#chbar,#chh{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(20,20,22,.8)}
+#chbar #chh{position:absolute;left:100%;top:0!important;transform:none!important;transition:none}
+body.chcl #chbar #chh{left:100%}
+</style><style>
+#efgrid{margin-bottom:4px}
+.ftile.efT{border-color:#a8742f;background:linear-gradient(135deg,#3a2a12,#6b4a1c);color:#ffb454}
+.ftile.efT.off{opacity:.5}
+.ftile.efA{border-style:dashed;color:var(--mu)}
+#efbar{display:none;align-items:center;gap:8px;margin:-10px -16px 8px;padding:4px 8px;border-bottom:1px solid var(--ln)}#efbar b{font-size:15px}
+#p-ef.det #efbar{display:flex}#p-ef.det #efgrid{display:none}
+#p-ef:not(.det) #mods{display:none}
+#p-ef.det #mods .mod:not(.sel){display:none}
+#p-ef .mod{border:0;margin-bottom:0}#p-ef .mh{background:none;justify-content:flex-end}
+#p-ef .mh .mc,#p-ef .mh .mn{display:none}
+#p-ef.det #mods,#efgrid{animation:efin .22s ease}
+@keyframes efin{from{opacity:0}to{opacity:1}}
+</style><style>
+.ftile.efT,.ftile.efA{position:relative;padding:28px 6px 30px;min-height:116px}
+.ftile.efT.off{opacity:1}.efT.off>svg,.efT.off>span{opacity:.45}
+.ftile.efT span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.efb{position:absolute;width:28px;height:28px;min-height:0;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.35);color:inherit;display:flex;align-items:center;justify-content:center}
+.efb.e1{top:4px;left:4px}.efb.e2{top:4px;right:4px}.efb.e3{bottom:4px;left:4px}.efb.e4{bottom:4px;right:4px}
+#p-ef .mh{display:none}
+</style><style>#chips{border-radius:14px 0 14px 14px}</style></head><body class="noph">
 <header>
 <button id="cvrs" class="ib" aria-label="重設曲線">重設</button><div id="ldw" style="flex:none"><button id="load" class="ib" aria-label="開啟" aria-haspopup="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v1H7.5a2 2 0 0 0-1.9 1.4L3 18z"/><path d="M3 18l2.6-7.6A2 2 0 0 1 7.5 9H22l-2.6 8.2a2 2 0 0 1-1.9 1.4H3z"/></svg></button><div id="ldm" class="hid"><button data-ld="photo">新增照片</button><button data-ld="proj">開啟專案</button><button data-ld="preset">匯入預設集</button></div></div><input id="file" type="file" accept="image/*" hidden><input id="jf" type="file" accept=".zip,.json,application/zip,application/json" hidden><input id="pf" type="file" accept=".zip,application/zip" hidden>
 <button id="undo" class="ib" aria-label="復原" disabled><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></svg></button><button id="redo" class="ib" aria-label="重做" disabled><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 15-6.7L21 13"/></svg></button>
@@ -219,7 +312,7 @@ body.noph #side{display:none!important}
 <button id="mvb" aria-label="切換遮罩顯示方式" title="切換遮罩顯示方式"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></button><canvas id="hist" width="110" height="40"></canvas><div id="zc"><button id="zin" aria-label="放大">＋</button><button id="zout" aria-label="縮小">－</button><button id="zfit" aria-label="符合畫面">1×</button></div><button id="cvhm" aria-label="開關兩側手柄"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 18C9 18 9 6 21 6"/><circle cx="3" cy="18" r="1.5" fill="currentColor"/><circle cx="21" cy="6" r="1.5" fill="currentColor"/></svg><span>兩側手柄</span></button><div id="cvw"><canvas id="cvc"></canvas></div><div id="cui"><svg id="cfs"></svg><canvas id="cdial"></canvas><div id="cbt"><div class="cg"><button id="cb90" aria-label="向右轉90度"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9V4h5M4 15v5h5M20 15v5h-5"/><path d="M14 4h3a3 3 0 0 1 3 3v2M18 7l2 2 2-2"/></svg></button><button id="cblk" aria-label="鎖定比例"></button></div><div class="cg"><button id="cbsw" aria-label="橫直比例交換"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="12" height="8" rx="1.5"/><rect x="15" y="13" width="7" height="10" rx="1.5"/><path d="M17 4h1.5a2.5 2.5 0 0 1 2.5 2.5V10M19.5 8.5 21 10l1.5-1.5"/><path d="M13 18H8.5A2.5 2.5 0 0 1 6 15.5V13M4.5 14.5 6 13l1.5 1.5"/></svg></button><button id="cbmo" aria-label="翻轉"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="19" cy="12" r="1.8" fill="currentColor"/></svg></button></div><div id="cfm"><button data-f="v">垂直翻轉</button><button data-f="h">水平翻轉</button></div></div></div><div id="hint">在照片上拖曳建立遮罩</div></div>
 <div id="side"><button id="grip" aria-label="收合或展開調整面板"><b></b></button>
 <div id="chbar"><div id="chips"></div><div id="chlab"></div><button id="chtg" aria-label="收起或展開遮罩圖層列" aria-expanded="true"><b></b></button></div>
-<div id="tabs"><button data-t="light" class="on">光線</button><button data-t="color">顏色</button><button data-t="mask">遮罩</button><button data-t="ef">效果</button><button data-t="fn">功能</button></div>
+<div id="tabs"><button data-t="light" class="on"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.3 5.3l2.1 2.1M16.6 16.6l2.1 2.1M5.3 18.7l2.1-2.1M16.6 7.4l2.1-2.1"/></svg><span>光線</span></button><button data-t="color"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 14.8V5a2 2 0 0 0-4 0v9.8a4 4 0 1 0 4 0z"/><path d="M12 11v7" stroke-width="1.3"/><circle cx="12" cy="18.3" r="2.3" fill="currentColor" stroke="none"/></svg><span>顏色</span></button><button data-t="mask"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" stroke-dasharray="2.6 2.6"/><circle cx="12" cy="12" r="4"/></svg><span>遮罩</span></button><button data-t="ef"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="12" cy="12" r="6"/></svg><span>效果</span></button><button data-t="fn"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg><span>功能</span></button></div>
 <div id="panel">
 <div class="hid" id="cst"><button data-s="base" class="on">基礎</button><button data-s="hsl">HSL 混色</button><button data-s="cg">色彩分級</button></div>
 <div id="p-light"><div class="bar"><button id="cvb" style="flex:1 1 100%;display:inline-flex;align-items:center;justify-content:center;gap:8px"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21C10 21 10 3 21 3"/></svg><span>曲線</span></button></div></div><div id="p-color" class="hid"><div class="bar" id="wb"><button id="wbe" title="吸管取中性色" aria-label="吸管取中性色"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 3.5a2.1 2.1 0 0 0-3 0l-3 3-1-1-2 2 1 1-7 7V19h4.5l7-7 1 1 2-2-1-1 3-3a2.1 2.1 0 0 0 0-3z"/></svg></button><button id="wba" title="自動" aria-label="自動"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3l1.8 5.2L17 10l-5.2 1.8L10 17l-1.8-5.2L3 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg></button></div></div>
@@ -447,7 +540,7 @@ float d0=Z(p),m=smoothstep(uThr-max(uFe,.001),uThr+max(uFe,.001),d0);vec3 P=vec3
 for(int i=0;i<6;i++){if(i>=uNL)break;vec4 a=uLa[i];vec3 Ld=vec3(uLP[i].x*uAsp,uLP[i].y,uLP[i].z)-P;float dist=max(length(Ld),.02);vec3 Lv=Ld/dist;
 float ndl=dot(N,Lv),diff=clamp((ndl+a.w)/(1.+a.w),0.,1.);diff=diff*diff*(3.-2.*diff);float att=1./(1.+.8*dist*dist);
 float spec=pow(max(dot(N,normalize(Lv+Hh0)),0.),40.)*a.z*smoothstep(0.,.25,ndl);
-vec3 lit=uLC[i]*a.x*att;Lc+=vec3(a.y)*(.7+.3*N.z)+lit*diff+lit*spec;}
+vec3 lit=uLC[i]*a.x*att;Lc+=vec3(a.y)*mix(1.,.7+.3*N.z,m)+(lit*diff+lit*spec)*m;}
 float op=uLOp;vec3 r=mix(A,bl(A,Lc,uBM),op);
 if(uSolo>0)r=Lc;if(uSM>0)r=vec3(m);o=vec4(clamp(r,0.,1.),1.);}`;
 const FSRP=`#version 300 es
@@ -1013,7 +1106,7 @@ const df=DF.get(m.id),nf=NF.get(m.id),jobs=[];if(df)jobs.push(loadDepth(df,c,m.d
 modRender();render();commit();if(jobs.length)Promise.all(jobs).then(()=>{modRender();render()}).catch(()=>{})}
 function delFx(m){const idx=mods.indexOf(m);if(idx<0)return;delDepth(m);delNormal(m);mods.splice(idx,1);modRender();render();commit()}
 function delLayer(i){mods.forEach(m=>{if(m.fix&&m.at>i)m.at--});L.splice(i,1);cur=i==cur?0:(i<cur?cur-1:cur);chips();syncAll();rebuildBrush();drawOv();render();commit()}
-function chips(){cmClose();const c=$('#chips');c.innerHTML='';const seq=[];{const fl=tab=='ef'?mods:[],fa=a=>fl.filter(q=>fxPos(q)==a);fa(0).forEach(q=>seq.push([q]));L.forEach((m,i)=>{seq.push([null,m,i]);fa(i+1).forEach(q=>seq.push([q]))})}
+function chips(){cmClose();const c=$('#chips');c.innerHTML='';const seq=[];{const fl=mods,fa=a=>fl.filter(q=>fxPos(q)==a);fa(0).forEach(q=>seq.push([q]));L.forEach((m,i)=>{seq.push([null,m,i]);fa(i+1).forEach(q=>seq.push([q]))})}
 seq.forEach(([fx,m,i])=>{if(fx){c.appendChild(fxChip(fx));return}const w=document.createElement('div');w.className='chip'+(i==cur?' on':'')+(m.vis?'':' off');w.dataset.i=i;w.dataset.k='m'+i;
 if(i){const e=document.createElement('button');e.innerHTML=m.vis?ICO.eye:ICO.eyeoff;e.setAttribute('aria-label',m.vis?'隱藏圖層':'顯示圖層');e.onclick=ev=>{ev.stopPropagation();m.vis^=1;chips();render();commit()};w.appendChild(e)}
 const b=document.createElement('button');b.className='cn';b.textContent=m.name;b.onclick=()=>{cur=i;chips();syncAll();render()};w.appendChild(b);
@@ -1023,17 +1116,17 @@ c.appendChild(w)});$('#chlab').textContent='圖層：'+(L[cur]?L[cur].name:'')}
 {const box=$('#chips');let lp=null,dg=null,sup=0;
 const start=()=>{const o=lp;lp=null;if(!o||!o.w.isConnected)return;const kids=[...box.children];if(kids.length<3)return;try{o.w.setPointerCapture(o.id)}catch(_){}
 const r=kids.map(k=>k.getBoundingClientRect()),from=kids.indexOf(o.w),gi=kids.findIndex(k=>k.dataset.k=='m0'),lo=gi+1;
-dg={w:o.w,kids,r,mid:r.map(q=>q.left+q.width/2),from,to:from,lo,x0:o.x,sl0:box.scrollLeft,id:o.id};o.w.classList.add('drag');navigator.vibrate&&navigator.vibrate(12)};
+dg={w:o.w,kids,r,mid:r.map(q=>q.top+q.height/2),from,to:from,lo,x0:o.y,sl0:box.scrollTop,id:o.id};o.w.classList.add('drag');navigator.vibrate&&navigator.vibrate(12)};
 box.addEventListener('pointerdown',e=>{if(dg||lp||e.button>0||!bmp)return;const w=e.target.closest('.chip'),k=w&&w.dataset.k;if(!k||k=='m0')return;
 lp={w,x:e.clientX,y:e.clientY,id:e.pointerId,t:setTimeout(start,380)}});
 box.addEventListener('pointermove',e=>{if(lp&&e.pointerId==lp.id){if(Math.hypot(e.clientX-lp.x,e.clientY-lp.y)>8){clearTimeout(lp.t);lp=null}return}
-if(!dg||dg.fin||e.pointerId!=dg.id)return;const b=box.getBoundingClientRect();if(e.clientX>b.right-36)box.scrollLeft+=10;else if(e.clientX<b.left+36)box.scrollLeft-=10;
-const sd=box.scrollLeft-dg.sl0,mv=e.clientX-dg.x0,c=dg.mid[dg.from]+mv;let n=dg.lo;dg.kids.forEach((k,j)=>{if(j>=dg.lo&&j!=dg.from&&dg.mid[j]-sd<c)n++});dg.to=n;
-const f=dg.from,t=n,sh=dg.r[f].width+6;dg.w.style.transform=`translateX(${mv+sd}px)`;
-dg.kids.forEach((k,j)=>{if(j==f)return;k.style.transform=(f<t&&j>f&&j<=t)?`translateX(${-sh}px)`:(f>t&&j>=t&&j<f)?`translateX(${sh}px)`:''})});
+if(!dg||dg.fin||e.pointerId!=dg.id)return;const b=box.getBoundingClientRect();if(e.clientY>b.bottom-36)box.scrollTop+=10;else if(e.clientY<b.top+36)box.scrollTop-=10;
+const sd=box.scrollTop-dg.sl0,mv=e.clientY-dg.x0,c=dg.mid[dg.from]+mv;let n=dg.lo;dg.kids.forEach((k,j)=>{if(j>=dg.lo&&j!=dg.from&&dg.mid[j]-sd<c)n++});dg.to=n;
+const f=dg.from,t=n,sh=dg.r[f].height+6;dg.w.style.transform=`translateY(${mv+sd}px)`;
+dg.kids.forEach((k,j)=>{if(j==f)return;k.style.transform=(f<t&&j>f&&j<=t)?`translateY(${-sh}px)`:(f>t&&j>=t&&j<f)?`translateY(${sh}px)`:''})});
 const end=e=>{if(lp&&e.pointerId==lp.id){clearTimeout(lp.t);lp=null}if(!dg||dg.fin||e.pointerId!=dg.id)return;dg.fin=1;sup=1;setTimeout(()=>sup=0,80);
-const d=dg,f=d.from,t=d.to;let x=0;if(t>f)for(let k=f+1;k<=t;k++)x+=d.r[k].width+6;else for(let k=t;k<f;k++)x-=d.r[k].width+6;
-d.w.classList.remove('drag');d.w.style.transform=`translateX(${x}px)`;
+const d=dg,f=d.from,t=d.to;let x=0;if(t>f)for(let k=f+1;k<=t;k++)x+=d.r[k].height+6;else for(let k=t;k<f;k++)x-=d.r[k].height+6;
+d.w.classList.remove('drag');d.w.style.transform=`translateY(${x}px)`;
 setTimeout(()=>{dg=null;if(t==f){chips();return}
 const it=d.kids.map(k=>k.dataset.k),dk=it[f];it.splice(f,1);it.splice(t,0,dk);const co=L[cur],nl=it.filter(q=>q[0]=='m').map(q=>L[+q.slice(1)]);
 if(it.some(q=>q[0]=='f')){const fl=[];it.forEach((q,i)=>{if(q[0]!='f')return;const m=mods.find(z=>z.id==+q.slice(1)),n=it.slice(0,i).filter(y=>y[0]=='m').length;fl.push(m);if(q==dk){if(n<nl.length)m.fix=1;if(m.fix)m.at=n}else if(m.fix)m.at=n});mods.splice(0,mods.length,...fl)}
@@ -1501,7 +1594,7 @@ const zc_=()=>{const r=wrap.getBoundingClientRect();return[r.left+r.width/2,r.to
 $('#zin').onclick=()=>tab=='crop'?cropZoom(1.25):zAt(zm.z*1.5,...zc_());$('#zout').onclick=()=>tab=='crop'?cropZoom(.8):zAt(zm.z/1.5,...zc_());$('#zfit').onclick=()=>{if(tab=='crop'){if(bmp){crop.hw*=20;crop.hh*=20;fitCrop();cropUI();drawOv();render();cDeb()}}else zAt(1,...zc_())};
 wrap.addEventListener('wheel',e=>{if(!bmp)return;e.preventDefault();if(tab=='crop')cropZoom(e.deltaY<0?1.1:1/1.1);else zAt(zm.z*(e.deltaY<0?1.15:1/1.15),e.clientX,e.clientY)},{passive:false});
 const canPan=()=>tab!='mask'&&tab!='crop'&&!wbPick&&!maskPick&&!focusPick&&!drag;
-wrap.addEventListener('pointerdown',e=>{if(e.target.closest('#zc,#mvb,#cvhm'))return;pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
+wrap.addEventListener('pointerdown',e=>{if(e.target.closest('#zc,#mvb,#cvhm,#chbar'))return;pts.set(e.pointerId,{x:e.clientX,y:e.clientY});
 if(pts.size==2){if(drag){if(drag.k=='brush'){ac().strokes.pop();rebuildBrush()}else if(drag.snap)Object.assign(drag.c,JSON.parse(drag.snap));drag=null;drawOv();render()}if(cdrag){if(cdrag.snap)Object.assign(crop,cdrag.snap);cdrag=null;drawOv();render()}const[a,b]=[...pts.values()];pin={d:Math.hypot(a.x-b.x,a.y-b.y)||1,ld:Math.hypot(a.x-b.x,a.y-b.y)||1,z:zm.z,mx:(a.x+b.x)/2,my:(a.y+b.y)/2}}});
 wrap.addEventListener('pointermove',e=>{const p=pts.get(e.pointerId);if(!p)return;const ox=p.x,oy=p.y;p.x=e.clientX;p.y=e.clientY;
 if(pts.size==2&&pin){const[a,b]=[...pts.values()],d=Math.hypot(a.x-b.x,a.y-b.y),mx=(a.x+b.x)/2,my=(a.y+b.y)/2;if(tab=='crop'){cropZoom(d/pin.ld);pin.ld=d;return}zm.x+=mx-pin.mx;zm.y+=my-pin.my;pin.mx=mx;pin.my=my;zAt(pin.z*d/pin.d,mx,my)}
@@ -2015,4 +2108,105 @@ document.addEventListener('pointerdown',e=>{if(menu&&!menu.contains(e.target)&&!
 addEventListener('resize',close);addEventListener('keydown',e=>{if(e.key=='Escape')close()});
 document.addEventListener('scroll',e=>{if(menu&&!menu.contains(e.target))close()},true);
 })();
+</script><script>
+(function(){const sd=document.querySelector('#side'),cb=document.querySelector('#chbar');
+document.body.appendChild(cb);cb.addEventListener('wheel',e=>e.stopPropagation());
+sd.classList.add('pc');
+document.querySelectorAll('#tabs button').forEach(b=>b.addEventListener('click',()=>{sd.classList.toggle('pc',!sd.classList.contains('pc')&&tab===b.dataset.t)},true))})();
+</script><script>
+(function(){const wrap=document.querySelector('#wrap'),cb=document.querySelector('#chbar');
+const h=document.createElement('button');h.id='chh';h.setAttribute('aria-label','收起或展開遮罩圖層');h.innerHTML='<b></b>';document.body.appendChild(h);
+h.addEventListener('pointerdown',e=>e.stopPropagation());h.onclick=()=>document.body.classList.toggle('chcl');const pos=()=>{const r=wrap.getBoundingClientRect(),b=document.body.getBoundingClientRect();cb.style.top=h.style.top=(r.top-b.top+8)+'px'};pos();addEventListener('resize',pos);new ResizeObserver(pos).observe(document.querySelector('header'));
+const TW=96,cache=new Map();let fb=null,tx=null,th=0,tm=0;
+function fitR(){return iw>=ih?[96,Math.max(1,Math.round(96*ih/iw))]:[Math.max(1,Math.round(96*iw/ih)),96]}
+function paint(){document.querySelectorAll('#chips canvas.mt').forEach(cv=>{const u=+cv.dataset.u,d=cache.get(u);if(u&&!d)return;if(cv.width!=96){cv.width=cv.height=96}const g=cv.getContext('2d');g.fillStyle='#1b1b1e';g.fillRect(0,0,96,96);
+if(!u){const[a,b]=fitR();g.fillStyle='#fff';g.fillRect((96-a)>>1,(96-b)>>1,a,b)}else g.putImageData(d.im,(96-d.w)>>1,(96-d.h)>>1)})}
+function thumbs(){if(!bmp||L.length<2||!cb.offsetParent)return;
+try{const[w,hh]=fitR();
+if(!fb||th!=w+'x'+hh){if(fb){gl.deleteFramebuffer(fb);gl.deleteTexture(tx)}tx=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tx);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,w,hh,0,gl.RGBA,gl.UNSIGNED_BYTE,null);
+[gl.TEXTURE_MIN_FILTER,gl.TEXTURE_MAG_FILTER].forEach(k=>gl.texParameteri(gl.TEXTURE_2D,k,gl.LINEAR));[gl.TEXTURE_WRAP_S,gl.TEXTURE_WRAP_T].forEach(k=>gl.texParameteri(gl.TEXTURE_2D,k,gl.CLAMP_TO_EDGE));
+fb=gl.createFramebuffer();gl.bindFramebuffer(gl.FRAMEBUFFER,fb);gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,tx,0);th=w+'x'+hh}
+const buf=new Uint8Array(w*hh*4);
+for(let i=1;i<L.length;i++){if(!maskRender(i))continue;gl.bindFramebuffer(gl.READ_FRAMEBUFFER,MKB.fb);gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER,fb);
+gl.blitFramebuffer(0,0,iw,ih,0,0,w,hh,gl.COLOR_BUFFER_BIT,gl.LINEAR);gl.bindFramebuffer(gl.READ_FRAMEBUFFER,fb);gl.readPixels(0,0,w,hh,gl.RGBA,gl.UNSIGNED_BYTE,buf);
+const im=new ImageData(w,hh);for(let y=0;y<hh;y++){const s=(hh-1-y)*w*4;for(let x=0;x<w;x++){const v=buf[s+x*4],o=(y*w+x)*4;im.data[o]=im.data[o+1]=im.data[o+2]=v;im.data[o+3]=255}}
+cache.set(L[i].uid,{w,h:hh,im})}}catch(e){console.warn(e)}
+gl.bindFramebuffer(gl.FRAMEBUFFER,null);gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,tex);paint()}
+const sched=()=>{clearTimeout(tm);tm=setTimeout(thumbs,350)};
+const r0=render;render=function(){r0();sched()};
+const BSI='<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 3.5 3.5 3-3L20 17"/></svg>';const FXI='<svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3l1.8 5.2L17 10l-5.2 1.8L10 17l-1.8-5.2L3 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/></svg>';
+function dec(){let miss=0;document.querySelectorAll('#chips .chip').forEach(ch=>{if(ch.classList.contains('tile'))return;ch.classList.add('tile');
+const k=ch.dataset.k,isF=k[0]=='f',idx=isF?-1:+k.slice(1),eye=[...ch.children].find(b=>b.tagName=='BUTTON'&&!b.className),cn=ch.querySelector('.cn'),mm=ch.querySelector('.mm'),lk=ch.querySelector('.lk'),
+t=document.createElement('div'),b=document.createElement('div');t.className='th';b.className='tb';
+if(isF){t.classList.add('fxi');t.innerHTML=FXI}else if(idx==0){t.classList.add('bsi');t.innerHTML=BSI}else{const c=document.createElement('canvas');c.className='mt';c.dataset.u=idx?L[idx].uid:0;t.appendChild(c);if(idx&&!cache.has(L[idx].uid))miss=1}
+if(eye){eye.classList.add('ey');t.appendChild(eye)}if(lk){lk.classList.add('lkb');t.appendChild(lk)}
+b.appendChild(cn);if(mm)b.appendChild(mm);ch.replaceChildren(t,b)});paint();if(miss)sched()}
+const c0=chips;chips=function(){c0();dec()};chips()})();
+</script><script>
+(function(){const wb=document.querySelector('#wb'),go=k=>document.querySelector('#cst button[data-s="'+k+'"]').click(),
+S=d=>'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>';
+[['hsl','HSL',S('<circle cx="12" cy="12" r="9"/><path d="M12 3v9M12 12l-7.8 4.5M12 12l7.8 4.5"/>'),1],['cg','色彩分級',S('<circle cx="9" cy="9" r="5"/><circle cx="15" cy="9" r="5"/><circle cx="12" cy="15" r="5"/>'),0]].forEach(([k,l,i,r])=>{const b=document.createElement('button');b.className='tx'+(r?' r':'');b.innerHTML=i+'<span>'+l+'</span>';b.onclick=()=>go(k);wb.appendChild(b)});
+const bar=document.createElement('div');bar.id='csbar';bar.className='hid';bar.innerHTML='<button class="ib" aria-label="返回基礎">'+S('<path d="M15 5l-7 7 7 7"/>').replace('width="18" height="18"','width="24" height="24"')+'</button><b></b>';
+bar.firstChild.onclick=()=>go('base');document.querySelector('#p-hsl').before(bar);
+let lt=0;const pn=document.querySelector('#panel');pn.addEventListener('scroll',()=>{if(!document.body.classList.contains('csp'))return;const t=pn.scrollTop,d=t-lt;if(t<=4||d<-4)bar.classList.remove('csh');else if(d>4&&t>bar.offsetHeight)bar.classList.add('csh');lt=t},{passive:true});const pa=panelsApply;panelsApply=function(){pa();const on=tab=='color'&&sub!='base';bar.classList.toggle('hid',!on);document.body.classList.toggle('csp',on);bar.classList.remove('csh');lt=0;bar.querySelector('b').textContent=sub=='hsl'?'HSL 混色':'色彩分級'}})();
+</script><script>
+(function(){const H=[0,30,60,120,180,240,275,320],ins=['h0','h1','h2'].map(k=>document.querySelector('#p-hsl [data-id='+k+'] input'));ins.forEach(i=>i.classList.add('hsc'));
+function upd(){const m=cL(),c=band>=8&&m.hx[band-8]?m.hx[band-8]:null,h=c?c.hue:H[Math.min(band,7)],f=x=>((x%360)+360)%360,
+g=[`linear-gradient(90deg,hsl(${f(h-45)} 90% 50%),hsl(${f(h)} 90% 50%),hsl(${f(h+45)} 90% 50%))`,`linear-gradient(90deg,#777,hsl(${f(h)} 100% 50%))`,`linear-gradient(90deg,hsl(${f(h)} 60% 10%),hsl(${f(h)} 100% 50%),hsl(${f(h)} 100% 90%))`];
+ins.forEach((i,k)=>i.style.setProperty('--tg',g[k]))}
+const sa=syncAll;syncAll=function(){sa();upd()};const hw=hxSw;hxSw=function(){hw();upd()};upd()})();
+</script><script>
+(function(){const G={temp:'#3a3acc,#777 50%,#e0d030',tint:'#3cb43c,#777 50%,#b43cb4',vibrance:'#555,#777 50%,#4fc34f 62%,#e0d030 82%,#ee5530',saturation:'#555,#777 50%,#4fc34f 62%,#e0d030 82%,#ee5530'};
+for(const k in G){const i=document.querySelector('#p-color [data-id='+k+'] input');if(i){i.classList.add('hsc');i.style.setProperty('--tg','linear-gradient(90deg,'+G[k]+')')}}})();
+</script><script>
+document.addEventListener('click',e=>{const v=e.target.closest&&e.target.closest('.row .v');if(!v||v.querySelector('input'))return;const r=v.closest('.row').querySelector('input[type=range]');if(!r)return;
+const inp=document.createElement('input'),old=v.textContent;inp.type='number';inp.step='any';inp.value=r.value;
+inp.style.cssText='width:76px;height:30px;padding:0 6px;text-align:right;font:inherit;color:var(--ac);background:var(--bg);border:1px solid var(--ac);border-radius:6px;outline:none';
+inp.addEventListener('dblclick',ev=>ev.stopPropagation());inp.addEventListener('pointerdown',ev=>ev.stopPropagation());
+let done=0;const fin=ok=>{if(done)return;done=1;const x=parseFloat(inp.value);
+if(ok&&isFinite(x)){r.value=Math.min(+r.max,Math.max(+r.min,x));r.dispatchEvent(new Event('input',{bubbles:true}));r.dispatchEvent(new Event('change',{bubbles:true}));if(v.contains(inp))v.textContent=r.value}else v.textContent=old};
+inp.onkeydown=ev=>{if(ev.key=='Enter'){ev.preventDefault();fin(true)}else if(ev.key=='Escape')fin(false)};inp.onblur=()=>fin(true);
+v.textContent='';v.appendChild(inp);inp.focus();inp.select()});
+</script><script>
+(function(){const h=document.querySelector('#chh'),cb=document.querySelector('#chbar');if(h&&cb)cb.appendChild(h)})();
+</script><script>
+(function(){
+const S=(d,z)=>'<svg viewBox="0 0 24 24" width="'+(z||30)+'" height="'+(z||30)+'" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>';
+const IC={glare:'<path d="M10 3l1.8 5.2L17 10l-5.2 1.8L10 17l-1.8-5.2L3 10l5.2-1.8z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
+haze:'<path d="M3 8h18M3 12h12M6 16h15M3 20h9"/>',
+dof:'<circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8" stroke-dasharray="2.5 3"/>',
+dehaze:'<path d="M3 17l5-6 4 4 3-3 6 5"/><circle cx="17" cy="7" r="2"/>',
+vig:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="12" cy="12" r="5"/>',
+ca:'<circle cx="9" cy="10" r="5"/><circle cx="15" cy="10" r="5"/><circle cx="12" cy="15" r="5"/>',
+lim:'<path d="M3 12c2.5-7 5-7 7.5 0s5 7 7.5 0 2-3 3-3"/><path d="M3 5h18M3 19h18" opacity=".5"/>',
+ramp:'<rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 7v10M12 7v10M17 7v10" opacity=".5"/>',
+relight:'<path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6M10 22h4"/>',
+grain:'<circle cx="6" cy="7" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="18" cy="8" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="13" r="1"/><circle cx="6" cy="17" r="1"/><circle cx="12" cy="19" r="1"/><circle cx="18" cy="18" r="1"/>',
+lut:'<path d="M12 3l8 4.5v9L12 21l-8-4.5v-9z"/><path d="M12 12l8-4.5M12 12L4 7.5M12 12v9"/>',
+cmatch:'<rect x="3" y="5" width="11" height="11" rx="2"/><rect x="10" y="9" width="11" height="11" rx="2"/>',
+vhs:'<rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="8.5" cy="12" r="2"/><circle cx="15.5" cy="12" r="2"/>'};
+let efDet=null;const p=document.querySelector('#p-ef'),pn=document.querySelector('#panel');
+const grid=document.createElement('div');grid.id='efgrid';grid.className='ftiles';
+const bar=document.createElement('div');bar.id='efbar';bar.innerHTML='<button class="ib" aria-label="返回效果列表">'+S('<path d="M15 5l-7 7 7 7"/>',24)+'</button><b></b>';
+p.prepend(bar);p.prepend(grid);document.querySelector('#addmod').parentNode.classList.add('hid');
+function mvFx(m,d){const k=mods.indexOf(m),j=k+d;if(k<0||j<0||j>=mods.length)return;const f=new Map();[...grid.children].forEach(c=>c.dataset.id&&f.set(c.dataset.id,c.getBoundingClientRect()));[mods[k],mods[j]]=[mods[j],mods[k]];modRender();render();commit();
+[...grid.children].forEach(c=>{const o=f.get(c.dataset.id);if(!o||!c.animate)return;const r=c.getBoundingClientRect(),dx=o.left-r.left,dy=o.top-r.top;if(!dx&&!dy)return;c.style.zIndex=2;const a=c.animate([{transform:'translate('+dx+'px,'+dy+'px)'},{transform:'none'}],{duration:320,easing:'cubic-bezier(.2,.8,.3,1)'});a.onfinish=a.oncancel=()=>{c.style.zIndex=''}})}
+function openFx(id){efDet=id;fxSel=id;modRender();pn.scrollTop=0}
+bar.firstChild.onclick=()=>{efDet=null;modRender();pn.scrollTop=0};
+function sync(){if(efDet!=null&&!mods.some(m=>m.id==efDet))efDet=null;p.classList.toggle('det',efDet!=null);
+const cur=mods.find(m=>m.id==efDet);bar.querySelector('b').textContent=cur?fxName(cur):'';grid.innerHTML='';
+mods.forEach((m,i)=>{const b=document.createElement('div');b.className='ftile efT'+(m.on?'':' off');b.dataset.id=m.id;b.setAttribute('role','button');b.tabIndex=0;b.innerHTML=S(IC[m.type]||IC.glare)+'<span></span>';b.lastChild.textContent=fxName(m);b.onclick=()=>openFx(m.id);
+const mk=(c,ic,lab,fn,dis)=>{const x=document.createElement('button');x.className='efb '+c;x.innerHTML=ic;x.setAttribute('aria-label',lab);x.disabled=!!dis;x.onclick=e=>{e.stopPropagation();fn()};b.appendChild(x)};
+mk('e1',m.on?ICO.eye:ICO.eyeoff,m.on?'隱藏效果':'顯示效果',()=>{m.on^=1;modRender();render();commit()});
+mk('e2',ICO.trash,'刪除效果',()=>{const k=mods.indexOf(m);delDepth(m);delNormal(m);mods.splice(k,1);modRender();render();commit()});
+mk('e3',S('<path d="M15 5l-7 7 7 7"/>',18),'左移',()=>mvFx(m,-1),i==0);mk('e4',S('<path d="M9 5l7 7-7 7"/>',18),'右移',()=>mvFx(m,1),i==mods.length-1);grid.appendChild(b)});
+const a=document.createElement('button');a.className='ftile efA';a.innerHTML=S('<path d="M12 5v14M5 12h14"/>')+'<span>新增效果</span>';a.onclick=()=>document.querySelector('#addmod').click();grid.appendChild(a)}
+const mr=modRender;modRender=function(){mods.forEach(m=>m.open=m.id===efDet?1:0);mr();sync()};
+document.addEventListener('click',e=>{const c=e.target.closest&&e.target.closest('.chip.fxc .cn');if(c){if(tab!='ef')document.querySelector('#tabs button[data-t=ef]').click();openFx(+c.closest('.chip').dataset.k.slice(1))}});
+const ok=document.querySelector('#mdlok');let n0=0;ok.addEventListener('click',()=>{n0=mods.length},true);ok.addEventListener('click',()=>{if(mods.length>n0)openFx(mods[mods.length-1].id)});
+modRender()})();
+</script><script>
+(function(){const wrap=document.querySelector('#wrap'),cb=document.querySelector('#chbar'),hs=document.querySelector('#hist');
+const f=()=>{const h=wrap.clientHeight-16-(hs&&getComputedStyle(hs).display!='none'?48:0);cb.style.maxHeight=Math.max(80,h)+'px'};
+new ResizeObserver(f).observe(wrap);addEventListener('resize',f);const sf=syncFx;syncFx=function(){sf();f()};f()})();
 </script></body></html>
