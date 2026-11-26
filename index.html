@@ -299,7 +299,7 @@ body.chcl #chbar #chh{left:100%}
 .efb{position:absolute;width:28px;height:28px;min-height:0;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.35);color:inherit;display:flex;align-items:center;justify-content:center}
 .efb.e1{top:4px;left:4px}.efb.e2{top:4px;right:4px}.efb.e3{bottom:4px;left:4px}.efb.e4{bottom:4px;right:4px}
 #p-ef .mh{display:none}
-</style><style>#chips{border-radius:14px 0 14px 14px}</style></head><body class="noph">
+</style><style>#chips{border-radius:14px 0 14px 14px}</style><style>@media(max-width:799px){body.csp #panel,body.csp #wfwin{height:46vh}}</style></head><body class="noph">
 <header>
 <button id="cvrs" class="ib" aria-label="重設曲線">重設</button><div id="ldw" style="flex:none"><button id="load" class="ib" aria-label="開啟" aria-haspopup="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v1H7.5a2 2 0 0 0-1.9 1.4L3 18z"/><path d="M3 18l2.6-7.6A2 2 0 0 1 7.5 9H22l-2.6 8.2a2 2 0 0 1-1.9 1.4H3z"/></svg></button><div id="ldm" class="hid"><button data-ld="photo">新增照片</button><button data-ld="proj">開啟專案</button><button data-ld="preset">匯入預設集</button></div></div><input id="file" type="file" accept="image/*" hidden><input id="jf" type="file" accept=".zip,.json,application/zip,application/json" hidden><input id="pf" type="file" accept=".zip,application/zip" hidden>
 <button id="undo" class="ib" aria-label="復原" disabled><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></svg></button><button id="redo" class="ib" aria-label="重做" disabled><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 15-6.7L21 13"/></svg></button>
@@ -432,7 +432,9 @@ if(M.x<.5){vec2 ts0=vec2(textureSize(og,0));vec2 kk=vec2(ts0.x/ts0.y,1.);vec2 e=
 else if(M.x<1.5){float a=u2[i].w,cs=cos(-a),sn=sin(-a);vec2 ts1=vec2(textureSize(og,0));vec2 kk=vec2(ts1.x/ts1.y,1.);vec2 q=(p-G.xy)*kk;q=vec2(q.x*cs-q.y*sn,q.x*sn+q.y*cs)/max(G.zw*kk,vec2(1e-3));w=fw(length(q)-1.,M.y);}
 else if(M.x<2.5){w=smoothstep(0.,1.,bmw(G.x,p));}
 else if(M.x<3.5){if(G.x>=0.)w=rgs(true,p,G,f,M.y);}
-else if(M.x<4.5){if(G.x>=0.)w=rgs(false,p,G,f,M.y);}else{if(G.y>=0.){float z=bmw(G.x,p),r=G.z/100.*.5+.02;w=1.-smoothstep(r*(1.-f*.95),r,abs(z-G.y));}}
+else if(M.x<4.5){if(G.x>=0.)w=rgs(false,p,G,f,M.y);}else{if(G.y>=0.){float dr=G.z/100.*.5+.02,dfd=G.w/100.,drd=M.y/100.*.04;
+if(drd<1e-4){float z=bmw(G.x,p);w=1.-smoothstep(dr*(1.-dfd*.95),dr+1e-4,abs(z-G.y));}
+else{vec2 dts=vec2(textureSize(og,0));float das=dts.x/dts.y,dac=0.;for(int dj=0;dj<32;dj++){float drr=sqrt((float(dj)+.5)/32.),dan=float(dj)*2.39996;vec2 dq=clamp(p+vec2(cos(dan),sin(dan)*das)*drr*drd,0.,1.);float dz=bmw(G.x,dq);dac+=1.-smoothstep(dr*(1.-dfd*.95),dr+1e-4,abs(dz-G.y));}w=dac/32.;}}}
 if(w!=w)w=0.;w=clamp(w,0.,1.);if(M.z>.5)w=1.-w;if(K.x>1.5){if(K.w<.5){Bm*=w;hB=true;}}else{if(K.w>.5)w=0.;if(K.y<.5){W=w;Bm=1.;hB=false;bi=i;}else W=clamp(K.x>.5?W-w:W+w,0.,1.);}
 if(K.z>.5){float am=g0[bi].w/100.,wf=W*Bm;if(show==bi){float r=wf,bb=0.;if(hB){bb=wf;if(shg==1)r=Bm;else if(shg==0)r=W;}sw=r*am;sb=bb*am;}if(mo>0){if(bi==mo)mkv=wf*am;}else c=mix(c,adj(c,bi),wf*am);}}
 if(vm==2){if(show>=0&&mo==0)c=vec3(clamp(sw,0.,1.));}else{c=mix(c,vm==1?vec3(.1,1.,.2):vec3(1.,.1,.1),sw*.4);c=mix(c,vec3(.15,.5,1.),sb*.5);}}
@@ -764,7 +766,7 @@ gl.activeTexture(gl.TEXTURE5);gl.bindTexture(gl.TEXTURE_2D,null);gl.activeTextur
 function upBatch(E){const u0=new Float32Array(24),u1=new Float32Array(24),u2=new Float32Array(24),g0=new Float32Array(24),g1=new Float32Array(24),lk=new Float32Array(24),hs=new Float32Array(144),cgv=new Float32Array(96),cbl=new Float32Array(6),wht=new Float32Array(6),cgr=new Float32Array(12),hxu=new Float32Array(192).fill(-1),cu=new Uint8Array(6144),cuf=new Float32Array(6);
 E.forEach((e,i)=>{const x=e.x,c=e.c,p=x.p,b=!e.k;if(b){u0.set([p.exposure,p.contrast,p.lift,p.gamma],i*4);u1.set([p.gain,p.wexp||0,p.temp,p.tint],i*4);cgr.set([x.cgr[0]/100,x.cgr[1]/100],i*2);hs.set(x.hsl.flat(),i*24);(x.hx||[]).forEach((q,k)=>hxu.set([q.v[0],q.v[1],q.v[2],q.hue],(i*8+k)*4));cgv.set(x.cg.flat(),i*16);cbl[i]=x.cgb||0;wht[i]=p.whiteness||0;cvFill(x.cv,i,cu,cuf)}
 u2.set([b?p.vibrance:0,b?p.saturation:0,0,c.ang||0],i*4);g0.set([TY[c.type]||0,c.type=='image'||c.type=='brush'?0:c.feather,c.inv,x.amt],i*4);
-g1.set(c.type=='brush'||c.type=='image'?[c.slot,0,0,0]:c.type=='depth'?[c.slot,c.lum,c.range,0]:c.type=='color'?[c.hue,c.sat,c.lum,c.range]:c.type=='lum'?[c.lum,c.range,0,0]:[c.x1,c.y1,c.x2,c.y2],i*4);lk.set([c.op=='int'?2:c.op=='sub'?1:0,e.k?1:0,e.last,c.ch?1:0],i*4)});
+g1.set(c.type=='brush'||c.type=='image'?[c.slot,0,0,0]:c.type=='depth'?[c.slot,c.lum,c.range,c.dfe==null?50:c.dfe]:c.type=='color'?[c.hue,c.sat,c.lum,c.range]:c.type=='lum'?[c.lum,c.range,0,0]:[c.x1,c.y1,c.x2,c.y2],i*4);lk.set([c.op=='int'?2:c.op=='sub'?1:0,e.k?1:0,e.last,c.ch?1:0],i*4)});
 gl.uniform1fv(locs.cuf,cuf);gl.activeTexture(gl.TEXTURE6);gl.bindTexture(gl.TEXTURE_2D,cut);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,256,6,0,gl.RGBA,gl.UNSIGNED_BYTE,cu);gl.activeTexture(gl.TEXTURE0);gl.uniform4fv(locs.u0,u0);gl.uniform4fv(locs.u1,u1);gl.uniform4fv(locs.u2,u2);gl.uniform4fv(locs.g0,g0);gl.uniform4fv(locs.g1,g1);gl.uniform4fv(locs.lk,lk);gl.uniform3fv(locs.hs,hs);gl.uniform4fv(locs.hxs,hxu);gl.uniform4fv(locs.cgv,cgv);gl.uniform1fv(locs.cbl,cbl);gl.uniform1fv(locs.wht,wht);gl.uniform2fv(locs.cgr,cgr);}
 function maskIdx(m){if(!m.mkOn||!m.mk)return 0;const i=L.findIndex(l=>l.uid===m.mk);return i>0?i:0}
 function uidFix(){const seen=new Set();L.forEach(m=>{if(seen.has(m.uid))m.uid=++luid;seen.add(m.uid)})}
@@ -939,7 +941,7 @@ slider($('#p-light'),'whiteness','偏移',-100,100,0,...P('whiteness'));
 function hsl2rgbH(h,s,l){const k=n=>(n+h/30)%12,a=s*Math.min(l,1-l),f=n=>l-a*Math.max(-1,Math.min(k(n)-3,9-k(n),1));return[f(0),f(8),f(4)]}
 function hzHex(h,s,l){return'#'+hsl2rgbH(h,s/100,l/100).map(v=>Math.round(cl(v,0,1)*255).toString(16).padStart(2,'0')).join('')}
 let cgi=0;const CGN=['陰影','中間調','亮部','全域'];
-{const h=document.createElement('div');h.innerHTML='<p class="note" id="cgname" style="margin:6px 0 8px;text-align:center;color:var(--tx)"><b>陰影</b></p><div id="wfw"><canvas id="wf" width="480" height="240" style="width:100%;height:auto;aspect-ratio:2/1;display:block;border-radius:8px;background:#000;touch-action:pan-y"></canvas><div id="wfr" class="note" style="text-align:center;margin:6px 0 8px"></div><div class="bar"><button id="wfm0" class="on">亮度</button><button id="wfm1">RGB 分量</button><button id="wfrs">重設範圍</button></div><p class="note">拖曳兩條橫線，設定陰影／中間調／亮部的範圍</p></div><div id="cgrow"><div id="cgt"></div><div id="cgm"><div id="cgv"></div><div id="cgw"></div></div></div><div class="bar"><button id="cgp">使用調色盤顏色 ▾</button></div><div id="cgpl" class="pgrid hid"></div>';$('#p-hsl').appendChild(h);
+{const h=document.createElement('div');h.innerHTML='<p class="note" id="cgname" style="margin:6px 0 8px;text-align:center;color:var(--tx)"><b>陰影</b></p><div id="wfw"><canvas id="wf" width="480" height="240" style="width:100%;height:auto;aspect-ratio:2/1;display:block;border-radius:8px;background:#000;touch-action:pan-y"></canvas><div id="wfr" class="note" style="text-align:center;margin:6px 0 8px"></div><div class="bar"><button id="wfm0" class="on">亮度</button><button id="wfm1">RGB 分量</button><button id="wfrs">重設範圍</button></div><p class="note">拖曳兩條橫線，設定陰影／中間調／亮部的範圍</p></div><div id="cgrow"><div id="cgt"></div><div id="cgm"><div id="cgv"></div><div id="cgw"></div></div></div><button id="cgp" class="hid"></button><div id="cgpl" class="pgrid hid"></div>';$('#p-hsl').appendChild(h);
 const CGF=['#1c1c1c','#5c5c5c','#e6e6e6'];
 CGN.forEach((n,j)=>{const b=document.createElement('button');b.title=n;b.setAttribute('aria-label',n);b.innerHTML='<svg viewBox="0 0 40 40" width="40" height="40">'+(j<3?`<circle cx="20" cy="20" r="13" fill="${CGF[j]}"/>`:'<path d="M20 7A13 13 0 0 0 20 33Z" fill="#5c5c5c"/><path d="M20 7A13 13 0 0 1 20 33Z" fill="#e6e6e6"/>')+'<circle class="rg" cx="20" cy="20" r="17" fill="none"/></svg>';b.onclick=()=>{cgi=j;cgAnim=true;syncAll();cgAnim=false};$('#cgt').appendChild(b)});{const b=document.createElement('button');b.title='波形圖';b.setAttribute('aria-label','波形圖');b.innerHTML='<svg viewBox="0 0 40 40" width="40" height="40"><circle class="rg" cx="20" cy="20" r="17" fill="none"/><path d="M9 23H14L17 13L21 28L25 16L28 23H31" fill="none" stroke="#e6e6e6" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>';b.onclick=()=>wfShow();$('#cgt').appendChild(b)}}
 function cgTabs(){[...$('#cgt').children].forEach((b,j)=>b.classList.toggle('on',j==cgi));const nm=$('#cgname b');if(nm)nm.textContent=CGN[cgi]}
@@ -1056,7 +1058,8 @@ slider($('#p-hsl'),'cgbal','平衡',-100,100,0,()=>cL().cgb,v=>cL().cgb=v,()=>cg
 const isR=()=>cur>0&&(ac().type=='color'||ac().type=='lum'||ac().type=='depth'),isB=()=>cur>0&&ac().type=='brush';
 slider($('#p-mask'),'bsz','筆刷大小',1,100,30,()=>brush.size,v=>brush.size=v,isB);
 slider($('#p-mask'),'range','選取範圍',0,100,50,()=>ac().range,v=>ac().range=v,isR);
-slider($('#p-mask'),'feather','羽化',0,100,()=>{const t=ac().type;return t=='linear'?100:t=='image'?0:50},()=>ac().feather,v=>{const c=ac();c.feather=v;if(c.type=='brush'||c.type=='image')refreshSlot(c)},()=>cur>0);
+slider($('#p-mask'),'dfe','深度邊界羽化',0,100,50,()=>ac().dfe==null?50:ac().dfe,v=>ac().dfe=v,()=>cur>0&&ac().type=='depth');
+slider($('#p-mask'),'feather','羽化',0,100,()=>{const t=ac().type;return t=='linear'?100:t=='image'||t=='depth'?0:50},()=>ac().feather,v=>{const c=ac();c.feather=v;if(c.type=='brush'||c.type=='image')refreshSlot(c)},()=>cur>0);
 slider($('#p-mask'),'amt','強度',0,100,100,()=>cL().amt,v=>cL().amt=v,()=>cur>0);
 ['#f00','#ffa500','#ff0','#0c0','#0cc','#33f','#808','#f0f'].forEach((c,i)=>{const b=document.createElement('button');b.className='dot';b.style.background=c;b.setAttribute('aria-label','色彩'+(i+1));b.onclick=()=>swAnim(i);$('#dots').appendChild(b)});
 const hxIc=l=>`<svg viewBox="0 0 52 24" width="52" height="24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 3.5a2.1 2.1 0 0 0-3 0l-3 3-1-1-2 2 1 1-7 7V19h4.5l7-7 1 1 2-2-1-1 3-3a2.1 2.1 0 0 0 0-3z"/><g transform="translate(28 0)"><rect x="4" y="11" width="16" height="10" rx="2"/>${l?'<path d="M8 11V7a4 4 0 0 1 8 0v4"/>':'<path d="M8 11V7a4 4 0 0 1 7.6-1.7"/>'}</g></svg>`;
@@ -1222,7 +1225,7 @@ const prep=(t,img)=>{if(!bmp)return;wbOff();maskPick=false;focusPick=null;const 
 if(sub&&1+cL().extra.length>=5){uiAlert('每個遮罩圖層最多 5 個組成');return}
 if(t=='linear'||t=='radial'){pend=t;pendSub=sub;hint('在照片上拖曳建立遮罩');return}
 let c;if(sub){c=mkComp(t,maskMode);cL().extra.push(c);cL().ci=cL().extra.length}else{c=mk(NM[t]+' '+L.length);c.type=t;L.push(c);cur=L.length-1}
-if(img)c.img=img;if(t=='brush')c.feather=50;if(t=='image'){c.feather=0;c.fi=1}pend=null;chips();syncAll();rebuildBrush();
+if(img)c.img=img;if(t=='brush')c.feather=50;if(t=='depth')c.feather=0;if(t=='image'){c.feather=0;c.fi=1}pend=null;chips();syncAll();rebuildBrush();
 if(t=='brush'){hint('在照片上塗抹');setTimeout(()=>{if(!maskPick)hint('')},2500);commit()}else if(t=='image')commit();else{c.ex=.5;c.ey=.5;eyeSample({x:.5,y:.5});syncAll();drawOv();render();commit();hint('拖動滴管選取'+(t=='color'?'顏色':t=='depth'?'深度':'亮度'));setTimeout(()=>{if(!maskPick)hint('')},2500)}};
 $('#mimg').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f||!bmp)return;
 try{const b=await createImageBitmap(f),k=Math.min(1,384/Math.max(b.width,b.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(b.width*k));c.height=Math.max(1,Math.round(b.height*k));
@@ -1730,7 +1733,7 @@ files.unshift({name:'project.json',data:new TextEncoder().encode(JSON.stringify(
 const num=(v,d,a,b)=>typeof v=='number'&&isFinite(v)?cl(v,a,b):d;
 function fillComp(c,x){c.ch=x.ch?1:0;c.type=TY[x.type]!=null?x.type:'linear';c.hue=num(x.hue,-1,-1,360);c.sat=num(x.sat,0,0,1);c.lum=num(x.lum,-1,-1,1);c.range=num(x.range,50,0,100);c.ex=num(x.ex,.5,0,1);c.ey=num(x.ey,.5,0,1);
 c.strokes=(Array.isArray(x.strokes)?x.strokes:[]).slice(0,400).map(t=>({e:t&&t.e?1:0,r:num(t&&t.r,.03,.001,.3),s:num(t&&t.s,.5,0,1),p:(Array.isArray(t&&t.p)?t.p:[]).slice(0,8000).map(a=>[num(a&&a[0],0,0,1),num(a&&a[1],0,0,1)])}));
-['x1','y1','x2','y2'].forEach(k=>c[k]=num(x[k],c[k],-4,5));c.ang=num(x.ang,0,-7,7);c.feather=num(x.feather,50,0,100);c.inv=x.inv?1:0;c.img=(typeof x.img=='string'&&x.img.startsWith('data:image/')&&x.img.length<600000)?x.img:'';if(c.type=='image'){c.fi=1;if(!x.fi)c.feather=0}}
+['x1','y1','x2','y2'].forEach(k=>c[k]=num(x[k],c[k],-4,5));c.ang=num(x.ang,0,-7,7);c.feather=num(x.feather,50,0,100);c.inv=x.inv?1:0;c.img=(typeof x.img=='string'&&x.img.startsWith('data:image/')&&x.img.length<600000)?x.img:'';if(c.type=='image'){c.fi=1;if(!x.fi)c.feather=0}c.dfe=num(x.dfe,50,0,100);if(c.type=='depth'&&x.dfe==null){c.dfe=num(x.feather,50,0,100);c.feather=0}}
 function clean(x,i){const m=mk(i?(typeof x.name=='string'?x.name.slice(0,20):'遮罩 '+i):'全圖'),p=x.p||{};
 Object.keys(m.p).forEach(k=>m.p[k]=num(p[k],m.p[k],-100,100));
 if(Array.isArray(x.hsl))m.hsl=m.hsl.map((h,j)=>[0,1,2].map(k=>num(x.hsl[j]&&x.hsl[j][k],0,-100,100)));
@@ -2140,7 +2143,7 @@ const k=ch.dataset.k,isF=k[0]=='f',idx=isF?-1:+k.slice(1),eye=[...ch.children].f
 t=document.createElement('div'),b=document.createElement('div');t.className='th';b.className='tb';
 if(isF){t.classList.add('fxi');t.innerHTML=FXI}else if(idx==0){t.classList.add('bsi');t.innerHTML=BSI}else{const c=document.createElement('canvas');c.className='mt';c.dataset.u=idx?L[idx].uid:0;t.appendChild(c);if(idx&&!cache.has(L[idx].uid))miss=1}
 if(eye){eye.classList.add('ey');t.appendChild(eye)}if(lk){lk.classList.add('lkb');t.appendChild(lk)}
-b.appendChild(cn);if(mm)b.appendChild(mm);ch.replaceChildren(t,b)});paint();if(miss)sched()}
+t.style.cursor='pointer';t.onclick=e=>{if(e.target.closest('button'))return;cn.click()};b.appendChild(cn);if(mm)b.appendChild(mm);ch.replaceChildren(t,b)});paint();if(miss)sched()}
 const c0=chips;chips=function(){c0();dec()};chips()})();
 </script><script>
 (function(){const wb=document.querySelector('#wb'),go=k=>document.querySelector('#cst button[data-s="'+k+'"]').click(),
