@@ -301,10 +301,10 @@ body.chcl #chbar #chh{left:100%}
 #p-ef .mh{display:none}
 </style><style>#chips{border-radius:14px 0 14px 14px}</style><style>@media(max-width:799px){body.csp #panel,body.csp #wfwin{height:46vh}}</style></head><body class="noph">
 <header>
-<button id="cvrs" class="ib" aria-label="重設曲線">重設</button><div id="ldw" style="flex:none"><button id="load" class="ib" aria-label="開啟" aria-haspopup="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v1H7.5a2 2 0 0 0-1.9 1.4L3 18z"/><path d="M3 18l2.6-7.6A2 2 0 0 1 7.5 9H22l-2.6 8.2a2 2 0 0 1-1.9 1.4H3z"/></svg></button><div id="ldm" class="hid"><button data-ld="photo">新增照片</button><button data-ld="proj">開啟專案</button><button data-ld="preset">匯入預設集</button></div></div><input id="file" type="file" accept="image/*" hidden><input id="jf" type="file" accept=".zip,.json,application/zip,application/json" hidden><input id="pf" type="file" accept=".zip,application/zip" hidden>
+<button id="cvrs" class="ib" aria-label="重設曲線">重設</button><div id="ldw" class="hid" style="flex:none"><button id="load" class="ib" aria-label="開啟" aria-haspopup="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v1H7.5a2 2 0 0 0-1.9 1.4L3 18z"/><path d="M3 18l2.6-7.6A2 2 0 0 1 7.5 9H22l-2.6 8.2a2 2 0 0 1-1.9 1.4H3z"/></svg></button><div id="ldm" class="hid"><button data-ld="photo">新增照片</button><button data-ld="proj">開啟專案</button><button data-ld="preset">匯入預設集</button></div></div><input id="file" type="file" accept="image/*" hidden><input id="jf" type="file" accept=".zip,.json,application/zip,application/json" hidden><input id="pf" type="file" accept=".zip,application/zip" hidden>
 <button id="undo" class="ib" aria-label="復原" disabled><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></svg></button><button id="redo" class="ib" aria-label="重做" disabled><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 15-6.7L21 13"/></svg></button>
 <span style="flex:1"></span>
-<button id="rst" class="ib" aria-label="全部重設" title="全部重設"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 2.7-6.4L3 8"/><path d="M3 3v5h5"/></svg></button><button id="pxb" class="ib hid" aria-label="開關 Proxy 預覽" title="Proxy 預覽（開／關）"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><rect x="7" y="9" width="7" height="7" rx="1"/><path d="M17 8h1"/></svg></button><button id="cmp" class="ib" aria-label="按住看原圖" title="按住看原圖"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/><path d="M6.5 9h2M6.5 12h2" opacity=".6"/></svg></button><div id="dlw"><button id="dlb" class="ib" aria-label="下載"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg></button></div>
+<button id="rst" class="ib hid" aria-label="全部重設" title="全部重設"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 2.7-6.4L3 8"/><path d="M3 3v5h5"/></svg></button><button id="pxb" class="ib hid" aria-label="開關 Proxy 預覽" title="Proxy 預覽（開／關）"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><rect x="7" y="9" width="7" height="7" rx="1"/><path d="M17 8h1"/></svg></button><button id="cmp" class="ib" aria-label="按住看原圖" title="按住看原圖"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/><path d="M6.5 9h2M6.5 12h2" opacity=".6"/></svg></button><div id="dlw"><button id="dlb" class="ib" aria-label="下載"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg></button></div>
 <div id="cvch"><button data-c="w" style="--c:#fff" aria-label="白色（RGB）"></button><button data-c="r" style="--c:#ff4d4d" aria-label="紅色"></button><button data-c="g" style="--c:#3ddc5a" aria-label="綠色"></button><button data-c="b" style="--c:#4d86ff" aria-label="藍色"></button></div><button id="fqdone" class="ib" aria-label="完成設定">完成設定</button><button id="crdone" class="ib" aria-label="完成裁切">完成裁切</button><select id="fmt" class="hid"><option value="png">PNG</option><option value="jpeg">JPEG 92</option></select><button id="exp" class="hid"></button><button id="dl" class="hid"></button>
 </header>
 <div id="wrap"><div id="empty"><button class="dz" id="dzp">新增照片</button><span class="dzor">或</span><button class="dz" id="dzz">打開專案</button><span class="dzhint">電腦版也可以直接把檔案拖進來</span></div>
@@ -1161,7 +1161,7 @@ mods.forEach(m=>{if(!nm.some(x=>x.id==m.id)){delDepth(m);delNormal(m)}});mods.le
 nm.forEach(m=>{if(m.dv){if(DMV.get(m.id)!==m.dv){const fl=DEPF.get(m.dv);if(fl)loadDepth(fl,m,m.dv).then(()=>{modRender();render()}).catch(()=>{})}}else if(DM.has(m.id))delDepth(m)});
 nm.forEach(m=>{if(m.type=='relight'||m.type=='ramp'){if(m.nv){if(NMV.get(m.id)!==m.nv){const fl=NEPF.get(m.nv);if(fl)loadNormal(fl,m,m.nv).then(()=>{modRender();render()}).catch(()=>{})}}else if(NT.has(m.id))delNormal(m)}});nm.forEach(m=>{if(m.type=='lut'){if(m.lv){if(LTV.get(m.id)!==m.lv){const fl=LEPF.get(m.lv);if(fl)loadLut(fl,m,m.lv).then(()=>{modRender();render()}).catch(()=>{})}}else if(LT.has(m.id))delNormal(m)}});Object.assign(crop,S.crop);cropUI();pal.cols=S.pal.slice();pal.sel=-1;palRender();
 chips();syncAll();rebuildBrush();modRender();drawOv();render();if(cvOn)cvDraw()}
-function btns(){$('#undo').disabled=hi<=0;$('#redo').disabled=hi>=hist.length}
+function btns(){$('#undo').disabled=false;$('#undo').classList.toggle('dis',hi<=0);$('#redo').disabled=hi>=hist.length}
 function go(d){if(d<0){if(hi<=0)return;applyOps(baseS,hist[hi-1].b);hi--}else{if(hi>=hist.length)return;applyOps(baseS,hist[hi].f);hi++}applyState(baseS);btns()}
 $('#undo').onclick=()=>go(-1);$('#redo').onclick=()=>go(1);
 $('#rst').onclick=()=>{uiConfirm('清除全部調整與遮罩？',{title:'全部重設',ok:'清除'}).then(y=>{if(y){L=[mk('全圖')];cur=0;band=0;pend=null;clearMods();modRender();commit();chips();syncAll();rebuildBrush();drawOv();render()}})};
@@ -1632,7 +1632,7 @@ let prox=null;if(Math.max(b.width,b.height)>2048&&await uiConfirm('這張照片�
 {const old=[BF,BP];BF=b;FW=b.width;FH=b.height;BP=prox;proxyOn=!!prox;old.forEach(x=>{try{x&&x.close()}catch(_){}})}
 bmp=proxyOn?BP:b;oc=document.createElement('canvas');const os=Math.min(1,512/Math.max(b.width,b.height));oc.width=Math.max(1,Math.round(b.width*os));oc.height=Math.max(1,Math.round(b.height*os));oc.getContext('2d',{willReadFrequently:true}).drawImage(b,0,0,oc.width,oc.height);iw=bmp.width;ih=bmp.height;pxUI();$('#gl').width=iw;$('#gl').height=ih;gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,bmp);
 syncFx();DG.file=null;DG.nfile=null;DG.tok=(DG.tok||0)+1;DEPF.clear();NEPF.clear();clearMods();modRender();focusPick=null;cropReset();zm.z=1;zm.x=zm.y=0;zApply();vw=0;vh=0;L=[mk('全圖')];cur=0;band=0;pend=null;wbOff();resetHist();chips();syncAll();btns();
-$('#empty').classList.add('hid');document.body.classList.remove('noph');stage.classList.remove('hid');fit();rebuildBrush();srcFile=f;savedSig=sig();if(wasEmpty)panelExpand();toLightTab();return true}catch(err){uiAlert('無法開啟這張照片：'+err.message);return false}}
+$('#empty').classList.add('hid');document.body.classList.remove('noph');stage.classList.remove('hid');fit();rebuildBrush();srcFile=f;savedSig=sig();galId=galNext||galNew();galName=(f.name||'').replace(/\.[^.]+$/,'')||'未命名';galHide();if(wasEmpty)panelExpand();toLightTab();return true}catch(err){uiAlert('無法開啟這張照片：'+err.message);return false}}
 $('#file').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(f)await openPhoto(f)};
 let dlName='',dlScale=1;
 // ---- 通用存檔：Android WebView（JS Bridge）與一般瀏覽器（Chrome）共用 ----
@@ -1722,14 +1722,15 @@ const ds=lo+30+v.getUint16(lo+26,true)+v.getUint16(lo+28,true);let d=u.subarray(
 if(meth==8){if(typeof DecompressionStream=='undefined')throw new Error('這個瀏覽器無法解壓縮此 ZIP');d=new Uint8Array(await new Response(new Blob([d]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer())}
 else if(meth!=0)throw new Error('不支援的壓縮方式');
 if(!name.endsWith('/'))out[name]=d;p+=46+nl+xl+cl_}return out}
-$('#dl').onclick=async()=>{try{const files=[],md=[];let photo=null;
+async function buildProjBlob(){const files=[],md=[];let photo=null;
 if(srcFile){photo='photo.'+extOf(srcFile,'jpg');files.push({name:photo,data:new Uint8Array(await srcFile.arrayBuffer())})}
 for(const m of mods){const o=JSON.parse(JSON.stringify(m));if(hasD(m))o.hd=1;if(NT.has(m.id))o.hn=1;const lf=LF.get(m.id);if(lf){o.lf='lut_'+m.id+'.cube';files.push({name:o.lf,data:new Uint8Array(await lf.arrayBuffer())})}md.push(o)}
 let normalName=null;if(DG.nfile){normalName='normal.'+extOf(DG.nfile,'png');files.push({name:normalName,data:new Uint8Array(await DG.nfile.arrayBuffer())})}
 let depthName=null;if(DG.file){depthName='depth.'+extOf(DG.file,'png');files.push({name:depthName,data:new Uint8Array(await DG.file.arrayBuffer())})}
 const proj={app:'lr5',version:2,depth:depthName,normal:normalName,photo,photoName:srcFile?srcFile.name:null,layers:L,fx,palette:pal.cols,mods:md,crop:bmp?{cx:crop.cx/iw,cy:crop.cy/ih,hw:crop.hw/iw,hh:crop.hh/ih,a:crop.a,ratio:crop.ratio,rk:crop.rk,fx:crop.fx,fy:crop.fy}:null};
 files.unshift({name:'project.json',data:new TextEncoder().encode(JSON.stringify(proj,null,1))});
-{const fn=(dlName||'New_Project')+'.zip';if(await saveBlob(zipMake(files),fn,'application/zip')){savedSig=sig();uiAlert('「'+fn+'」已儲存。','儲存成功')}}}catch(err){uiAlert('無法建立專案：'+err.message)}};
+return zipMake(files)}
+$('#dl').onclick=async()=>{try{const fn=(dlName||'New_Project')+'.zip';if(await saveBlob(await buildProjBlob(),fn,'application/zip')){savedSig=sig();uiAlert('「'+fn+'」已儲存。','儲存成功')}}catch(err){uiAlert('無法建立專案：'+err.message)}};
 const num=(v,d,a,b)=>typeof v=='number'&&isFinite(v)?cl(v,a,b):d;
 function fillComp(c,x){c.ch=x.ch?1:0;c.type=TY[x.type]!=null?x.type:'linear';c.hue=num(x.hue,-1,-1,360);c.sat=num(x.sat,0,0,1);c.lum=num(x.lum,-1,-1,1);c.range=num(x.range,50,0,100);c.ex=num(x.ex,.5,0,1);c.ey=num(x.ey,.5,0,1);
 c.strokes=(Array.isArray(x.strokes)?x.strokes:[]).slice(0,400).map(t=>({e:t&&t.e?1:0,r:num(t&&t.r,.03,.001,.3),s:num(t&&t.s,.5,0,1),p:(Array.isArray(t&&t.p)?t.p:[]).slice(0,8000).map(a=>[num(a&&a[0],0,0,1),num(a&&a[1],0,0,1)])}));
@@ -2015,7 +2016,7 @@ const fmtSz=n=>n>=1048576?(n/1048576).toFixed(1)+' MB':n>=1024?Math.round(n/1024
 async function ckRender(){const box=$('#fklist'),sm=$('#fksum');box.innerHTML='';sm.textContent='讀取中…';
 if(!window.caches){sm.textContent='這個瀏覽器不支援快取儲存。';return}
 const rows=[];
-try{for(const cn of await caches.keys()){const c=await caches.open(cn);for(const rq of await c.keys()){const r=await c.match(rq);let sz=+((r&&r.headers.get('content-length'))||0);if(!sz&&r){try{sz=(await r.clone().blob()).size}catch(_){}}rows.push({cn,rq,sz})}}}
+try{for(const cn of await caches.keys()){if(cn==GAL_CN)continue;const c=await caches.open(cn);for(const rq of await c.keys()){const r=await c.match(rq);let sz=+((r&&r.headers.get('content-length'))||0);if(!sz&&r){try{sz=(await r.clone().blob()).size}catch(_){}}rows.push({cn,rq,sz})}}}
 catch(e){sm.textContent='無法讀取快取：'+e.message;return}
 if(!$('#fnck')||$('#fnck').classList.contains('hid'))return;
 sm.textContent=rows.length?'共 '+rows.length+' 個項目，約 '+fmtSz(rows.reduce((a,r)=>a+r.sz,0)):'目前沒有任何快取項目。';
@@ -2212,4 +2213,78 @@ modRender()})();
 (function(){const wrap=document.querySelector('#wrap'),cb=document.querySelector('#chbar'),hs=document.querySelector('#hist');
 const f=()=>{const h=wrap.clientHeight-16-(hs&&getComputedStyle(hs).display!='none'?48:0);cb.style.maxHeight=Math.max(80,h)+'px'};
 new ResizeObserver(f).observe(wrap);addEventListener('resize',f);const sf=syncFx;syncFx=function(){sf();f()};f()})();
-</script></body></html>
+</script><style>
+#gal{position:fixed;inset:0;z-index:90;display:flex;flex-direction:column;background:var(--bg);padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+#galh{display:flex;align-items:center;gap:8px;padding:8px 12px;border-bottom:1px solid var(--ln);flex:none}#galh b{flex:1;font-size:18px}
+#galg{flex:1;min-height:0;overflow-y:auto;padding:12px;display:block}
+.gc{flex:none;-webkit-touch-callout:none;user-select:none;-webkit-user-select:none;position:relative;border:1px solid var(--ln);border-radius:12px;background:var(--pn);overflow:hidden;cursor:pointer}
+.gc .gt{width:100%;height:100%;background:#000;display:flex;align-items:center;justify-content:center}.gc .gt img{width:100%;height:100%;object-fit:cover;display:block}.gr{display:flex;gap:8px;margin-bottom:8px}
+.gc .gi{padding:8px 10px}.gc .gn{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.gc .gd{font-size:12px;color:var(--mu)}
+.gc .gx{position:absolute;top:6px;right:6px;width:36px;height:36px;min-height:0;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.6);color:#fff;display:flex;align-items:center;justify-content:center}
+#galm{grid-column:1/-1;text-align:center;color:var(--mu);padding:60px 0;line-height:1.8}
+</style>
+<div id="gal" class="hid"><div id="galh"><b>檔案</b><button id="galc" class="hid">繼續編輯</button><button id="galo">開啟專案</button><button id="galn" class="pri">新增照片</button></div><div id="galg"></div></div>
+<script>
+/* 相簿：編輯過的專案存在獨立的 Cache（不會出現在「清除快取」頁） */
+const GAL_CN='lr-gallery-v1';
+var galCards=[],galPos=null,galTok=0,galId=null,galNext=null,galName='',galBusy=0,galT=0,galUrls=[];
+const galU=(id,e)=>'https://lr-gallery.local/'+id+'.'+e;
+const galNew=()=>'g'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+function galThumb(){return new Promise(r=>{try{const g=$('#gl'),k=Math.min(1,256/Math.max(g.width,g.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(g.width*k));c.height=Math.max(1,Math.round(g.height*k));c.getContext('2d').drawImage(g,0,0,c.width,c.height);c.toBlob(r,'image/jpeg',.8)}catch(e){r(null)}})}
+async function galSave(){if(!bmp||!galId||!window.caches)return;if(galBusy){galSched();return}galBusy=1;
+try{const id=galId,name=galName||'未命名';let th=null;
+if(tab!='crop'&&!cvOn&&!(fq&&fq.style.display!='none')){draw(true);th=await galThumb();draw(false)}
+const blob=await buildProjBlob();if(id!==galId)return;const c=await caches.open(GAL_CN);
+await c.put(galU(id,'zip'),new Response(blob,{headers:{'Content-Type':'application/zip'}}));
+if(th)await c.put(galU(id,'jpg'),new Response(th,{headers:{'Content-Type':'image/jpeg'}}));
+await c.put(galU(id,'json'),new Response(JSON.stringify({id,name,t:Date.now()}),{headers:{'Content-Type':'application/json'}}))}
+catch(e){console.warn('gallery save',e)}finally{galBusy=0}}
+function galSched(){clearTimeout(galT);if(bmp&&galId)galT=setTimeout(galSave,6000)}
+async function galList(){if(!window.caches)return[];try{const c=await caches.open(GAL_CN),out=[];for(const k of await c.keys()){if(!k.url.endsWith('.json'))continue;const r=await c.match(k);if(r)out.push(await r.json())}out.sort((a,b)=>b.t-a.t);return out}catch(e){return[]}}
+async function galDel(id){try{const c=await caches.open(GAL_CN);await Promise.all(['zip','jpg','json'].map(e=>c.delete(galU(id,e))))}catch(e){}if(id===galId)galId=null}
+async function galRender(){const g=$('#galg'),tok=++galTok,oldU=galUrls,cards=[];galUrls=[];const items=await galList();if(tok!==galTok)return;
+if(!items.length){g.innerHTML='<div id="galm">還沒有編輯過的照片<br>點上方「新增照片」開始</div>';galCards=[];galPos={};oldU.forEach(u=>URL.revokeObjectURL(u));return}
+const c=await caches.open(GAL_CN);
+for(const it of items){const d=document.createElement('div');d.className='gc';d.innerHTML='<div class="gt"></div>';
+d.setAttribute('aria-label',it.name);
+let ar=1;try{const tr=await c.match(galU(it.id,'jpg'));if(tr){const u=URL.createObjectURL(await tr.blob());galUrls.push(u);const im=new Image();im.src=u;im.draggable=false;await im.decode().catch(()=>{});ar=(im.naturalWidth/im.naturalHeight)||1;d.querySelector('.gt').appendChild(im)}}catch(e){}cards.push({d,ar,id:it.id});
+let t=0,lp=0,x0=0,y0=0;
+d.addEventListener('pointerdown',e=>{lp=0;x0=e.clientX;y0=e.clientY;clearTimeout(t);t=setTimeout(async()=>{lp=1;navigator.vibrate&&navigator.vibrate(15);if(await uiConfirm('要刪除這個檔案嗎？\n編輯內容將無法復原。',{title:'刪除檔案',ok:'刪除'})){const an=d.animate([{opacity:1,transform:'scale(1)'},{opacity:0,transform:'scale(.8)'}],{duration:220,easing:'ease',fill:'forwards'});await an.finished.catch(()=>{});await galDel(it.id);galRender()}},500)});
+d.addEventListener('pointermove',e=>{if(Math.hypot(e.clientX-x0,e.clientY-y0)>8)clearTimeout(t)});
+['pointerup','pointerleave','pointercancel'].forEach(n=>d.addEventListener(n,()=>clearTimeout(t)));
+d.addEventListener('contextmenu',e=>e.preventDefault());
+d.onclick=()=>{if(lp){lp=0;return}galOpen(it.id)};}if(tok!==galTok)return;galCards=cards;galLayout(true);oldU.forEach(u=>URL.revokeObjectURL(u))}
+function galShow(){$('#gal').classList.remove('hid');$('#galg').scrollTop=0;$('#galc').classList.toggle('hid',!bmp);galRender()}
+function galHide(){$('#gal').classList.add('hid')}
+async function galOpen(id){try{const c=await caches.open(GAL_CN),r=await c.match(galU(id,'zip'));if(!r){uiAlert('找不到這個專案的檔案');galRender();return}
+const b=await r.blob();galNext=id;await openProjectFile(new File([b],'project.zip',{type:'application/zip'}))}catch(e){uiAlert('無法開啟：'+e.message)}finally{galNext=null}}
+$('#galn').onclick=()=>$('#file').click();$('#galo').onclick=()=>$('#jf').click();
+$('#galc').onclick=()=>{if(!galId)galId=galNew();galHide()};
+{const b=document.createElement('button');b.id='gx';b.className='ib';b.setAttribute('aria-label','返回檔案');b.title='返回檔案';
+b.innerHTML='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+b.onclick=async()=>{clearTimeout(galT);await galSave();galShow()};document.querySelector('header').prepend(b)}
+{const c0=commit;commit=function(){c0.apply(this,arguments);galSched()}}
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&bmp&&galId){clearTimeout(galT);galSave()}});
+/* 檔案牆：每列最多 3 張、同列等高；新增／刪除／重新排序有動畫（FLIP） */
+function galLayout(anim){const g=$('#galg');if(!galCards.length)return;const W=g.clientWidth-24,G=8;if(W<=0)return;
+const old=galPos;g.querySelectorAll('.gr,#galm').forEach(r=>r.remove());let prev=0;
+for(let i=0;i<galCards.length;i+=3){const row=galCards.slice(i,i+3),sum=row.reduce((a,c)=>a+c.ar,0);let h=(W-G*(row.length-1))/sum;if(row.length<3)h=Math.min(h,prev||260);
+const r=document.createElement('div');r.className='gr';row.forEach(c=>{c.d.style.width=Math.floor(c.ar*h)+'px';c.d.style.height=Math.floor(h)+'px';r.appendChild(c.d)});g.appendChild(r);prev=h}
+const gr=g.getBoundingClientRect(),np={};galCards.forEach(c=>{const r=c.d.getBoundingClientRect();np[c.id]={x:r.left-gr.left,y:r.top-gr.top+g.scrollTop,w:r.width,h:r.height}});galPos=np;
+if(!anim||!old||!g.animate)return;const E={duration:320,easing:'cubic-bezier(.2,.8,.3,1)'};
+galCards.forEach(c=>{const o=old[c.id],n=np[c.id];
+if(o){const dx=o.x-n.x,dy=o.y-n.y,sc=o.w/n.w;if(Math.abs(dx)>1||Math.abs(dy)>1||Math.abs(sc-1)>.01){c.d.style.transformOrigin='0 0';c.d.animate([{transform:'translate('+dx+'px,'+dy+'px) scale('+sc+')'},{transform:'none'}],E)}}
+else{c.d.style.transformOrigin='50% 50%';c.d.animate([{opacity:0,transform:'scale(.8)'},{opacity:1,transform:'none'}],E)}})}
+addEventListener('resize',()=>{if(!$('#gal').classList.contains('hid'))galLayout(false)});
+galShow();
+</script>
+<style>.ib.dis{opacity:.35}</style>
+<script>
+/* 長按「復原」→ 全部重設（#rst 按鈕與預設集匯入功能仍保留在程式碼中，只是隱藏） */
+{const b=$('#undo');let t=0,lp=0;
+b.addEventListener('pointerdown',()=>{lp=0;clearTimeout(t);t=setTimeout(()=>{lp=1;navigator.vibrate&&navigator.vibrate(15);$('#rst').onclick()},550)});
+['pointerup','pointerleave','pointercancel'].forEach(n=>b.addEventListener(n,()=>clearTimeout(t)));
+b.addEventListener('click',e=>{if(lp){lp=0;e.stopImmediatePropagation();e.preventDefault()}},true);
+b.addEventListener('contextmenu',e=>e.preventDefault());btns()}
+</script>
+</body></html>
