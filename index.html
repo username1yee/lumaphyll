@@ -2287,4 +2287,13 @@ b.addEventListener('pointerdown',()=>{lp=0;clearTimeout(t);t=setTimeout(()=>{lp=
 b.addEventListener('click',e=>{if(lp){lp=0;e.stopImmediatePropagation();e.preventDefault()}},true);
 b.addEventListener('contextmenu',e=>e.preventDefault());btns()}
 </script>
+<style>
+*{-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+input,textarea{-webkit-user-select:text;user-select:text}
+</style>
+<script>
+/* 禁止網頁文字被反白（輸入框除外） */
+document.addEventListener('selectstart',e=>{const t=e.target&&e.target.nodeType==1?e.target:e.target&&e.target.parentElement;if(!t||!t.closest||!t.closest('input,textarea'))e.preventDefault()});
+document.addEventListener('contextmenu',e=>{const t=e.target;if(!t||!t.closest||!t.closest('input,textarea'))e.preventDefault()});
+</script>
 </body></html>
