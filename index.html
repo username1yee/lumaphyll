@@ -299,7 +299,7 @@ body.chcl #chbar #chh{left:100%}
 .efb{position:absolute;width:28px;height:28px;min-height:0;padding:0;border:0;border-radius:50%;background:rgba(0,0,0,.35);color:inherit;display:flex;align-items:center;justify-content:center}
 .efb.e1{top:4px;left:4px}.efb.e2{top:4px;right:4px}.efb.e3{bottom:4px;left:4px}.efb.e4{bottom:4px;right:4px}
 #p-ef .mh{display:none}
-</style><style>#chips{border-radius:14px 0 14px 14px}</style><style>@media(max-width:799px){body.csp #panel,body.csp #wfwin{height:46vh}}</style></head><body class="noph">
+</style><style>#chips{border-radius:14px 0 14px 14px}</style><style>@media(max-width:799px){body.csp #panel,body.csp #wfwin{height:46vh}}</style><style>body:has(#dgp.on) #dsq{background:transparent}</style></head><body class="noph">
 <header>
 <button id="cvrs" class="ib" aria-label="重設曲線">重設</button><div id="ldw" class="hid" style="flex:none"><button id="load" class="ib" aria-label="開啟" aria-haspopup="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v1H7.5a2 2 0 0 0-1.9 1.4L3 18z"/><path d="M3 18l2.6-7.6A2 2 0 0 1 7.5 9H22l-2.6 8.2a2 2 0 0 1-1.9 1.4H3z"/></svg></button><div id="ldm" class="hid"><button data-ld="photo">新增照片</button><button data-ld="proj">開啟專案</button><button data-ld="preset">匯入預設集</button></div></div><input id="file" type="file" accept="image/*" hidden><input id="jf" type="file" accept=".zip,.json,application/zip,application/json" hidden><input id="pf" type="file" accept=".zip,application/zip" hidden>
 <button id="undo" class="ib" aria-label="復原" disabled><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7v6h6"/><path d="M21 17a9 9 0 0 0-15-6.7L3 13"/></svg></button><button id="redo" class="ib" aria-label="重做" disabled><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7v6h-6"/><path d="M3 17a9 9 0 0 1 15-6.7L21 13"/></svg></button>
@@ -534,15 +534,15 @@ if(L>0.){float T=L+R;c=mix(vec3(L)+c*(R/T),c,step(vec3(T),c));}
 if(H>0.){float T=H+Rh;vec3 u=1.-c;u=mix(vec3(H)+u*(Rh/T),u,step(vec3(T),u));c=1.-u;}
 o=vec4(clamp(c,0.,1.),1.);}`;
 const FSR=`#version 300 es
-precision highp float;in vec2 uv;out vec4 o;uniform sampler2D t,dm,nm;uniform vec3 uLP[6],uLC[6];uniform vec4 uLa[6];uniform int uNL;uniform float uAsp,uDS,uThr,uLOp,uFe;uniform int uBM,uInv,uFy,uLM,uSolo,uSM;
+precision highp float;in vec2 uv;out vec4 o;uniform sampler2D t,dm,nm;uniform vec3 uLP[6],uLC[6];uniform vec4 uLa[6];uniform float uLR[6];uniform vec4 uLK[6];uniform float uLKA[6];uniform sampler2D lk;uniform int uNL;uniform float uAsp,uDS,uThr,uLOp,uFe;uniform int uBM,uInv,uFy,uLM,uSolo,uSM;
 float Z(vec2 p){float d=dot(texture(dm,p).rgb,vec3(.3333));return uInv>0?1.-d:d;}
 vec3 bl(vec3 a,vec3 b,int m){if(m==1)return a*b;vec3 c=clamp(b,0.,1.);if(m==0)return c;if(m==2)return 1.-(1.-a)*(1.-c);if(m==3)return mix(2.*a*c,1.-2.*(1.-a)*(1.-c),step(.5,a));if(m==4)return (1.-2.*c)*a*a+2.*a*c;if(m==5)return mix(2.*a*c,1.-2.*(1.-a)*(1.-c),step(.5,c));if(m==6)return min(a/max(1.-c,.001),1.);if(m==7)return min(a+b,1.);if(m==8)return max(a,c);if(m==9)return min(a,c);return abs(a-c);}
 void main(){vec3 A=clamp(texture(t,uv).rgb,0.,1.);vec2 p=vec2(uv.x,1.-uv.y);vec3 N=texture(nm,p).rgb*2.-1.;if(uFy>0)N.y=-N.y;N=normalize(N);
 float d0=Z(p),m=smoothstep(uThr-max(uFe,.001),uThr+max(uFe,.001),d0);vec3 P=vec3(uv.x*uAsp,uv.y,d0*uDS-float(uLM)*(1.-m)*(2.+uThr*3.)),Hh0=vec3(0.,0.,1.),Lc=vec3(0.);
 for(int i=0;i<6;i++){if(i>=uNL)break;vec4 a=uLa[i];vec3 Ld=vec3(uLP[i].x*uAsp,uLP[i].y,uLP[i].z)-P;float dist=max(length(Ld),.02);vec3 Lv=Ld/dist;
-float ndl=dot(N,Lv),diff=clamp((ndl+a.w)/(1.+a.w),0.,1.);diff=diff*diff*(3.-2.*diff);float att=1./(1.+.8*dist*dist);
+float ndl=dot(N,Lv),diff=clamp((ndl+a.w)/(1.+a.w),0.,1.);diff=diff*diff*(3.-2.*diff);float att=1./(1.+.8*dist*dist);if(uLR[i]<99.5){float R=uLR[i]/100.*4.;att*=1.-smoothstep(R*.5,R,dist);}
 float spec=pow(max(dot(N,normalize(Lv+Hh0)),0.),40.)*a.z*smoothstep(0.,.25,ndl);
-vec3 lit=uLC[i]*a.x*att;Lc+=vec3(a.y)*mix(1.,.7+.3*N.z,m)+(lit*diff+lit*spec)*m;}
+float ck=1.;if(uLK[i].x>.5){float sl=uLK[i].x-1.;vec2 q=-Ld.xy/max(Ld.z,.01),tc=fract(vec2(q.x/(2.*max(uLKA[i],.05)),-q.y)/(2.*max(uLK[i].w,.05))+.5);float cv=dot(texture(lk,(vec2(mod(sl,3.),floor(sl/3.))+clamp(tc,.003,.997))/vec2(3.,2.)).rgb,vec3(.299,.587,.114));if(uLK[i].z>.5)cv=1.-cv;cv*=smoothstep(.01,.06,Ld.z);ck=mix(1.,cv,uLK[i].y);}vec3 lit=uLC[i]*a.x*att*ck;Lc+=vec3(a.y)*mix(1.,.7+.3*N.z,m)+(lit*diff+lit*spec)*m;}
 float op=uLOp;vec3 r=mix(A,bl(A,Lc,uBM),op);
 if(uSolo>0)r=Lc;if(uSM>0)r=vec3(m);o=vec4(clamp(r,0.,1.),1.);}`;
 const FSRP=`#version 300 es
@@ -677,7 +677,7 @@ const mkp=f=>{const q=gl.createProgram();gl.attachShader(q,sh(gl.VERTEX_SHADER,V
 prog3=mkp(FS3);prog4=mkp(FS4);prog5=mkp(FS5);['t','dm','ty','hm','a','col'].forEach(k=>l3[k]=gl.getUniformLocation(prog3,k));gl.useProgram(prog3);gl.uniform1i(l3.t,0);gl.uniform1i(l3.dm,2);
 ['t','gc','sz','ra','fl'].forEach(k=>l4[k]=gl.getUniformLocation(prog4,k));gl.useProgram(prog4);gl.uniform1i(l4.t,0);
 ['t','gc','a','sz','ra','col'].forEach(k=>l5[k]=gl.getUniformLocation(prog5,k));gl.useProgram(prog5);gl.uniform1i(l5.t,0);gl.useProgram(prog);
-progG=mkp(FSG);['t','gt','md','hm','dir','a','b','dt','mk','um'].forEach(k=>lG[k]=gl.getUniformLocation(progG,k));gl.useProgram(progG);gl.uniform1i(lG.t,0);gl.uniform1i(lG.gt,5);gl.uniform1i(lG.mk,9);progL=mkp(FSL);['t','a'].forEach(k=>lL[k]=gl.getUniformLocation(progL,k));gl.useProgram(progL);gl.uniform1i(lL.t,0);progC=mkp(FSC);['t','res','ctr','sc','k','fit','bl'].forEach(k=>lC[k]=gl.getUniformLocation(progC,k));gl.useProgram(progC);gl.uniform1i(lC.t,0);progR=mkp(FSR);['t','dm','nm','uLP','uLC','uLa','uNL','uAsp','uDS','uThr','uLOp','uFe','uBM','uInv','uFy','uLM','uSolo','uSM'].forEach(k=>lR[k]=gl.getUniformLocation(progR,k));gl.useProgram(progR);gl.uniform1i(lR.t,0);gl.uniform1i(lR.dm,2);gl.uniform1i(lR.nm,4);progRP=mkp(FSRP);['t','dm','nm','rl','src','hm','inv','amt'].forEach(k=>lP[k]=gl.getUniformLocation(progRP,k));gl.useProgram(progRP);gl.uniform1i(lP.t,0);gl.uniform1i(lP.dm,2);gl.uniform1i(lP.nm,4);gl.uniform1i(lP.rl,7);progMX=mkp(FSMX);progVH=mkp(FSVH);['t','os','gc','sz','ra','fp','res','tm','St','bleed','smear','nz','chroma','scn','trk','deg','vg','fl'].forEach(k=>lVH[k]=gl.getUniformLocation(progVH,k));gl.useProgram(progVH);gl.uniform1i(lVH.t,0);gl.uniform1i(lVH.os,11);progCM=mkp(FSCM);['t','tm','ts','rm','rs','a'].forEach(k=>lCM[k]=gl.getUniformLocation(progCM,k));gl.useProgram(progCM);gl.uniform1i(lCM.t,0);progGR=mkp(FSGR);['t','res','a','sz','rg','lu','ch','sd','mono'].forEach(k=>lGR[k]=gl.getUniformLocation(progGR,k));gl.useProgram(progGR);gl.uniform1i(lGR.t,0);progLT=mkp(FSLT);['t','lut','mi','mo','ig','og','a','n','lo','hi'].forEach(k=>lLT[k]=gl.getUniformLocation(progLT,k));gl.useProgram(progLT);gl.uniform1i(lLT.t,0);gl.uniform1i(lLT.lut,10);gl.useProgram(progMX);gl.uniform1i(gl.getUniformLocation(progMX,'t'),0);gl.uniform1i(gl.getUniformLocation(progMX,'e'),8);gl.uniform1i(gl.getUniformLocation(progMX,'mk'),9);gl.useProgram(prog);
+progG=mkp(FSG);['t','gt','md','hm','dir','a','b','dt','mk','um'].forEach(k=>lG[k]=gl.getUniformLocation(progG,k));gl.useProgram(progG);gl.uniform1i(lG.t,0);gl.uniform1i(lG.gt,5);gl.uniform1i(lG.mk,9);progL=mkp(FSL);['t','a'].forEach(k=>lL[k]=gl.getUniformLocation(progL,k));gl.useProgram(progL);gl.uniform1i(lL.t,0);progC=mkp(FSC);['t','res','ctr','sc','k','fit','bl'].forEach(k=>lC[k]=gl.getUniformLocation(progC,k));gl.useProgram(progC);gl.uniform1i(lC.t,0);progR=mkp(FSR);['t','dm','nm','uLP','uLC','uLa','uLR','uLK','uLKA','lk','uNL','uAsp','uDS','uThr','uLOp','uFe','uBM','uInv','uFy','uLM','uSolo','uSM'].forEach(k=>lR[k]=gl.getUniformLocation(progR,k));gl.useProgram(progR);gl.uniform1i(lR.t,0);gl.uniform1i(lR.dm,2);gl.uniform1i(lR.nm,4);gl.uniform1i(lR.lk,12);progRP=mkp(FSRP);['t','dm','nm','rl','src','hm','inv','amt'].forEach(k=>lP[k]=gl.getUniformLocation(progRP,k));gl.useProgram(progRP);gl.uniform1i(lP.t,0);gl.uniform1i(lP.dm,2);gl.uniform1i(lP.nm,4);gl.uniform1i(lP.rl,7);progMX=mkp(FSMX);progVH=mkp(FSVH);['t','os','gc','sz','ra','fp','res','tm','St','bleed','smear','nz','chroma','scn','trk','deg','vg','fl'].forEach(k=>lVH[k]=gl.getUniformLocation(progVH,k));gl.useProgram(progVH);gl.uniform1i(lVH.t,0);gl.uniform1i(lVH.os,11);progCM=mkp(FSCM);['t','tm','ts','rm','rs','a'].forEach(k=>lCM[k]=gl.getUniformLocation(progCM,k));gl.useProgram(progCM);gl.uniform1i(lCM.t,0);progGR=mkp(FSGR);['t','res','a','sz','rg','lu','ch','sd','mono'].forEach(k=>lGR[k]=gl.getUniformLocation(progGR,k));gl.useProgram(progGR);gl.uniform1i(lGR.t,0);progLT=mkp(FSLT);['t','lut','mi','mo','ig','og','a','n','lo','hi'].forEach(k=>lLT[k]=gl.getUniformLocation(progLT,k));gl.useProgram(progLT);gl.uniform1i(lLT.t,0);gl.uniform1i(lLT.lut,10);gl.useProgram(progMX);gl.uniform1i(gl.getUniformLocation(progMX,'t'),0);gl.uniform1i(gl.getUniformLocation(progMX,'e'),8);gl.uniform1i(gl.getUniformLocation(progMX,'mk'),9);gl.useProgram(prog);
 ['n','show','lg','shg','off','u0','u1','u2','g0','g1','hs','hxs','cgv','cgr','ef','hz','hm','hd','hk','cbl','wht','lk','pf','fst','fin','rowsN','og','dzOn','dz','dzA','cuf','mo','vm'].forEach(k=>locs[k]=gl.getUniformLocation(prog,k));
 gl.uniform1i(gl.getUniformLocation(prog,'bm'),1);gl.activeTexture(gl.TEXTURE1);bt=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,bt);
 [gl.TEXTURE_MIN_FILTER,gl.TEXTURE_MAG_FILTER].forEach(k=>gl.texParameteri(gl.TEXTURE_2D,k,gl.LINEAR));[gl.TEXTURE_WRAP_S,gl.TEXTURE_WRAP_T].forEach(k=>gl.texParameteri(gl.TEXTURE_2D,k,gl.CLAMP_TO_EDGE));
@@ -802,7 +802,7 @@ gl.uniform1i(lP.src,m.src|0);gl.uniform1i(lP.hm,Math.round(m.mode)||0);gl.unifor
 gl.bindTexture(gl.TEXTURE_2D,fbs.t[src].tx);vp(last);gl.bindFramebuffer(gl.FRAMEBUFFER,last?null:fbs.t[dst].fb);gl.drawArrays(gl.TRIANGLES,0,3);src=dst;continue}
 if(m.type=='relight'){const last=nxt(),dst=1-src,d=DM.get(m.id);gl.useProgram(progR);
 gl.activeTexture(gl.TEXTURE2);gl.bindTexture(gl.TEXTURE_2D,d.tx);gl.activeTexture(gl.TEXTURE4);gl.bindTexture(gl.TEXTURE_2D,NT.get(m.id));gl.activeTexture(gl.TEXTURE0);
-{const LS=m.lights.filter(l=>l.vis).slice(0,6),LP=new Float32Array(18),LC=new Float32Array(18),LA=new Float32Array(24);LS.forEach((l,i)=>{const c=hsl2rgbH(l.hh,l.hs/100,l.hl/100);LP.set([l.lx,1-l.ly,l.lz],i*3);LC.set(c,i*3);LA.set([l.li,l.amb,l.spec,l.wr],i*4)});gl.uniform3fv(lR.uLP,LP);gl.uniform3fv(lR.uLC,LC);gl.uniform4fv(lR.uLa,LA);gl.uniform1i(lR.uNL,LS.length)}gl.uniform1f(lR.uAsp,iw/ih);gl.uniform1f(lR.uDS,m.ds);gl.uniform1f(lR.uThr,m.thr);gl.uniform1f(lR.uFe,(m.fe==null?30:m.fe)/100*.4);gl.uniform1f(lR.uLOp,m.amount/100);
+{const LS=m.lights.filter(l=>l.vis).slice(0,6),LP=new Float32Array(18),LC=new Float32Array(18),LA=new Float32Array(24),LR=new Float32Array(6).fill(100),LK=new Float32Array(24),LKA=new Float32Array(6).fill(1);rlCkTex(m);LS.forEach((l,i)=>{LR[i]=l.rad==null?100:l.rad;if(l.ck){LKA[i]=l.cka||1;LK.set([m.lights.indexOf(l)+1,(l.ka==null?100:l.ka)/100,l.ki?1:0,(l.ks==null?100:l.ks)/100],i*4)}const c=hsl2rgbH(l.hh,l.hs/100,l.hl/100);LP.set([l.lx,1-l.ly,l.lz],i*3);LC.set(c,i*3);LA.set([l.li,l.amb,l.spec,l.wr],i*4)});gl.uniform3fv(lR.uLP,LP);gl.uniform3fv(lR.uLC,LC);gl.uniform4fv(lR.uLa,LA);gl.uniform1fv(lR.uLR,LR);gl.uniform4fv(lR.uLK,LK);gl.uniform1fv(lR.uLKA,LKA);gl.uniform1i(lR.uNL,LS.length)}gl.uniform1f(lR.uAsp,iw/ih);gl.uniform1f(lR.uDS,m.ds);gl.uniform1f(lR.uThr,m.thr);gl.uniform1f(lR.uFe,(m.fe==null?30:m.fe)/100*.4);gl.uniform1f(lR.uLOp,m.amount/100);
 gl.uniform1i(lR.uBM,Math.round(m.bm));gl.uniform1i(lR.uInv,m.inv?1:0);gl.uniform1i(lR.uFy,m.fy?1:0);gl.uniform1i(lR.uLM,m.lm?1:0);gl.uniform1i(lR.uSolo,m.solo?1:0);gl.uniform1i(lR.uSM,m.sm?1:0);
 gl.bindTexture(gl.TEXTURE_2D,fbs.t[src].tx);vp(last);gl.bindFramebuffer(gl.FRAMEBUFFER,last?null:fbs.t[dst].fb);gl.drawArrays(gl.TRIANGLES,0,3);src=dst;continue}if(m.type=='grain'){const last=nxt(),dst=1-src;gl.useProgram(progGR);gl.uniform2f(lGR.res,iw,ih);gl.uniform1f(lGR.a,m.amount/100);gl.uniform1f(lGR.sz,m.size*(FW?iw/FW:1));gl.uniform1f(lGR.rg,m.rough/100);gl.uniform1f(lGR.lu,m.luma/100);gl.uniform1f(lGR.ch,m.chroma/100);gl.uniform1f(lGR.sd,m.seed);gl.uniform1i(lGR.mono,m.style==3?1:0);gl.bindTexture(gl.TEXTURE_2D,fbs.t[src].tx);vp(last);gl.bindFramebuffer(gl.FRAMEBUFFER,last?null:fbs.t[dst].fb);gl.drawArrays(gl.TRIANGLES,0,3);src=dst;continue}
 if(m.type=='lut'){const last=nxt(),dst=1-src,T=LT.get(m.id),M=lutMats(m);gl.useProgram(progLT);gl.activeTexture(gl.TEXTURE10);gl.bindTexture(gl.TEXTURE_3D,T.tx);gl.activeTexture(gl.TEXTURE0);gl.uniformMatrix3fv(lLT.mi,false,M[0]);gl.uniformMatrix3fv(lLT.mo,false,M[1]);gl.uniform1i(lLT.ig,m.igm|0);gl.uniform1i(lLT.og,m.ogm|0);gl.uniform1f(lLT.a,m.amount/100);gl.uniform1f(lLT.n,T.N);gl.uniform3fv(lLT.lo,T.lo);gl.uniform3fv(lLT.hi,T.hi);gl.bindTexture(gl.TEXTURE_2D,fbs.t[src].tx);vp(last);gl.bindFramebuffer(gl.FRAMEBUFFER,last?null:fbs.t[dst].fb);gl.drawArrays(gl.TRIANGLES,0,3);src=dst;continue}
@@ -1321,13 +1321,13 @@ const H=t=>{const p=document.createElement('p');p.className='note';p.innerHTML='
 H('LUT 輸入（套用 LUT 前的轉換）');SEL('色彩空間',cn,'ics');SEL('Gamma',GMN,'igm');
 H('LUT 輸出（LUT 套用後的色彩）');SEL('色彩空間',cn,'ocs');SEL('Gamma',GMN,'ogm');
 slider(b,'lta','強度',0,100,100,()=>m.amount,v=>m.amount=v,null,'',1,[])}
-function delNormal(m){{LF.delete(m.id);LTV.delete(m.id);const q=LT.get(m.id);if(q){gl.deleteTexture(q.tx);LT.delete(m.id)}}NF.delete(m.id);NMV.delete(m.id);const t=NT.get(m.id);if(t){gl.deleteTexture(t);NT.delete(m.id)}}
+function delNormal(m){{const kq=CKT.get(m.id);if(kq){gl.deleteTexture(kq.tx);CKT.delete(m.id)}}{LF.delete(m.id);LTV.delete(m.id);const q=LT.get(m.id);if(q){gl.deleteTexture(q.tx);LT.delete(m.id)}}NF.delete(m.id);NMV.delete(m.id);const t=NT.get(m.id);if(t){gl.deleteTexture(t);NT.delete(m.id)}}
 async function loadNormal(f,m,nv){const lim=Math.min(4096,gl.getParameter(gl.MAX_TEXTURE_SIZE)),o={colorSpaceConversion:'none'};let b=await createImageBitmap(f,o);const sc=Math.min(1,lim/Math.max(b.width,b.height));
 if(sc<1){const w=Math.round(b.width*sc),h=Math.round(b.height*sc);b.close();b=await createImageBitmap(f,{...o,resizeWidth:w,resizeHeight:h,resizeQuality:'high'})}
 const tx=NT.get(m.id)||gl.createTexture();gl.activeTexture(gl.TEXTURE4);gl.bindTexture(gl.TEXTURE_2D,tx);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,b);
 [gl.TEXTURE_MIN_FILTER,gl.TEXTURE_MAG_FILTER].forEach(k=>gl.texParameteri(gl.TEXTURE_2D,k,gl.LINEAR));[gl.TEXTURE_WRAP_S,gl.TEXTURE_WRAP_T].forEach(k=>gl.texParameteri(gl.TEXTURE_2D,k,gl.CLAMP_TO_EDGE));gl.activeTexture(gl.TEXTURE0);b.close();
 NT.set(m.id,tx);NF.set(m.id,f);if(nv)m.nv=nv;else{m.nv=++nvc;NEPF.set(m.nv,f)}NMV.set(m.id,m.nv)}
-const newLight=()=>({vis:1,lx:.5,ly:.4,lz:.5,li:1,amb:.15,spec:.3,wr:.25,hh:40,hs:100,hl:80});const MD={relight:()=>({lights:[newLight()],ds:.15,thr:.1,fe:30,bm:1,amount:65,fy:0,lm:1,solo:0,sm:0}),glare:()=>({kind:0,cx:.5,cy:.3,rlen:70,rfade:50,rsharp:30,cglow:30,dmax:50,dmin:10,bloom:20,th:80,sm:30,amount:50,hh:40,hs:0,size:50,ssize:50,mode:1,cnt:2,ang:0,fade:50,rnd:1,thk:50,soft:20,one:0}),haze:()=>({amount:50,dist:0,con:0,hh:210,hs:22,hl:82,mode:0}),dof:()=>({amount:50,focus:50,range:20,bk:30}),dehaze:()=>({amount:50,con:0,aoff:0,A:[.82,.86,.9]}),vig:()=>({amount:50,feather:50,radius:60,hh:0,hs:0,hl:0}),lim:()=>({lo:0,lor:10,hi:0,hir:10}),ramp:()=>({stops:[{p:0,c:'#000000'},{p:1,c:'#ffffff'}],src:0,ip:0,mode:0,amount:100}),ca:()=>({amount:1,k:.03,blur:0,red:1.015,green:1,blue:.985,fit:1,cx:.5,cy:.5}),cmatch:()=>({amount:70,cs:null,ct:''}),lut:()=>({ics:0,igm:1,ocs:0,ogm:1,amount:100,lv:0}),grain:()=>({amount:28,size:1,rough:55,luma:65,chroma:8,style:1,seed:Math.round(Math.random()*300)}),vhs:()=>({res:50,strength:80,bleed:75,smear:35,noise:45,chroma:45,scan:35,tracking:50,color:40,vig:20,flick:35,seed:30,osdOn:1,osdDate:vhsNow()[0],osdTime:vhsNow()[1],osdCnt:'00:12:34',osdSize:160,osdRec:1,osdCntOn:1})};
+const newLight=()=>({vis:1,lx:.5,ly:.4,lz:.5,li:1,amb:.15,spec:.3,wr:.25,rad:100,ck:'',cka:1,ka:100,ki:0,ks:100,hh:40,hs:100,hl:80});const MD={relight:()=>({lights:[newLight()],ds:.15,thr:.1,fe:30,bm:1,amount:65,fy:1,lm:1,solo:0,sm:0}),glare:()=>({kind:0,cx:.5,cy:.3,rlen:70,rfade:50,rsharp:30,cglow:30,dmax:50,dmin:10,bloom:20,th:80,sm:30,amount:50,hh:40,hs:0,size:50,ssize:50,mode:1,cnt:2,ang:0,fade:50,rnd:1,thk:50,soft:20,one:0}),haze:()=>({amount:50,dist:0,con:0,hh:210,hs:22,hl:82,mode:0}),dof:()=>({amount:50,focus:50,range:20,bk:30}),dehaze:()=>({amount:50,con:0,aoff:0,A:[.82,.86,.9]}),vig:()=>({amount:50,feather:50,radius:60,hh:0,hs:0,hl:0}),lim:()=>({lo:0,lor:10,hi:0,hir:10}),ramp:()=>({stops:[{p:0,c:'#000000'},{p:1,c:'#ffffff'}],src:0,ip:0,mode:0,amount:100}),ca:()=>({amount:1,k:.03,blur:0,red:1.015,green:1,blue:.985,fit:1,cx:.5,cy:.5}),cmatch:()=>({amount:70,cs:null,ct:''}),lut:()=>({ics:0,igm:1,ocs:0,ogm:1,amount:100,lv:0}),grain:()=>({amount:28,size:1,rough:55,luma:65,chroma:8,style:1,seed:Math.round(Math.random()*300)}),vhs:()=>({res:50,strength:80,bleed:75,smear:35,noise:45,chroma:45,scan:35,tracking:50,color:40,vig:20,flick:35,seed:30,osdOn:1,osdDate:vhsNow()[0],osdTime:vhsNow()[1],osdCnt:'00:12:34',osdSize:160,osdRec:1,osdCntOn:1})};
 const newMod=t=>({id:mid++,type:t,open:1,on:1,inv:0,fix:0,at:0,mkOn:0,mk:0,...MD[t]()}),hasD=m=>DM.has(m.id);
 function delDepth(m){DF.delete(m.id);DMV.delete(m.id);const d=DM.get(m.id);if(d){gl.deleteTexture(d.tx);DM.delete(m.id)}}
 function clearMods(){mods.forEach(m=>{delDepth(m);delNormal(m)});mods.length=0}
@@ -1467,6 +1467,16 @@ const w=document.createElement('div');w.innerHTML='<canvas class="limwf" width="
 const b0=w.querySelector('.lm0'),b1=w.querySelector('.lm1'),up=()=>{b0.classList.toggle('on',!limMode);b1.classList.toggle('on',!!limMode)};up();
 b0.onclick=()=>{limMode=0;up();limWf()};b1.onclick=()=>{limMode=1;up();limWf()};requestAnimationFrame(limWf)}
 var rlHitM=null,rlSel=new Map();
+var CKT=new Map();
+function rlCkTex(m){let o=CKT.get(m.id);const T=gl.TEXTURE_2D;gl.activeTexture(gl.TEXTURE12);
+if(!o){o={tx:gl.createTexture(),sig:null,cv:null};CKT.set(m.id,o);gl.bindTexture(T,o.tx);[gl.TEXTURE_MIN_FILTER,gl.TEXTURE_MAG_FILTER].forEach(k=>gl.texParameteri(T,k,gl.LINEAR));[gl.TEXTURE_WRAP_S,gl.TEXTURE_WRAP_T].forEach(k=>gl.texParameteri(T,k,gl.CLAMP_TO_EDGE));gl.texImage2D(T,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([255,255,255,255]))}
+gl.bindTexture(T,o.tx);const sig=m.lights.map(l=>l.ck||'');
+if(!o.sig||o.sig.length!=sig.length||sig.some((q,i)=>q!==o.sig[i])){o.sig=sig;
+if(sig.some(q=>q)){if(!o.cv){o.cv=document.createElement('canvas');o.cv.width=1536;o.cv.height=1024}const g=o.cv.getContext('2d');g.fillStyle='#fff';g.fillRect(0,0,1536,1024);
+m.lights.slice(0,6).forEach((l,i)=>{if(!l.ck)return;let im=IMG.get(l.ck);if(!im){im=new Image();IMG.set(l.ck,im);im.onload=()=>{o.sig=null;render()};im.src=l.ck}if(im.complete&&im.naturalWidth)g.drawImage(im,(i%3)*512,Math.floor(i/3)*512,512,512)});
+gl.texImage2D(T,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,o.cv)}
+else gl.texImage2D(T,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([255,255,255,255]))}
+gl.activeTexture(gl.TEXTURE0)}
 function rlList(){return mods.filter(m=>m.type=='relight'&&m.on&&m.open&&DM.has(m.id)&&NT.has(m.id))}
 function selL(m){return m.lights[Math.min(rlSel.get(m.id)||0,m.lights.length-1)]}
 function rlHit(q){const z=zm.z||1;let best=null,bd=36;rlHitM=null;rlList().forEach(m=>m.lights.forEach(l=>{if(!l.vis)return;const p=fromSrc({x:l.lx,y:l.ly}),d=Math.hypot((q.x-p.x)*ovW*z,(q.y-p.y)*ovH*z);if(d<bd){bd=d;best=l;rlHitM=m}}));return best}
@@ -1487,7 +1497,13 @@ const d=document.createElement('button');d.innerHTML=ICO.trash;d.setAttribute('a
 if(!sl){const nn=document.createElement('p');nn.className='note';nn.textContent='目前沒有燈，請按「新增燈」。';b.appendChild(nn)}
 else{const RL=(id,l,mi,ma,def,key,extra,cls,st)=>slider(b,id,l,mi,ma,def,()=>sl[key],v=>{sl[key]=v;extra&&extra()},null,cls||'',1,reg,st);
 const hp=document.createElement('p');hp.className='note';hp.innerHTML='<b>燈光</b>（在預覽圖上拖曳燈泡）';b.appendChild(hp);
-RL('rl1','離鏡頭',.05,2,.5,'lz',null,'',.01);RL('rl2','強度',0,4,1,'li',null,'',.05);RL('rl3','環境光',0,1,.15,'amb',null,'',.01);RL('rl4','高光',0,1.5,.3,'spec',null,'',.01);RL('rl5','光線柔化',0,.8,.25,'wr',null,'',.01);
+RL('rl1','離鏡頭',.05,3,.5,'lz',null,'',.01);RL('rl2','強度',0,4,1,'li',null,'',.05);RL('rl7','光照範圍',5,100,100,'rad',null,'',1);RL('rl3','環境光',0,1,.15,'amb',null,'',.01);RL('rl4','高光',0,1.5,.3,'spec',null,'',.01);RL('rl5','光線柔化',0,.8,.25,'wr',null,'',.01);
+const kh=document.createElement('p');kh.className='note';kh.innerHTML='<b>光照貼圖</b>';b.appendChild(kh);
+const kb=document.createElement('div');kb.className='bar';kb.innerHTML='<label class="btnl">'+(sl.ck?'更換光照貼圖':'上傳光照貼圖')+'<input type="file" accept="image/*" hidden></label>'+(sl.ck?'<button class="rck">移除貼圖</button>':'');b.appendChild(kb);
+kb.querySelector('input').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;try{const bm=await createImageBitmap(f),k=Math.min(1,512/Math.max(bm.width,bm.height)),c=document.createElement('canvas');c.width=Math.max(1,Math.round(bm.width*k));c.height=Math.max(1,Math.round(bm.height*k));const x=c.getContext('2d');x.fillStyle='#000';x.fillRect(0,0,c.width,c.height);x.drawImage(bm,0,0,c.width,c.height);bm.close();const u=c.toDataURL('image/jpeg',.9);await new Promise(r=>{const im=new Image();IMG.set(u,im);im.onload=im.onerror=r;im.src=u});sl.ck=u;sl.cka=c.width/c.height;modRender();render();commit()}catch(err){uiAlert('無法開啟光照貼圖：'+err.message)}};
+const rk=kb.querySelector('.rck');if(rk)rk.onclick=()=>{sl.ck='';modRender();render();commit()};
+if(sl.ck){RL('rl8','貼圖強度',0,100,100,'ka',null,'',1);RL('rl9','貼圖縮放',10,300,100,'ks',null,'',1);
+const iv=document.createElement('label');iv.className='sw';iv.innerHTML='<span>反轉貼圖</span><input type="checkbox">';const ic=iv.querySelector('input');ic.checked=!!sl.ki;ic.onchange=e=>{sl.ki=+e.target.checked;render();commit()};b.appendChild(iv)}
 const cp=document.createElement('p');cp.className='note';cp.innerHTML='<b>燈色</b>';b.appendChild(cp);
 let sat;const tint=()=>sat&&sat.i.style.setProperty('--hc',`hsl(${sl.hh} 100% 50%)`);RL('rh','色相',0,360,40,'hh',tint,'rb');sat=RL('rs','飽和度',0,100,100,'hs',null,'sg');RL('rv','亮度',0,100,80,'hl');tint()}
 const gp=document.createElement('p');gp.className='note';gp.innerHTML='<b>幾何</b>';b.appendChild(gp);
@@ -1750,7 +1766,7 @@ for(const k in z)if(k!='project.json'&&k!==d.photo)dfiles[k]=new File([z[k]],k,{
 else d=JSON.parse(new TextDecoder().decode(buf));
 if(!d||d.app!='lr5'||!Array.isArray(d.layers)||!d.layers.length)throw new Error('不是這個程式匯出的專案檔');
 if(Array.isArray(d.palette)){pal.cols=d.palette.filter(c=>typeof c=='string'&&/^#[0-9a-f]{6}$/i.test(c)).map(c=>c.toLowerCase()).filter((c,i,a)=>a.indexOf(c)==i).slice(0,30);pal.sel=-1;palRender()}
-if(Array.isArray(d.mods)){clearMods();d.mods.slice(0,40).forEach(x=>{if(!x||!MD[x.type])return;const m=newMod(x.type),df=MD[x.type]();Object.keys(df).forEach(k=>{if(k!='A'&&k!='lights'&&k!='stops')m[k]=num(x[k],df[k],-100,360)});if(x.type=='ramp')m.stops=rampClean(x.stops);if(x.type=='cmatch'){m.cs=csClean(x.cs);m.ct=(typeof x.ct=='string'&&x.ct.startsWith('data:image/')&&x.ct.length<200000)?x.ct:''}if(x.type=='vhs')vhsStr(m,x);if(x.type=='relight'){const src=Array.isArray(x.lights)?x.lights:[x];m.lights=src.slice(0,6).map(q=>{const l=newLight();q=q||{};Object.keys(l).forEach(k=>l[k]=num(q[k],l[k],-100,360));l.vis=q.vis===0?0:1;return l})}
+if(Array.isArray(d.mods)){clearMods();d.mods.slice(0,40).forEach(x=>{if(!x||!MD[x.type])return;const m=newMod(x.type),df=MD[x.type]();Object.keys(df).forEach(k=>{if(k!='A'&&k!='lights'&&k!='stops')m[k]=num(x[k],df[k],-100,360)});if(x.type=='ramp')m.stops=rampClean(x.stops);if(x.type=='cmatch'){m.cs=csClean(x.cs);m.ct=(typeof x.ct=='string'&&x.ct.startsWith('data:image/')&&x.ct.length<200000)?x.ct:''}if(x.type=='vhs')vhsStr(m,x);if(x.type=='relight'){const src=Array.isArray(x.lights)?x.lights:[x];m.lights=src.slice(0,6).map(q=>{const l=newLight();q=q||{};Object.keys(l).forEach(k=>l[k]=num(q[k],l[k],-100,360));l.vis=q.vis===0?0:1;l.ck=(typeof q.ck=='string'&&q.ck.startsWith('data:image/')&&q.ck.length<600000)?q.ck:'';l.ki=q.ki?1:0;return l})}
 m.mode=m.mode===undefined?undefined:Math.round(cl(m.mode,0,5));if(m.mode===undefined)delete m.mode;if(typeof x.name=='string'&&x.name)m.name=x.name.slice(0,20);m.inv=x.inv?1:0;m.on=x.on===0?0:1;m.fix=(x.fix||x.pre)?1:0;m.at=x.fix?num(x.at,0,0,200):0;m.mkOn=x.mkOn?1:0;m.mk=num(x.mk,0,0,1e9);mods.push(m);if(typeof x.df=='string'&&dfiles[x.df])pendD.push([m,dfiles[x.df]]);else if(x.hd&&DG.file)pendD.push([m,DG.file]);if(x.hn&&DG.nfile&&!(typeof x.nf=='string'&&dfiles[x.nf]))pendD.push([m,DG.nfile,1]);if(typeof x.nf=='string'&&dfiles[x.nf])pendD.push([m,dfiles[x.nf],1]);if(typeof x.lf=='string'&&dfiles[x.lf])pendD.push([m,dfiles[x.lf],2])});for(const[m,fl,isN]of pendD){try{await(isN==2?loadLut(fl,m):isN?loadNormal(fl,m):loadDepth(fl,m))}catch(_){}}if(!DG.file){const q=mods.find(m=>DF.has(m.id));if(q)DG.file=DF.get(q.id)}if(!DG.nfile){const q=mods.find(m=>NF.has(m.id));if(q){DG.nfile=NF.get(q.id);DG.nsrc='upload'}}modRender();if(mods.some(m=>m.type!='vig'&&m.type!='glare'&&m.type!='ca'&&m.type!='lim'&&m.type!='ramp'&&m.type!='cmatch'&&m.type!='grain'&&m.type!='lut'&&!hasD(m))){mods.filter(m=>(needsD(m)&&!hasD(m))||(needsN(m)&&!NT.has(m.id))).forEach(m=>autoDepth(m))}}
 if(d.crop&&bmp){const c=d.crop;crop.cx=num(c.cx,.5,0,1)*iw;crop.cy=num(c.cy,.5,0,1)*ih;crop.hw=Math.max(8,num(c.hw,.5,0,1)*iw);crop.hh=Math.max(8,num(c.hh,.5,0,1)*ih);crop.a=num(c.a,0,-7,7);crop.fx=c.fx==-1?-1:1;crop.fy=c.fy==-1?-1:1;crop.ratio=num(c.ratio,0,0,20);crop.rk=Math.round(num(c.rk,0,-1,8));fitCrop();cropUI()}
 if(d.fx){fx.hist=d.fx.hist===0?0:1;syncFx()}L=d.layers.slice(0,200).map(clean);uidFix();cur=0;band=0;wbOff();commit();chips();syncAll();rebuildBrush();savedSig=sig()}catch(err){uiAlert('無法載入專案：'+err.message)}}
@@ -1911,7 +1927,7 @@ b.onclick=()=>{maskView=(maskView+1)%3;up();render()}}
 // ================= 專案深度圖（Depth Anything V2 / Transformers.js）=================
 const TF_URL='https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.5.1',DG_MODEL='onnx-community/depth-anything-v2-small';
 const DL={a:[0,0],b:[0,0],bd:0,n:0,t:0,shown:0,bg:true};
-function dlPct(){const pa=DL.a[1]?DL.a[0]/DL.a[1]:0,pb=DL.bd?1:(DL.b[1]?DL.b[0]/DL.b[1]:0);return pa*.8+pb*.2}
+function dlPct(){const T=DL.a[1]+DL.b[1];return T?(DL.a[0]+DL.b[0])/T:(DL.bd?1:0)}
 function dlDraw(){if(DG.hideDL)return;const A=DL.a[0]+DL.b[0],T=DL.a[1]+DL.b[1];dgShow('下載必要資源中','只需下載一次，請稍候。',dlPct(),(A/1048576).toFixed(1)+' / '+(T/1048576).toFixed(1)+' MB',DL.bg)}
 function dlProg(k,l,t,bg){DL[k]=[l,t];DL.bg=bg;if(DL.shown){dlDraw();return}if(!DL.t)DL.t=setTimeout(()=>{DL.t=0;if(DL.n>0&&dlPct()<.999){DL.shown=1;dlDraw()}},350)}
 function dlEnd(){if(--DL.n<=0){DL.n=0;clearTimeout(DL.t);DL.t=0;DL.shown=0;DL.a=[0,0];DL.b=[0,0];DL.bd=0;if($('#dgpt').textContent=='下載必要資源中')dgHide()}}
@@ -1961,8 +1977,8 @@ const o=document.createElement('canvas');o.width=w;o.height=h;o.getContext('2d')
 const pb=await new Promise(q=>o.toBlob(q,'image/png'));return new File([pb],'depth.png',{type:'image/png'})}
 let askQ=Promise.resolve();
 function depthAsk(kind){const g=DG.ag||0,p=askQ.then(()=>(DG.ag||0)!==g?null:askShow(kind));askQ=p.catch(()=>{});return p}
-function askShow(kind){return new Promise(res=>{const d=$('#dsq'),r=$('#dsqr'),v=$('#dsqv');r.value=1;$('#dsqt').textContent=kind=='n'?'法線精準度':'深度精準度';
-const upd=()=>{v.textContent=(+r.value).toFixed(1)+'×'};upd();r.oninput=upd;
+function askShow(kind){return new Promise(res=>{const d=$('#dsq'),r=$('#dsqr'),v=$('#dsqv'),isN=kind=='n',NR={'0.5':768,'1':1024,'1.5':1536,'2':2048};r.min=isN?.5:1;r.max=isN?2:4;r.step=.5;r.value=1;$('#dsqt').textContent=kind=='n'?'法線精準度':'深度精準度';
+const upd=()=>{const x=+r.value;v.textContent=x.toFixed(1)+'×'};upd();r.oninput=upd;
 $('#dsqok').onclick=()=>{d.classList.remove('on');res(+r.value)};
 $('#dsqno').onclick=()=>{d.classList.remove('on');depthAbort();res(null)};d.classList.add('on')})}
 function depthAbort(){DG.ag=(DG.ag||0)+1;DG.hideDL=1;DG.user=1;if(DSA.size)wkKill();DG.gp=null;DG.ngp=null;const q=[...DPEND];DPEND.clear();[...DSA].forEach(t=>{t.x=1;t.stop()});dgHide();q.forEach(delFx)}
@@ -2010,7 +2026,7 @@ if(DG.file){fiU=URL.createObjectURL(DG.file);im.src=fiU;im.style.display='block'
 $('#fiinfo').textContent=DG.file?'白色＝近、黑色＝遠。目前有 '+mods.filter(needsD).length+' 個效果使用這張深度圖。'+(DG.tDepth?' 生成耗時：'+DG.tDepth+'。':''):'';
 {const im2=$('#fnimg2'),em2=$('#fnemp');if(DG.nu){URL.revokeObjectURL(DG.nu);DG.nu=null}
 if(DG.nfile){DG.nu=URL.createObjectURL(DG.nfile);im2.src=DG.nu;im2.style.display='block';em2.style.display='none'}else{im2.style.display='none';em2.style.display=''}
-$('#fninfo').textContent=DG.nfile?(DG.nsrc=='ai'?'由 DeepBump AI 模型生成（依照片明暗推算表面細節）。':DG.nsrc=='depth'?'由專案深度圖推算（AI 法線模型無法使用時的備案）。':'自行上傳的法線圖。')+' 目前有 '+mods.filter(needsN).length+' 個效果使用。'+(DG.tNormal&&DG.nsrc=='ai'?' 生成耗時：'+DG.tNormal+'。':''):''}}
+$('#fninfo').textContent=DG.nfile?(DG.nsrc=='ai'?'由 MoGe-2 ViT-S AI 模型生成。':DG.nsrc=='depth'?'由專案深度圖推算（AI 法線模型無法使用時的備案）。':'自行上傳的法線圖。')+' 目前有 '+mods.filter(needsN).length+' 個效果使用。'+(DG.tNormal&&DG.nsrc=='ai'?' 生成耗時：'+DG.tNormal+'。':''):''}}
 $('#ftk').onclick=()=>palGo(true,'ck');$('#fkback').onclick=()=>palGo(false);
 const fmtSz=n=>n>=1048576?(n/1048576).toFixed(1)+' MB':n>=1024?Math.round(n/1024)+' KB':n+' B';
 async function ckRender(){const box=$('#fklist'),sm=$('#fksum');box.innerHTML='';sm.textContent='讀取中…';
@@ -2039,29 +2055,33 @@ try{navigator.storage&&navigator.storage.persist&&navigator.storage.persist()}ca
 setTimeout(()=>{Promise.all([wkPre().catch(e=>console.warn('深度模型預載失敗',e)),mgBuf(true).catch(e=>console.warn('法線模型預載失敗',e))])},400);
 
 // ================= 專案法線圖（MoGe-2 AI；失敗時由深度圖推算）=================
-const MG_URLS=['https://huggingface.co/shiertier/deepbump/resolve/main/deepbump256.onnx'],ORT_B='https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
+const MG_URLS=['https://huggingface.co/Ruicheng/moge-2-vits-normal-onnx/resolve/main/model.onnx'],ORT_B='https://cdn.jsdelivr.net/npm/onnxruntime-web@1.22.0/dist/';
 function mgBuf(bg){return DG.mgp||(DG.mgp=mgBuf0(bg).catch(e=>{DG.mgp=null;throw e}))}
-async function mgBuf0(bg){let c=null;try{c=await caches.open('deepbump-cache');for(const u of MG_URLS){const h=await c.match(u);if(h){DL.bd=1;return new Uint8Array(await h.arrayBuffer())}}}catch(_){}
-DL.n++;try{let err;for(const u of MG_URLS){try{const r=await fetch(u);if(!r.ok)throw new Error('HTTP '+r.status);const tot=+r.headers.get('content-length')||9e6,rd=r.body.getReader(),ch=[];let l=0;
+async function mgBuf0(bg){let c=null;try{c=await caches.open('moge2-normal-cache');for(const u of MG_URLS){const h=await c.match(u);if(h){DL.bd=1;return new Uint8Array(await h.arrayBuffer())}}}catch(_){}
+DL.n++;try{let err;for(const u of MG_URLS){try{const r=await fetch(u);if(!r.ok)throw new Error('HTTP '+r.status);const tot=+r.headers.get('content-length')||141e6,rd=r.body.getReader(),ch=[];let l=0;
 for(;;){const{done,value}=await rd.read();if(done)break;ch.push(value);l+=value.length;dlProg('b',l,tot,!!bg)}
 const bl=new Blob(ch);try{c&&await c.put(u,new Response(bl))}catch(_){}return new Uint8Array(await bl.arrayBuffer())}catch(e){err=e;console.warn(u,e)}}throw err}finally{dlEnd()}}
 async function mgGen(sc){if(DG.mgBad)throw new Error('skip');DG.user=0;const st=dgStages('法線圖');
-try{const ort=DG.ort||(DG.ort=await import(ORT_B+'ort.webgpu.min.mjs'));ort.env.wasm.wasmPaths=ORT_B;
-st.go('準備圖片');await new Promise(r=>setTimeout(r,0));const src=BF||bmp,k=Math.min(1,768*(sc||1)/Math.max(src.width,src.height)),w0=Math.max(1,Math.round(src.width*k)),h0=Math.max(1,Math.round(src.height*k)),c=document.createElement('canvas');c.width=w0;c.height=h0;const cx=c.getContext('2d',{willReadFrequently:true});cx.drawImage(src,0,0,w0,h0);
-const d=cx.getImageData(0,0,w0,h0).data,g0=new Float32Array(w0*h0);for(let i=0;i<w0*h0;i++)g0[i]=(d[i*4]+d[i*4+1]+d[i*4+2])/765;
-const W=Math.max(256,w0),H=Math.max(256,h0),G=(x,y)=>g0[Math.min(h0-1,y)*w0+Math.min(w0-1,x)],T=256,OV=28,pos=S=>{const a=[];if(S<=T)return[0];for(let p=0;p+T<S;p+=T-OV*2)a.push(p);a.push(S-T);return a},xs=pos(W),ys=pos(H);
-const acc=new Float32Array(W*H*3),wt=new Float32Array(W*H);let buf=null,s=null,lastE;const eps=navigator.gpu&&!DG.mgNoGpu?[['webgpu'],['wasm']]:[['wasm']];
-for(const ep of eps){try{if(!DG.nsess){if(!buf)buf=await mgBuf(false);st.go('建立法線模型');await new Promise(r=>setTimeout(r,40));DG.nsess=await ort.InferenceSession.create(buf,{executionProviders:ep})}
-s=DG.nsess;acc.fill(0);wt.fill(0);let n=0;const tot=xs.length*ys.length;st.go('正在計算場景法線');
-for(const y0 of ys)for(const x0 of xs){await new Promise(r=>setTimeout(r,0));st.chk();
-const tl=new Float32Array(T*T);for(let y=0;y<T;y++)for(let x=0;x<T;x++)tl[y*T+x]=G(x0+x,y0+y);
-const out=await s.run({[s.inputNames[0]]:new ort.Tensor('float32',tl,[1,1,T,T])}),q=out[s.outputNames[0]],o=q.data;if(!q.dims||q.dims.length!=4||q.dims[1]!=3||q.dims[2]!=T)throw new Error('輸出格式不符');
-let mn=1e9;for(let i=0;i<o.length;i+=97)mn=Math.min(mn,o[i]);const sc=mn<-.01?1:2,of=mn<-.01?0:-1;
-for(let y=0;y<T;y++){const wy=Math.min(1,(Math.min(y,T-1-y)+1)/OV);for(let x=0;x<T;x++){const wv=wy*Math.min(1,(Math.min(x,T-1-x)+1)/OV),i=y*T+x,p=(y0+y)*W+x0+x;
-acc[p*3]+=(o[i]*sc+of)*wv;acc[p*3+1]+=(o[T*T+i]*sc+of)*wv;acc[p*3+2]+=(o[2*T*T+i]*sc+of)*wv;wt[p]+=wv}}n++;st.p=n/tot}
-st.go('合成法線圖');await new Promise(r=>setTimeout(r,0));const id=new ImageData(w0,h0);for(let y=0;y<h0;y++)for(let x=0;x<w0;x++){const p=y*W+x,j=(y*w0+x)*4;let a=acc[p*3],b=acc[p*3+1],e=acc[p*3+2];const L=Math.hypot(a,b,e)||1;a/=L;b/=L;e/=L;id.data[j]=(a*.5+.5)*255;id.data[j+1]=(b*.5+.5)*255;id.data[j+2]=(e*.5+.5)*255;id.data[j+3]=255}
-const oc2=document.createElement('canvas');oc2.width=w0;oc2.height=h0;oc2.getContext('2d').putImageData(id,0,0);const pb=await new Promise(r=>oc2.toBlob(r,'image/png'));st.end();DG.tNormal=st.sum;return new File([pb],'normal.png',{type:'image/png'})}
-catch(e){if(e&&e.cx)throw e;lastE=e;console.warn('DeepBump',ep,e);DG.nsess=null;if(ep[0]=='webgpu')DG.mgNoGpu=1}}
+try{const ort=DG.ort||(DG.ort=await import(ORT_B+'ort.webgpu.min.mjs'));ort.env.wasm.wasmPaths=ORT_B;ort.env.wasm.numThreads=1;
+st.go('準備圖片');await new Promise(r=>setTimeout(r,0));
+const res=sc<=.5?768:sc<=1?1024:sc<=1.5?1536:2048,src=BF||bmp,k=Math.min(1,res/Math.max(src.width,src.height)),w=Math.max(1,Math.round(src.width*k)),h=Math.max(1,Math.round(src.height*k)),c=document.createElement('canvas');c.width=w;c.height=h;const cx=c.getContext('2d',{willReadFrequently:true});cx.drawImage(src,0,0,w,h);
+const d=cx.getImageData(0,0,w,h).data,P=w*h,inp=new Float32Array(P*3);
+for(let i=0;i<P;i++){const p=i*4;inp[i]=d[p]/255;inp[P+i]=d[p+1]/255;inp[2*P+i]=d[p+2]/255}
+let lastE;const eps=navigator.gpu&&!DG.mgNoGpu?[['webgpu'],['wasm']]:[['wasm']];
+for(const ep of eps){try{
+if(!DG.nsess){const buf=await mgBuf(false);st.go('建立法線模型');await new Promise(r=>setTimeout(r,40));DG.nsess=await ort.InferenceSession.create(buf,{executionProviders:ep,graphOptimizationLevel:'all'})}
+const s=DG.nsess;st.go('正在計算場景法線');await new Promise(r=>setTimeout(r,40));st.chk();
+const out=await s.run({image:new ort.Tensor('float32',inp,[1,3,h,w]),num_tokens:new ort.Tensor('int64',BigInt64Array.of(1800n),[])});
+const key=out.normal?'normal':Object.keys(out).find(q=>q.toLowerCase().includes('normal'));if(!key)throw new Error('找不到 normal 輸出');
+const nt=out[key],dm=nt.dims,nd=nt.data;let H,W,CL;
+if(dm.length==4&&dm[1]==3){H=dm[2];W=dm[3];CL=0}else if(dm.length==4&&dm[3]==3){H=dm[1];W=dm[2];CL=1}else throw new Error('輸出格式不符');
+st.go('合成法線圖');await new Promise(r=>setTimeout(r,0));
+const N=W*H,id=new ImageData(W,H),o=id.data;let sz=0;
+for(let i=0;i<N;i+=7){const z=CL?nd[i*3+2]:nd[2*N+i];if(z==z)sz+=z}
+const sg=sz<0?-1:1;
+for(let i=0;i<N;i++){let x,y,z;if(CL){x=nd[i*3];y=nd[i*3+1];z=nd[i*3+2]}else{x=nd[i];y=nd[N+i];z=nd[2*N+i]}z*=sg;const L=Math.sqrt(x*x+y*y+z*z);if(!(L>1e-6)){x=0;y=0;z=1}else{x/=L;y/=L;z/=L}const j=i*4;o[j]=(x*.5+.5)*255;o[j+1]=(y*.5+.5)*255;o[j+2]=(z*.5+.5)*255;o[j+3]=255}
+const oc2=document.createElement('canvas');oc2.width=W;oc2.height=H;oc2.getContext('2d').putImageData(id,0,0);const pb=await new Promise(r=>oc2.toBlob(r,'image/png'));st.end();DG.tNormal=st.sum;return new File([pb],'normal.png',{type:'image/png'})}
+catch(e){if(e&&e.cx)throw e;lastE=e;console.warn('MoGe-2',ep,e);DG.nsess=null;if(ep[0]=='webgpu')DG.mgNoGpu=1}}
 throw lastE}catch(e){if(!(e&&e.cx))DG.mgBad=1;st.end();throw e}}
 async function normalFromDepth(){const df=await getProjDepth(),b=await createImageBitmap(df),k=Math.min(1,1024/Math.max(b.width,b.height)),w=Math.max(2,Math.round(b.width*k)),h=Math.max(2,Math.round(b.height*k)),c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d',{willReadFrequently:true});x.drawImage(b,0,0,w,h);b.close();
 const d=x.getImageData(0,0,w,h).data,z=new Float32Array(w*h),t=new Float32Array(w*h);for(let i=0;i<w*h;i++)z[i]=d[i*4]/255;
@@ -2205,7 +2225,7 @@ mk('e1',m.on?ICO.eye:ICO.eyeoff,m.on?'隱藏效果':'顯示效果',()=>{m.on^=1;
 mk('e2',ICO.trash,'刪除效果',()=>{const k=mods.indexOf(m);delDepth(m);delNormal(m);mods.splice(k,1);modRender();render();commit()});
 mk('e3',S('<path d="M15 5l-7 7 7 7"/>',18),'左移',()=>mvFx(m,-1),i==0);mk('e4',S('<path d="M9 5l7 7-7 7"/>',18),'右移',()=>mvFx(m,1),i==mods.length-1);grid.appendChild(b)});
 const a=document.createElement('button');a.className='ftile efA';a.innerHTML=S('<path d="M12 5v14M5 12h14"/>')+'<span>新增效果</span>';a.onclick=()=>document.querySelector('#addmod').click();grid.appendChild(a)}
-const mr=modRender;modRender=function(){mods.forEach(m=>m.open=m.id===efDet?1:0);mr();sync()};
+const mr=modRender;modRender=function(){mods.forEach(m=>m.open=m.id===efDet?1:0);mr();sync();drawOv()};
 document.addEventListener('click',e=>{const c=e.target.closest&&e.target.closest('.chip.fxc .cn');if(c){if(tab!='ef')document.querySelector('#tabs button[data-t=ef]').click();openFx(+c.closest('.chip').dataset.k.slice(1))}});
 const ok=document.querySelector('#mdlok');let n0=0;ok.addEventListener('click',()=>{n0=mods.length},true);ok.addEventListener('click',()=>{if(mods.length>n0)openFx(mods[mods.length-1].id)});
 modRender()})();
